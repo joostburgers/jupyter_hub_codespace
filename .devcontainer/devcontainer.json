@@ -14,10 +14,6 @@
                 "ms-toolsai.jupyter-kernel-spec"
             ],
             "settings": {
-                "python.defaultInterpreterPath": "/usr/local/bin/python",
-                "python.interpreter.infoVisibility": "always",
-                "jupyter.defaultKernelName": "python3",
-                "jupyter.askForKernelRestart": false,
                 "files.exclude": {
                     "ARCHITECTURE.md": true,
                     "CODESPACES_QUICKSTART.md": true,
