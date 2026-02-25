@@ -1,0 +1,11 @@
+{
+    "python.defaultInterpreterPath": "/usr/local/bin/python",
+    "jupyter.defaultKernelName": "python3",
+    "jupyter.askForKernelRestart": false,
+    "jupyter.kernels.filter": [
+        {
+            "path": "/usr/bin/python3",
+            "type": "pythonEnvironment"
+        }
+    ]
+}
