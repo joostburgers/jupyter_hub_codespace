@@ -11,6 +11,7 @@ echo "Installing packages..."
 pip install --quiet --no-cache-dir \
     pandas \
     plotly \
+    nbformat \
     ipykernel
 
 echo ""
