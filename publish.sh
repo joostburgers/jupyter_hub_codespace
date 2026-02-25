@@ -16,7 +16,7 @@ echo "Publishing as: $STUDENT_NAME"
 # Convert notebook to clean HTML
 echo "Converting notebook to HTML..."
 jupyter nbconvert --to html \
-    --template lab \
+    --no-input \
     --output-dir "$DOCS" \
     --output "notebook" \
     "$NOTEBOOK"
