@@ -15,7 +15,11 @@ pip install --quiet --no-cache-dir \
     ipykernel
 
 echo ""
-echo "Registering Python 3.11 as Jupyter kernel..."
+echo "Linking system Python to devcontainer Python..."
+ln -sf /usr/local/bin/python /usr/bin/python3
+
+echo ""
+echo "Registering Python kernel..."
 python -m ipykernel install --sys-prefix --name python3 --display-name "Python 3"
 
 echo ""

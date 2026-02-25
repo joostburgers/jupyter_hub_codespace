@@ -5,7 +5,6 @@
         "ghcr.io/devcontainers/features/git:1": {}
     },
     "postCreateCommand": "bash .devcontainer/post-create.sh",
-    "postAttachCommand": "code START_HERE.ipynb",
     "customizations": {
         "vscode": {
             "extensions": [
@@ -19,12 +18,6 @@
                 "python.interpreter.infoVisibility": "always",
                 "jupyter.defaultKernelName": "python3",
                 "jupyter.askForKernelRestart": false,
-                "jupyter.kernels.filter": [
-                    {
-                        "path": "/usr/bin/python3",
-                        "type": "pythonEnvironment"
-                    }
-                ],
                 "files.exclude": {
                     "ARCHITECTURE.md": true,
                     "CODESPACES_QUICKSTART.md": true,
