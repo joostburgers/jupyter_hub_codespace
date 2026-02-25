@@ -27,7 +27,8 @@
                     "gazetteer.py": true,
                     "LICENSE": true,
                     "lesson_2_very_basic_python": true,
-                    ".devcontainer": true
+                    ".devcontainer": true,
+                    ".github": true
                 }
             }
         }
