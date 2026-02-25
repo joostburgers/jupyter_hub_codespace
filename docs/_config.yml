@@ -1,0 +1,7 @@
+theme: cayman
+title: "DS 101: Introduction to Data Science"
+description: "Lesson 3 — Data Wrangling with Pandas"
+
+# Prevent Jekyll from processing the notebook HTML
+exclude:
+  - notebook.html
