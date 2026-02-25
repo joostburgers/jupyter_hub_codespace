@@ -15,6 +15,10 @@ pip install --quiet --no-cache-dir \
     ipykernel
 
 echo ""
+echo "Registering Python 3.11 as Jupyter kernel..."
+python -m ipykernel install --sys-prefix --name python3 --display-name "Python 3"
+
+echo ""
 echo "=========================================="
 echo "Setup complete!"
 echo "Open START_HERE.ipynb to begin."
