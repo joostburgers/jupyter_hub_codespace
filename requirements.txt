@@ -18,13 +18,14 @@ requests>=2.26.0
 # Natural Language Processing (Lessons 4-5)
 nltk>=3.6.0
 spacy>=3.0.0
-geoparser>=1.0.0
+# geoparser is installed separately in post-create.sh (not a standard PyPI package)
 transformers>=4.20.0
 torch>=1.9.0
 
 # Utilities
 tqdm>=4.62.0
 jupyter>=1.0.0
+ipykernel>=6.0.0
 ipywidgets>=7.6.0
 
 # Additional data handling
