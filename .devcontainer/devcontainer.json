@@ -14,6 +14,11 @@
                 "ms-toolsai.jupyter-kernel-spec"
             ],
             "settings": {
+                "python.defaultInterpreterPath": "/usr/local/bin/python",
+                "jupyter.kernels.filter": [
+                    { "path": "/usr/bin/python3", "type": "pythonEnvironment" },
+                    { "path": "/bin/python3", "type": "pythonEnvironment" }
+                ],
                 "files.exclude": {
                     "ARCHITECTURE.md": true,
                     "CODESPACES_QUICKSTART.md": true,
