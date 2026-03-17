@@ -26,6 +26,6 @@ python -m ipykernel install --sys-prefix --name python3 --display-name "Python 3
 echo ""
 echo "=========================================="
 echo "Setup complete!"
-echo "Open START_HERE.ipynb to begin."
+echo "Open the lesson notebook to begin."
 echo "=========================================="
 

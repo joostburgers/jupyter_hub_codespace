@@ -20,15 +20,6 @@
                     { "path": "/bin/python3", "type": "pythonEnvironment" }
                 ],
                 "files.exclude": {
-                    "ARCHITECTURE.md": true,
-                    "CODESPACES_QUICKSTART.md": true,
-                    "INSTALL_REQUIREMENTS.txt": true,
-                    "INSTRUCTOR_SETUP_CHECKLIST.md": true,
-                    "SETUP_SUMMARY.md": true,
-                    "TROUBLESHOOTING.md": true,
-                    "manual_setup.py": true,
-                    "verify_environment.py": true,
-                    "start_jupyter.sh": true,
                     "gazetteer.py": true,
                     "LICENSE": true,
                     "lesson_2_very_basic_python": true,

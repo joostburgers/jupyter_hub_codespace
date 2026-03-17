@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"name": "jupyter_hub_codespace",
+			"path": "."
+		}
+	],
+	"settings": {
+		"jupyter.askForKernelRestart": false,
+		"powershell.cwd": "jupyter_hub_codespace"
+	}
+}
