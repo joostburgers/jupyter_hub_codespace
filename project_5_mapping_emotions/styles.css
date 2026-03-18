@@ -1,0 +1,543 @@
+/* ============================================================================
+   GLOBAL STYLES & VARIABLES
+   ============================================================================ */
+
+:root {
+    /* JMU Primary Colors */
+    --primary-color: #450084;        /* JMU Purple */
+    --secondary-color: #CBB677;      /* JMU Gold */
+    
+    /* JMU Secondary Colors */
+    --medium-purple: #B599CE;
+    --light-purple: #DACCE6;
+    --dark-gold: #AD9C65;
+    --light-gold: #F4EFE1;
+    --slate-gray: #333333;
+    --dark-gray: #595959;
+    --medium-gray: #B2B2B2;
+    --light-gray: #D6D6D6;
+    
+    /* JMU Web Accent Colors */
+    --dark-green: #5F791C;
+    --dark-blue: #3C738B;
+    --medium-green: #ADCC23;
+    --medium-blue: #5498B6;
+    --light-green: #DEEBA7;
+    --light-blue: #D2EBF5;
+    --jmu-red: #A4232B;
+    
+    /* Text and Background Colors */
+    --text-dark: #333333;            /* Using Slate Gray */
+    --text-light: #595959;           /* Using Dark Gray */
+    --bg-light: #F4EFE1;             /* Using Light Gold */
+    --bg-white: #ffffff;
+    --border-color: #D6D6D6;         /* Using Light Gray */
+    --shadow: 0 4px 6px rgba(69, 0, 132, 0.1);
+    --shadow-lg: 0 10px 15px rgba(69, 0, 132, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background-color: var(--bg-white);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ============================================================================
+   HEADER BANNER
+   ============================================================================ */
+
+.banner {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--medium-purple) 100%);
+    color: white;
+    padding: 3rem 0;
+    text-align: center;
+    box-shadow: var(--shadow);
+    height: 10vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.banner h1 {
+    font-size: 2rem;
+    margin-bottom: 0.25rem;
+    font-weight: 700;
+}
+
+.banner p,
+.banner .subtitle {
+    font-size: 1.2rem;
+    opacity: 0.95;
+    font-weight: 300;
+    margin: 0;
+    color:var(--secondary-color);
+}
+
+/* ============================================================================
+   NAVIGATION
+   ============================================================================ */
+
+.main-nav {
+    background-color: var(--bg-white);
+    border-bottom: 3px solid var(--secondary-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: var(--shadow);
+    width: 100%;
+}
+
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.main-nav li {
+    position: relative;
+}
+
+.main-nav a {
+    display: block;
+    padding: 1rem 2rem;
+    color: var(--text-dark);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.main-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 3px;
+    background-color: var(--secondary-color);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+    color: var(--primary-color);
+}
+
+.main-nav a:hover::after,
+.main-nav a.active::after {
+    width: 80%;
+}
+
+/* Navigation without ul (for simple nav) */
+.main-nav:not(:has(ul)) {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    padding: 0;
+}
+
+.main-nav:not(:has(ul)) a {
+    flex: 0 0 auto;
+}
+
+/* ============================================================================
+   MAIN CONTENT
+   ============================================================================ */
+
+main {
+    padding: 3rem 0;
+    min-height: calc(100vh - 400px);
+}
+
+section {
+    margin-bottom: 4rem;
+}
+
+h2 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 3px solid var(--secondary-color);
+}
+
+h3 {
+    font-size: 1.5rem;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+}
+
+p {
+    margin-bottom: 1rem;
+    color: var(--text-light);
+    font-size: 1.1rem;
+}
+
+/* ============================================================================
+   PROJECT OVERVIEW SECTION
+   ============================================================================ */
+
+.project-overview {
+    background-color: var(--bg-light);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+.overview-content p {
+    line-height: 1.8;
+}
+
+/* ============================================================================
+   FLYTHROUGH PREVIEW SECTION
+   ============================================================================ */
+
+.flythrough-preview {
+    text-align: center;
+}
+
+.preview-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.preview-link {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: var(--shadow-lg);
+    transition: transform 0.3s ease;
+}
+
+.preview-link:hover {
+    transform: scale(1.02);
+}
+
+.preview-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: filter 0.3s ease;
+}
+
+.preview-link:hover .preview-image {
+    filter: brightness(0.7);
+}
+
+.preview-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.preview-link:hover .preview-overlay {
+    opacity: 1;
+}
+
+.preview-text {
+    background-color: var(--secondary-color);
+    color: var(--text-dark);
+    padding: 1rem 2rem;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    box-shadow: var(--shadow-lg);
+}
+
+.preview-description {
+    margin-top: 1.5rem;
+    text-align: left;
+    font-size: 1.1rem;
+}
+
+/* ============================================================================
+   KEY FINDINGS GRID
+   ============================================================================ */
+
+.findings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.finding-card {
+    background-color: var(--bg-white);
+    padding: 2rem;
+    border-radius: 10px;
+    border: 2px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.finding-card:hover {
+    border-color: var(--secondary-color);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-5px);
+}
+
+.finding-card h3 {
+    color: var(--primary-color);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.finding-card p {
+    font-size: 1rem;
+}
+
+/* ============================================================================
+   METHODOLOGY SECTION
+   ============================================================================ */
+
+.method-steps {
+    display: grid;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.step {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    padding: 1.5rem;
+    background-color: var(--bg-light);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.step:hover {
+    background-color: var(--bg-white);
+    box-shadow: var(--shadow);
+}
+
+.step-number {
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary-color), var(--medium-purple));
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.step-content h3 {
+    margin-top: 0;
+    color: var(--primary-color);
+}
+
+.step-content p {
+    margin-bottom: 0;
+}
+
+/* ============================================================================
+   TEAM PAGE STYLES
+   ============================================================================ */
+
+.team-intro {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 3rem;
+}
+
+.team-intro p {
+    font-size: 1.2rem;
+    color: var(--text-light);
+}
+
+.team-members {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.team-card {
+    background-color: var(--bg-white);
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.team-card:hover {
+    border-color: var(--secondary-color);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-5px);
+}
+
+.team-card-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--medium-purple));
+    color: white;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.member-avatar {
+    width: 80px;
+    height: 80px;
+    background-color: var(--secondary-color);
+    color: var(--text-dark);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.member-initials {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.member-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.member-info h3 {
+    margin: 0;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.member-major {
+    margin: 0.5rem 0 0 0;
+    opacity: 0.9;
+    font-size: 1rem;
+    color: white;
+}
+
+.team-card-body {
+    padding: 2rem;
+}
+
+.member-role {
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+}
+
+.github-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.github-link:hover {
+    color: var(--secondary-color);
+}
+
+.error-message {
+    text-align: center;
+    padding: 2rem;
+    background-color: #fee;
+    border: 2px solid #fcc;
+    border-radius: 10px;
+    color: #c00;
+}
+
+/* ============================================================================
+   FOOTER
+   ============================================================================ */
+
+footer {
+    background-color: var(--slate-gray);
+    color: white;
+    padding: 2rem 0;
+    text-align: center;
+    margin-top: 4rem;
+}
+
+footer p {
+    margin: 0.5rem 0;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================ */
+
+@media (max-width: 768px) {
+    .banner {
+        height: auto;
+        min-height: 10vh;
+        padding: 1.5rem 1rem;
+    }
+
+    .banner h1 {
+        font-size: 1.5rem;
+    }
+
+    .banner p,
+    .banner .subtitle {
+        font-size: 0.9rem;
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .main-nav:not(:has(ul)) {
+        flex-wrap: wrap;
+    }
+
+    .main-nav a {
+        padding: 0.75rem 1.5rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    .findings-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .team-members {
+        grid-template-columns: 1fr;
+    }
+
+    .step {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}

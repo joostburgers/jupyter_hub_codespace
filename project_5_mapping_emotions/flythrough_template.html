@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>JMU Sentiment Flythrough - Free Version</title>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Leaflet CSS (Free alternative to Mapbox) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin=""/>
+    
+    <!-- Main website styles -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Scrollama for scroll-driven storytelling -->
+    <script src="https://unpkg.com/intersection-observer@0.12.0/intersection-observer.js"></script>
+    <script src="https://unpkg.com/scrollama"></script>
+    
+    <!-- Our configuration file -->
+    <script src="./flythrough_config.js"></script>
+    
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        a, a:hover, a:visited {
+            color: #0071bc;
+        }
+
+        #header {
+            display: none; /* Hidden - using banner from styles.css instead */
+        }
+
+        #scrolly {
+            position: relative;
+            display: flex;
+            padding: 0;
+        }
+
+        #scrolly > * {
+            flex: 1;
+        }
+
+        article {
+            position: relative;
+            padding: 0;
+            max-width: 40rem;
+            z-index: 10;
+        }
+
+        figure {
+            position: sticky;
+            width: 100%;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            margin: 0;
+            z-index: 1;
+        }
+
+        #map {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step {
+            margin: 0 auto 2rem auto;
+            padding: 25px 50px;
+            background-color: rgba(255,255,255,0.95);
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            opacity: 0.5;
+            transition: opacity 0.3s;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .step:first-child {
+            margin-top: 0;
+        }
+
+        .step:last-child {
+            margin-bottom: 0;
+        }
+
+        .step.is-active {
+            opacity: 1;
+        }
+
+        .step img {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            display: block;
+            margin: 15px 0;
+        }
+
+        .step-title {
+            font-weight: bold;
+            font-size: 24px;
+            margin: 0 0 15px 0;
+            color: #2d3748;
+        }
+        
+        .step p {
+            margin: 15px 0 0 0;
+            font-weight: normal;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #444;
+        }
+
+        #footer {
+            width: 100%;
+            padding: 3vh 2vw;
+            text-align: center;
+            background-color: #f8f9fa;
+            color: #888;
+        }
+
+        /* Map controls styling - Leaflet legend */
+        .leaflet-control .legend,
+        .legend {
+            background: rgba(255,255,255,0.95);
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            font-size: 12px;
+            line-height: 18px;
+            color: #333;
+        }
+
+        .leaflet-control .legend h4,
+        .legend h4 {
+            margin: 0 0 10px;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .leaflet-control .legend div span,
+        .legend div span {
+            border-radius: 50%;
+            width: 10px;
+            height: 10px;
+            margin-right: 5px;
+            display: inline-block;
+        }
+
+        /* Loading screen */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #2d3748;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            font-size: 18px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 750px) {
+            #scrolly {
+                flex-direction: column;
+            }
+
+            figure {
+                height: 50vh;
+            }
+
+            .step {
+                max-width: 100%;
+                padding: 20px;
+            }
+            
+            .legend {
+                font-size: 10px;
+                padding: 10px;
+            }
+        }
+
+        /* Error messages */
+        .error-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(239, 68, 68, 0.9);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            z-index: 10000;
+            max-width: 80%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Banner -->
+    <div class="banner">
+        <h1>JMU Reddit Sentiment Analysis</h1>
+        <p>Exploring student perspectives across Virginia universities</p>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <a href="index.html">Home</a>
+        <a href="team.html">Team</a>
+        <a href="flythrough_template.html" class="active">Interactive Tour</a>
+        <a href="whitepaper.html">Whitepaper</a>
+    </nav>
+
+    <!-- Loading screen -->
+    <div id="loading" class="loading">
+        <div>Loading your flythrough experience...</div>
+    </div>
+
+    <!-- Header -->
+    <div id="header">
+        <h1 id="story-title">Loading...</h1>
+        <h2 id="story-subtitle">Please wait...</h2>
+        <p id="story-byline">Preparing your journey...</p>
+    </div>
+
+    <!-- Main scrolly section -->
+    <section id="scrolly">
+        <article id="features">
+            <!-- Steps will be dynamically added here -->
+        </article>
+
+        <figure>
+            <div id="map"></div>
+        </figure>
+    </section>
+
+    <!-- Footer -->
+    <div id="footer">
+        <p id="footer-text">Loading footer...</p>
+    </div>
+
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
+
+    <script>
+        // Initialize variables
+        let map;
+        let layerTypes = {};
+        let activeChapter = '';
+        let currentMarkers = [];
+        let highlightLayer;
+
+        // Initialize the application
+        function initializeApp() {
+            try {
+                // Update header content
+                document.getElementById('story-title').textContent = config.title;
+                document.getElementById('story-subtitle').textContent = config.subtitle;
+                document.getElementById('story-byline').textContent = config.byline;
+                document.getElementById('footer-text').textContent = config.footer;
+
+                // Set theme
+                document.body.className = config.theme;
+
+                // Initialize the map
+                initializeMap();
+
+                // Create story sections
+                createStoryContent();
+
+                // Initialize scroll-driven interactions
+                initializeScrollytelling();
+
+                // Hide loading screen
+                document.getElementById('loading').style.display = 'none';
+
+            } catch (error) {
+                console.error('Initialization error:', error);
+                showError('Failed to initialize the flythrough. Please check your configuration file.');
+            }
+        }
+
+        function initializeMap() {
+            // Create the map
+            map = L.map('map', {
+                zoomControl: false,
+                scrollWheelZoom: false,
+                doubleClickZoom: false,
+                boxZoom: false,
+                keyboard: false,
+                dragging: false,
+                touchZoom: false
+            });
+
+            // Add tile layer
+            L.tileLayer(config.tileLayer, {
+                maxZoom: 19,
+                attribution: config.attribution
+            }).addTo(map);
+
+            // Set initial view to first chapter
+            if (config.chapters.length > 0) {
+                const firstChapter = config.chapters[0];
+                map.setView(
+                    [firstChapter.camera.latitude, firstChapter.camera.longitude],
+                    firstChapter.camera.zoom
+                );
+            }
+
+            // Add zoom control to top-right
+            L.control.zoom({
+                position: 'topright'
+            }).addTo(map);
+
+            // Add custom legend control
+            const legend = L.control({ position: 'bottomright' });
+            
+            legend.onAdd = function(map) {
+                const div = L.DomUtil.create('div', 'legend');
+                div.innerHTML = `
+                    <h4>Sentiment Scale</h4>
+                    <div><span style="background-color: #388e3c"></span>Very Positive (0.6+)</div>
+                    <div><span style="background-color: #9ccc65"></span>Positive (0.3-0.6)</div>
+                    <div><span style="background-color: #ffeb3b"></span>Neutral (-0.3-0.3)</div>
+                    <div><span style="background-color: #ef5350"></span>Negative (-0.6-0)</div>
+                    <div><span style="background-color: #d32f2f"></span>Very Negative (<-0.6)</div>
+                `;
+                return div;
+            };
+            
+            legend.addTo(map);
+
+            // Load and display data if available
+            loadSentimentData();
+        }
+
+        function loadSentimentData() {
+            try {
+                // Auto-collect all locations from chapters
+                const allLocations = [];
+                const locationNames = new Set();
+                
+                config.chapters.forEach(chapter => {
+                    if (chapter.location && chapter.location.name) {
+                        // Only add if we haven't seen this location yet
+                        if (!locationNames.has(chapter.location.name)) {
+                            locationNames.add(chapter.location.name);
+                            allLocations.push(chapter.location);
+                        }
+                    }
+                });
+                
+                if (allLocations.length === 0) {
+                    console.warn('No location data found in chapters');
+                    return;
+                }
+
+                // Helper function to get color based on RoBERTa score
+                function getColorForScore(score, colorScale) {
+                    if (score === null || score === undefined) return '#999999';
+                    
+                    if (colorScale === 'Portland') {
+                        // Blue (negative) -> White (neutral) -> Red (positive)
+                        if (score < -0.3) return '#0d47a1'; // Dark blue
+                        if (score < 0) return '#64b5f6';    // Light blue
+                        if (score < 0.3) return '#f5f5f5';  // Near white
+                        if (score < 0.6) return '#ef5350';  // Light red
+                        return '#c62828';                    // Dark red
+                    } else {
+                        // RdYlGn: Red (negative) -> Yellow (neutral) -> Green (positive)
+                        if (score < -0.3) return '#d32f2f'; // Dark red
+                        if (score < 0) return '#ef5350';    // Light red
+                        if (score < 0.3) return '#ffeb3b';  // Yellow
+                        if (score < 0.6) return '#9ccc65';  // Light green
+                        return '#388e3c';                    // Dark green
+                    }
+                }
+
+                // Create markers for all locations
+                allLocations.forEach(location => {
+                    // Skip locations with no post count (overview/navigation points only)
+                    if (location.postCount === null || location.postCount === undefined) {
+                        return;
+                    }
+                    
+                    const color = getColorForScore(location.robertaScore, config.colorScale);
+                    const radius = location.postCount ? Math.min(5 + (location.postCount / 20), 15) : 6;
+                    
+                    const marker = L.circleMarker(
+                        [location.latitude, location.longitude],
+                        {
+                            radius: radius,
+                            fillColor: color,
+                            color: '#fff',
+                            weight: 1,
+                            opacity: 0.9,
+                            fillOpacity: 0.7
+                        }
+                    );
+
+                    // Add tooltip that shows on hover
+                    const tooltipContent = `
+                        <strong>${location.name}</strong><br>
+                        Posts: ${location.postCount || 'N/A'}<br>
+                        Score: ${location.robertaScore !== null ? location.robertaScore.toFixed(2) : 'N/A'}
+                    `;
+                    marker.bindTooltip(tooltipContent, {
+                        permanent: false,
+                        direction: 'top',
+                        offset: [0, -10]
+                    });
+
+                    // Add popup with more detailed information (on click)
+                    const sentiment = location.robertaScore === null ? 'N/A' :
+                                    location.robertaScore > 0.1 ? 'Positive' :
+                                    location.robertaScore < -0.1 ? 'Negative' : 'Mixed';
+                    
+                    const popupContent = `
+                        <strong>${location.name}</strong><br>
+                        ${location.isJMU ? '🎓 JMU Location' : '🏙️ Community Location'}<br>
+                        Sentiment: ${sentiment}<br>
+                        Score: ${location.robertaScore !== null ? location.robertaScore.toFixed(2) : 'N/A'}<br>
+                        Posts: ${location.postCount || 'N/A'}
+                    `;
+                    marker.bindPopup(popupContent);
+                    
+                    // Store marker with metadata
+                    marker.locationData = location;
+                    
+                    // Add to appropriate layer groups
+                    if (!layerTypes['all_locations']) layerTypes['all_locations'] = L.layerGroup();
+                    layerTypes['all_locations'].addLayer(marker);
+                    
+                    if (location.isJMU) {
+                        if (!layerTypes['jmu_locations']) layerTypes['jmu_locations'] = L.layerGroup();
+                        layerTypes['jmu_locations'].addLayer(marker);
+                    } else {
+                        if (!layerTypes['non_jmu_locations']) layerTypes['non_jmu_locations'] = L.layerGroup();
+                        layerTypes['non_jmu_locations'].addLayer(marker);
+                    }
+                });
+
+                console.log(`Loaded ${allLocations.length} locations successfully`);
+            } catch (error) {
+                console.error('Error loading sentiment data:', error);
+            }
+        }
+
+        function createStoryContent() {
+            const features = document.getElementById('features');
+            
+            config.chapters.forEach((chapter, index) => {
+                const container = document.createElement('div');
+                container.className = 'step';
+                container.id = chapter.id;
+
+                // Add title
+                if (chapter.title) {
+                    const title = document.createElement('h3');
+                    title.className = 'step-title';
+                    title.innerHTML = chapter.title;
+                    container.appendChild(title);
+                }
+
+                // Add image
+                if (chapter.image) {
+                    const image = document.createElement('img');
+                    image.src = chapter.image;
+                    image.alt = chapter.title;
+                    image.onerror = function() {
+                        this.style.display = 'none';
+                        console.warn(`Image not found: ${chapter.image}`);
+                    };
+                    container.appendChild(image);
+                }
+
+                // Add description
+                if (chapter.description) {
+                    const description = document.createElement('p');
+                    description.innerHTML = chapter.description;
+                    container.appendChild(description);
+                }
+
+                features.appendChild(container);
+            });
+        }
+
+        function initializeScrollytelling() {
+            // Initialize Scrollama
+            const scroller = scrollama();
+
+            // Handle window resize
+            function handleResize() {
+                scroller.resize();
+            }
+
+            scroller
+                .setup({
+                    step: '#scrolly article .step',
+                    offset: 0.33,
+                    progress: false
+                })
+                .onStepEnter(response => {
+                    const chapter = config.chapters.find(c => c.id === response.element.id);
+                    if (chapter) {
+                        setActiveChapter(chapter);
+                        response.element.classList.add('is-active');
+                    }
+                })
+                .onStepExit(response => {
+                    response.element.classList.remove('is-active');
+                });
+
+            // Handle window resize
+            window.addEventListener('resize', handleResize);
+        }
+
+        function setActiveChapter(chapter) {
+            if (activeChapter === chapter.id) return;
+
+            activeChapter = chapter.id;
+
+            // Animate map to new location
+            if (chapter.camera) {
+                const center = [chapter.camera.latitude, chapter.camera.longitude];
+                const duration = chapter.duration || 2000;
+                
+                // Smooth transition
+                map.flyTo(
+                    center,
+                    chapter.camera.zoom,
+                    {
+                        duration: duration / 1000,
+                        easeLinearity: 0.25
+                    }
+                );
+            }
+
+            // Update data layers
+            updateDataLayers(chapter);
+
+            // Update highlight
+            updateHighlight(chapter);
+
+            // Legend is always visible as a Leaflet control
+        }
+
+        function updateDataLayers(chapter) {
+            // Hide all layers first
+            Object.values(layerTypes).forEach(layer => {
+                if (map.hasLayer(layer)) {
+                    map.removeLayer(layer);
+                }
+            });
+
+            // Show layers based on showData property
+            if (chapter.showData && chapter.showData !== 'none') {
+                if (chapter.showData === 'individual') {
+                    // Show only the specific location for this chapter
+                    if (chapter.location && chapter.location.name) {
+                        const individualLayer = L.layerGroup();
+                        // Find the marker in the all_locations layer
+                        if (layerTypes['all_locations']) {
+                            layerTypes['all_locations'].eachLayer(marker => {
+                                if (marker.locationData && marker.locationData.name === chapter.location.name) {
+                                    individualLayer.addLayer(marker);
+                                }
+                            });
+                        }
+                        map.addLayer(individualLayer);
+                    }
+                } else if (layerTypes[chapter.showData]) {
+                    // Show all_locations, jmu_locations, or non_jmu_locations
+                    map.addLayer(layerTypes[chapter.showData]);
+                }
+            }
+        }
+
+        function updateHighlight(chapter) {
+            // Remove existing highlight
+            if (highlightLayer) {
+                map.removeLayer(highlightLayer);
+                highlightLayer = null;
+            }
+
+            // Add new highlight if specified
+            if (chapter.highlightData) {
+                const highlight = chapter.highlightData;
+                
+                if (highlight.type === 'circle') {
+                    highlightLayer = L.circle(highlight.center, {
+                        radius: highlight.radius,
+                        color: highlight.color,
+                        weight: 3,
+                        opacity: 0.8,
+                        fillOpacity: 0.1,
+                        className: 'highlight-circle'
+                    });
+                    highlightLayer.addTo(map);
+                }
+            }
+        }
+
+        function showError(message) {
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.innerHTML = `
+                <h3>Error</h3>
+                <p>${message}</p>
+                <p>Please check the browser console for more details.</p>
+            `;
+            document.body.appendChild(errorDiv);
+
+            // Remove loading screen
+            const loading = document.getElementById('loading');
+            if (loading) {
+                loading.style.display = 'none';
+            }
+        }
+
+        // Start the application when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Small delay to ensure all resources are loaded
+            setTimeout(initializeApp, 100);
+        });
+
+        // Handle errors (ignore benign ResizeObserver warnings)
+        window.addEventListener('error', function(e) {
+            // Ignore ResizeObserver loop warnings - they're harmless
+            if (e.message && e.message.includes('ResizeObserver')) {
+                return;
+            }
+            console.error('Application error:', e);
+            // Don't show error UI - just log to console
+        });
+    </script>
+</body>
+</html>
