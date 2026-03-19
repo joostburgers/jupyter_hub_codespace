@@ -1,44 +1,10 @@
 {
-  "_instructions": "Each team member edits ONLY their own slot. Do not edit any other member's slot. Commit your changes immediately after editing. See COLLABORATION_GUIDE.md for the Git workflow. 4-member teams: leave slot 5 as-is. 5-member teams: Member 5 fills in slot 5.",
   "team": [
     {
-      "_slot": "MEMBER 1 (Project Lead) — only Member 1 edits this object",
-      "name": "Member 1 Name",
-      "major": "Your Major",
-      "role": "Project Lead & Web Content",
-      "github": "",
-      "headshot": ""
-    },
-    {
-      "_slot": "MEMBER 2 (JMU Analyst) — only Member 2 edits this object",
-      "name": "Member 2 Name",
-      "major": "Your Major",
-      "role": "JMU Data Analysis",
-      "github": "",
-      "headshot": ""
-    },
-    {
-      "_slot": "MEMBER 3 (Comparison Analyst) — only Member 3 edits this object",
-      "name": "Member 3 Name",
-      "major": "Your Major",
-      "role": "Comparison School Analysis",
-      "github": "",
-      "headshot": ""
-    },
-    {
-      "_slot": "MEMBER 4 (Other School Analyst) — only Member 4 edits this object",
-      "name": "Member 4 Name",
-      "major": "Your Major",
-      "role": "Sentiment Visualization",
-      "github": "",
-      "headshot": ""
-    },
-    {
-      "_slot": "MEMBER 5 (OPTIONAL — 5-member teams only) — delete this entire object if your team has 4 members",
-      "name": "Member 5 Name",
-      "major": "Your Major",
-      "role": "Your Role",
-      "github": "",
+      "name": "Joost Burgers",
+      "major": "Digital Studies",
+      "role": "Coordinator",
+      "github": "https://github.com/joostburgers",
       "headshot": ""
     }
   ]

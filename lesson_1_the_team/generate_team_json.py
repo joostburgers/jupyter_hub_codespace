@@ -15,31 +15,33 @@ import json
 import os
 
 # ── Paths ─────────────────────────────────────────────────────────────────────
-INPUT_CSV = os.path.join(os.path.dirname(__file__), "data", "team.csv")
+INPUT_CSV = os.path.join(os.path.dirname(__file__), "data", "team_template.csv")
 OUTPUT_JSON = os.path.join(
-    os.path.dirname(__file__), "..", "ds_101_project_4_visual_essay", "team_data.json"
+    os.path.dirname(__file__), "..", "project_5_mapping_emotions", "team_data.json"
 )
 
 # ── Load ──────────────────────────────────────────────────────────────────────
 df = pd.read_csv(INPUT_CSV)
 
 # ── Validate expected columns ─────────────────────────────────────────────────
-required = {"name", "major", "role", "github"}
+required = {"first_name", "last_name", "major", "role", "github"}
 missing = required - set(df.columns)
 if missing:
     raise ValueError(f"team.csv is missing columns: {missing}")
 
+# ── Filter out unfilled rows (role still contains placeholder 'member') ────────
+df = df[~df["role"].str.contains("member", case=False, na=True)].reset_index(drop=True)
+
 # ── Sort alphabetically by last name ─────────────────────────────────────────
-# Split on the last space to get the last name for sorting.
-# If a name has no space (one word), sort by the whole name.
-df["_last_name"] = df["name"].apply(lambda n: n.strip().split()[-1] if pd.notna(n) else "")
-df = df.sort_values("_last_name").drop(columns=["_last_name"]).reset_index(drop=True)
+df = df.sort_values("last_name").reset_index(drop=True)
 
 # ── Build JSON structure ──────────────────────────────────────────────────────
 team_members = []
 for _, row in df.iterrows():
+    first = str(row["first_name"]).strip()
+    last = str(row["last_name"]).strip()
     member = {
-        "name":     str(row["name"]).strip(),
+        "name":     f"{first} {last}",
         "major":    str(row["major"]).strip(),
         "role":     str(row["role"]).strip(),
         "github":   str(row.get("github", "")).strip() if pd.notna(row.get("github")) else "",

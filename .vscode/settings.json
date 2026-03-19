@@ -1,23 +1,9 @@
 {
-    "python.defaultInterpreterPath": "/usr/local/bin/python",
-    "jupyter.defaultKernelName": "python3",
-    "jupyter.askForKernelRestart": false,
+    
 
     "files.exclude": {
-        "project_5_mapping_emotions/flythrough_template.html": true,
-        "project_5_mapping_emotions/team.html": true,
-        "project_5_mapping_emotions/whitepaper.html": true,
-        "project_5_mapping_emotions/styles.css": true,
-        "project_5_mapping_emotions/data_cleaning_utils.py": true,
-        "project_5_mapping_emotions/__pycache__": true,
-        "project_5_mapping_emotions/assets": true,
-        "project_5_mapping_emotions/WEBSITE_GUIDE.md": true,
-        "project_5_mapping_emotions/SIMPLIFIED_ASSIGNMENT.md": true,
-        "docs": true
+       
     },
 
-    "explorer.fileNesting.enabled": true,
-    "explorer.fileNesting.patterns": {
-        "project_4_template.ipynb": "project_4_template.nbconvert.*"
-    }
+   
 }
