@@ -58,6 +58,65 @@ else
     echo "          ⚠ Notebook not found — using existing whitepaper.html"
 fi
 
+# Inject site navigation into the nbconvert output so whitepaper lives
+# inside the shared banner/nav/footer rather than as a standalone page.
+WHITEPAPER="$SCRIPT_DIR/whitepaper.html"
+if [ -f "$WHITEPAPER" ]; then
+    python3 - "$WHITEPAPER" <<'PYEOF'
+import re, sys
+
+path = sys.argv[1]
+with open(path, 'r', encoding='utf-8') as f:
+    src = f.read()
+
+# Skip if already wrapped from a previous run (notebook not found case)
+if '<meta name="wp-wrapped"' in src:
+    sys.exit(0)
+
+# Preserve Jupyter/Pygments CSS (defines --jp-* variables + syntax colours)
+styles = re.findall(r'<style[^>]*>(.*?)</style>', src, re.DOTALL)
+combined_css = '\n'.join(styles)
+
+# Extract body content produced by nbconvert
+body_m = re.search(r'<body[^>]*>(.*?)</body>', src, re.DOTALL)
+body = body_m.group(1).strip() if body_m else src
+
+out = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="wp-wrapped" content="true">
+    <title>Whitepaper \u2014 Mapping Emotions</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+{combined_css}
+    </style>
+</head>
+<body>
+    <div class="banner">
+        <h1>Mapping Emotions: Reddit Sentiment Analysis</h1>
+        <p>Exploring student perspectives across Virginia universities</p>
+    </div>
+    <nav class="main-nav">
+        <a href="index.html">Home</a>
+        <a href="team.html">Team</a>
+        <a href="flythrough_template.html">Interactive Tour</a>
+        <a href="whitepaper.html" class="active">Whitepaper</a>
+    </nav>
+{body}
+    <footer class="footer">
+        <p>&copy; 2025 JMU Digital Studies &mdash; Project 5: Mapping Emotions</p>
+    </footer>
+</body>
+</html>"""
+
+with open(path, 'w', encoding='utf-8') as f:
+    f.write(out)
+PYEOF
+    echo "          ✓ whitepaper.html wrapped with site navigation"
+fi
+
 # -----------------------------------------------------------------------------
 # STEP 3: Assemble docs/ folder (GitHub Pages target)
 # -----------------------------------------------------------------------------

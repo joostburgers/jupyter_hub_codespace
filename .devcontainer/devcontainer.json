@@ -12,7 +12,7 @@
                 "ms-python.vscode-pylance",
                 "ms-toolsai.jupyter",
                 "ms-toolsai.jupyter-kernel-spec",
-                "estivo.csv-editor"
+                "janisdd.vscode-edit-csv"
             ],
             "settings": {
                 "python.defaultInterpreterPath": "/usr/local/bin/python",
