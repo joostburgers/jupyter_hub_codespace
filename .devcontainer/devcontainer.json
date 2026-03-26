@@ -12,7 +12,8 @@
                 "ms-python.vscode-pylance",
                 "ms-toolsai.jupyter",
                 "ms-toolsai.jupyter-kernel-spec",
-                "janisdd.vscode-edit-csv"
+                "janisdd.vscode-edit-csv",
+                "ms-vscode.live-server"
             ],
             "settings": {
                 "python.defaultInterpreterPath": "/usr/local/bin/python",
@@ -23,7 +24,6 @@
                 "files.exclude": {
                     "gazetteer.py": true,
                     "LICENSE": true,
-                    "lesson_2_very_basic_python": true,
                     ".devcontainer": true,
                     ".github": true
                 }

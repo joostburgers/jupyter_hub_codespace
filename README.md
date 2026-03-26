@@ -18,6 +18,38 @@ Welcome to your Codespace! Everything you need is already installed. No setup re
 
 ---
 
+## Initial Setup — Enable GitHub Pages
+
+Do this **once** when your team first opens the repo. It takes about one minute and makes your site live for the whole team.
+
+### Step 1 — Enable Pages in the repo settings
+
+1. Go to your team's repository on **GitHub.com**.
+2. Click the **Settings** tab (top of the repo, not the account settings).
+3. In the left sidebar, click **Pages**.
+4. Under **Branch**, select **main** and set the folder to **/docs**.
+5. Click **Save**.
+
+Your site URL will appear at the top of the Pages settings page:
+```
+https://<your-github-org>.github.io/<repo-name>/
+```
+Bookmark it — this link stays the same for the rest of the project.
+
+### Step 2 — Run the publish script for the first time
+
+In the Codespaces terminal, run:
+
+```bash
+bash publish.sh
+```
+
+This creates the `docs/` folder GitHub Pages needs and pushes a first version of the site. The site will be live within about a minute.
+
+From this point on, any team member can run `bash publish.sh` after merging a lesson to `main` and the shared site will update automatically.
+
+---
+
 ## Start Here — Lesson 1
 
 Open the Lesson 1 notebook to begin:
@@ -46,8 +78,6 @@ Your site will be live at:
 ```
 https://<your-github-org>.github.io/<repo-name>/
 ```
-
-> **First time only:** In your GitHub repo go to **Settings → Pages** and set the source to **Branch: main, Folder: /docs**.
 
 ---
 
