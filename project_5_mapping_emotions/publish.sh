@@ -2,14 +2,16 @@
 # =============================================================================
 # publish.sh — Project 5: Mapping Emotions
 # =============================================================================
-# Converts the notebook to HTML, assembles the full website, and pushes
-# everything to GitHub Pages.
+# Assembles the full project website and pushes it to GitHub Pages (docs/).
 #
 # Run from the Codespaces terminal (from anywhere inside the repo):
-#   bash project_5_mapping_emotions/publish.sh
-#
-# Or, if you are already inside the project_5_mapping_emotions/ folder:
 #   bash publish.sh
+#
+# Or from inside project_5_mapping_emotions/:
+#   bash publish.sh
+#
+# GitHub Pages must be enabled for this repo with source set to:
+#   Branch: main  |  Folder: /docs
 # =============================================================================
 
 set -e  # Exit immediately on any error
@@ -26,88 +28,123 @@ echo "=============================================="
 echo ""
 
 # -----------------------------------------------------------------------------
-# STEP 1: Convert notebook to whitepaper HTML
+# STEP 1: Regenerate team_data.json from lesson_1_the_team/data/team.csv
 # -----------------------------------------------------------------------------
-echo "Step 1/4: Exporting notebook to HTML whitepaper..."
+echo "Step 1/5: Regenerating team data from team.csv..."
 
-jupyter nbconvert \
-    --to html \
-    --no-input \
-    --output whitepaper.html \
-    --output-dir "$SCRIPT_DIR" \
-    "$SCRIPT_DIR/project_4_template.ipynb"
-
-echo "          ✓ whitepaper.html generated"
+TEAM_SCRIPT="$REPO_ROOT/lesson_1_the_team/generate_team_json.py"
+if python "$TEAM_SCRIPT" 2>/dev/null; then
+    echo "          ✓ team_data.json updated"
+else
+    echo "          ⚠ Could not regenerate team data (team.csv may not be filled in yet)"
+    echo "            Using existing team_data.json if present"
+fi
 
 # -----------------------------------------------------------------------------
-# STEP 2: Assemble docs/ folder (GitHub Pages target)
+# STEP 2: Convert whitepaper notebook to HTML
 # -----------------------------------------------------------------------------
-echo "Step 2/4: Assembling docs/ folder..."
+echo "Step 2/5: Exporting whitepaper notebook to HTML..."
+
+NOTEBOOK="$SCRIPT_DIR/project_4_template_ignore.ipynb"
+if [ -f "$NOTEBOOK" ]; then
+    jupyter nbconvert \
+        --to html \
+        --no-input \
+        --output whitepaper.html \
+        --output-dir "$SCRIPT_DIR" \
+        "$NOTEBOOK"
+    echo "          ✓ whitepaper.html generated"
+else
+    echo "          ⚠ Notebook not found — using existing whitepaper.html"
+fi
+
+# -----------------------------------------------------------------------------
+# STEP 3: Assemble docs/ folder (GitHub Pages target)
+# -----------------------------------------------------------------------------
+echo "Step 3/5: Assembling docs/ folder..."
 
 mkdir -p "$DOCS"
 mkdir -p "$DOCS/images"
 
 # Core website pages
-cp "$SCRIPT_DIR/whitepaper.html"          "$DOCS/whitepaper.html"
 cp "$SCRIPT_DIR/index.html"               "$DOCS/index.html"
-cp "$SCRIPT_DIR/flythrough_template.html" "$DOCS/flythrough_template.html"
 cp "$SCRIPT_DIR/team.html"                "$DOCS/team.html"
+cp "$SCRIPT_DIR/flythrough_template.html" "$DOCS/flythrough_template.html"
+cp "$SCRIPT_DIR/whitepaper.html"          "$DOCS/whitepaper.html"
 cp "$SCRIPT_DIR/styles.css"               "$DOCS/styles.css"
-
-# Student-edited data files
 cp "$SCRIPT_DIR/flythrough_config.js"     "$DOCS/flythrough_config.js"
-cp "$SCRIPT_DIR/team_data.json"           "$DOCS/team_data.json"
 
-# Images
-if [ -d "$SCRIPT_DIR/images" ] && [ "$(ls -A "$SCRIPT_DIR/images")" ]; then
-    cp -r "$SCRIPT_DIR/images/." "$DOCS/images/"
-    echo "          ✓ images copied"
+# Team data (populated after Lesson 1 is merged)
+if [ -f "$SCRIPT_DIR/team_data.json" ]; then
+    cp "$SCRIPT_DIR/team_data.json" "$DOCS/team_data.json"
+    echo "          ✓ team_data.json included"
 else
-    echo "          ⚠ images/ folder is empty — add photos and re-run"
+    echo "          ⚠ team_data.json not found — team page will show no members"
 fi
 
-# Ensure GitHub Pages does not apply Jekyll processing
+# Images (headshots, etc.)
+if [ -d "$SCRIPT_DIR/images" ] && [ "$(ls -A "$SCRIPT_DIR/images" 2>/dev/null)" ]; then
+    cp -r "$SCRIPT_DIR/images/." "$DOCS/images/"
+    echo "          ✓ images copied"
+fi
+
+# Prevent GitHub Pages from running Jekyll processing
 touch "$DOCS/.nojekyll"
 
 echo "          ✓ docs/ assembled"
 
 # -----------------------------------------------------------------------------
-# STEP 3: Commit
+# STEP 4: Commit
 # -----------------------------------------------------------------------------
-echo "Step 3/4: Committing changes..."
+echo "Step 4/5: Committing changes..."
 
 cd "$REPO_ROOT"
-git add docs/ project_5_mapping_emotions/whitepaper.html
+git add \
+    docs/ \
+    project_5_mapping_emotions/whitepaper.html \
+    project_5_mapping_emotions/team_data.json \
+    lesson_1_the_team/data/team.csv 2>/dev/null || true
 
-# Only commit if there is something staged
 if git diff --cached --quiet; then
     echo "          ℹ No new changes to commit — site is already up to date"
 else
     STUDENT=$(git config user.name 2>/dev/null || echo "Unknown")
-    git commit -m "Publish Project 5 website — $STUDENT — $(date '+%Y-%m-%d %H:%M')"
+    git commit -m "Publish site — $STUDENT — $(date '+%Y-%m-%d %H:%M')"
     echo "          ✓ committed"
 fi
 
 # -----------------------------------------------------------------------------
-# STEP 4: Push
+# STEP 5: Push
 # -----------------------------------------------------------------------------
-echo "Step 4/4: Pushing to GitHub..."
+echo "Step 5/5: Pushing to GitHub..."
 git push
 echo "          ✓ pushed"
 
 # -----------------------------------------------------------------------------
-# Done
+# Derive the live GitHub Pages URL from the git remote
 # -----------------------------------------------------------------------------
 REMOTE=$(git remote get-url origin 2>/dev/null || echo "")
-REPO_NAME=$(basename "$REMOTE" .git 2>/dev/null || echo "your-repo")
-GITHUB_USER=$(git config user.email 2>/dev/null | cut -d@ -f1 || echo "your-username")
+if [[ "$REMOTE" =~ https://github\.com/([^/]+)/([^/.]+) ]]; then
+    GITHUB_USER="${BASH_REMATCH[1]}"
+    REPO_NAME="${BASH_REMATCH[2]}"
+elif [[ "$REMOTE" =~ git@github\.com:([^/]+)/([^/.]+) ]]; then
+    GITHUB_USER="${BASH_REMATCH[1]}"
+    REPO_NAME="${BASH_REMATCH[2]}"
+else
+    GITHUB_USER="your-username"
+    REPO_NAME="your-repo"
+fi
 
 echo ""
 echo "=============================================="
 echo " Done!"
 echo " Your site will be live in ~1 minute at:"
-echo " https://joostburgers.github.io/jupyter_hub_codespace/"
+echo " https://${GITHUB_USER}.github.io/${REPO_NAME}/"
 echo ""
-echo " Pages: Home · Team · Interactive Tour · Whitepaper"
+echo " Pages:"
+echo "   Home          → https://${GITHUB_USER}.github.io/${REPO_NAME}/"
+echo "   Team          → https://${GITHUB_USER}.github.io/${REPO_NAME}/team.html"
+echo "   Interactive   → https://${GITHUB_USER}.github.io/${REPO_NAME}/flythrough_template.html"
+echo "   Whitepaper    → https://${GITHUB_USER}.github.io/${REPO_NAME}/whitepaper.html"
 echo "=============================================="
 echo ""
