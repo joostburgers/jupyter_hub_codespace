@@ -24,6 +24,14 @@ echo "Registering Python kernel..."
 python -m ipykernel install --sys-prefix --name python3 --display-name "Python 3"
 
 echo ""
+echo "Removing upstream remote to prevent PR confusion..."
+# Students have encountered issues where PRs are accidentally opened against
+# the upstream template repo instead of their own origin. Removing the upstream
+# remote on Codespace creation ensures only 'origin' (the student repo) exists.
+git remote remove upstream 2>/dev/null || true
+echo "          ✓ Done (upstream remote removed if it existed)"
+
+echo ""
 echo "Marking lesson notebooks as assume-unchanged..."
 # Jupyter rewrites notebook metadata (kernel info, execution counts) whenever
 # a notebook is opened, even without running any cells. This causes ALL lesson
