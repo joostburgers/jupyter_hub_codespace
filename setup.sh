@@ -1,6 +1,7 @@
 #!/bin/bash
 # Post-creation script for DS 101
 # Installs only the packages needed for this lesson
+# Run this manually if the automatic setup did not complete on startup.
 
 echo "=========================================="
 echo "Setting up DS 101"
@@ -61,4 +62,3 @@ echo "=========================================="
 echo "Setup complete!"
 echo "Open the lesson notebook to begin."
 echo "=========================================="
-

@@ -4,7 +4,7 @@
     "features": {
         "ghcr.io/devcontainers/features/git:1": {}
     },
-    "postCreateCommand": "bash .devcontainer/post-create.sh",
+    "postCreateCommand": "bash setup.sh",
     "customizations": {
         "vscode": {
             "extensions": [
@@ -25,7 +25,8 @@
                     "gazetteer.py": true,
                     "LICENSE": true,
                     ".devcontainer": true,
-                    ".github": true
+                    ".github": true,
+                    "lesson_1_the_team/lesson_1_the_team.ipynb": true
                 }
             }
         }
