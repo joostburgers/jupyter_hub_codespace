@@ -11,9 +11,20 @@ echo "Installing packages..."
 pip install --quiet --no-cache-dir \
     pandas \
     plotly \
+    nltk \
+    spacy \
     nbformat \
     nbconvert \
     ipykernel
+
+echo ""
+echo "Downloading NLTK data..."
+python -m nltk.downloader -q punkt punkt_tab
+
+echo ""
+echo "Downloading spaCy models..."
+python -m spacy download --quiet en_core_web_sm
+python -m spacy download --quiet en_core_web_md
 
 echo ""
 echo "Linking system Python to devcontainer Python..."
