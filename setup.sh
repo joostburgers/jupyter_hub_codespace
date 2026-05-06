@@ -14,9 +14,21 @@ pip install --quiet --no-cache-dir \
     plotly \
     nltk \
     spacy \
+    geoparser \
+    tqdm \
+    mapclassify \
     nbformat \
     nbconvert \
-    ipykernel
+    ipykernel \
+    transformers \
+    torch \
+    scipy
+
+echo ""
+echo "Pre-caching Hugging Face RoBERTa sentiment model..."
+python -c "from transformers import AutoTokenizer, AutoModelForSequenceClassification; \
+    AutoTokenizer.from_pretrained('cardiffnlp/twitter-roberta-base-sentiment'); \
+    AutoModelForSequenceClassification.from_pretrained('cardiffnlp/twitter-roberta-base-sentiment')"
 
 echo ""
 echo "Downloading NLTK data..."
@@ -26,6 +38,18 @@ echo ""
 echo "Downloading spaCy models..."
 python -m spacy download --quiet en_core_web_sm
 python -m spacy download --quiet en_core_web_md
+python -m spacy download --quiet en_core_web_trf
+
+echo ""
+if [ -f "${HOME}/.local/share/geoparser/geoparser.db" ]; then
+    echo "GeoNames gazetteer already installed, skipping download."
+else
+    echo "Downloading GeoNames gazetteer (~13 GB, may take 15-30 minutes)..."
+    # Required by the geoparser library — builds a local SQLite database used for
+    # toponym disambiguation. Without this step, geo.parse() fails with:
+    #   'no such table: names_ft'
+    python -m geoparser download geonames
+fi
 
 echo ""
 echo "Linking system Python to devcontainer Python..."
@@ -63,8 +87,9 @@ git update-index --assume-unchanged \
     "lesson_3_introduction_pandas/lesson 3_introduction_pandas_datawrangling.ipynb" \
     "lesson_3_introduction_pandas/lesson_3_mini_practice.ipynb" \
     "lesson_4_finding_locations/lesson_4_1_extracting_locations.ipynb" \
-    "lesson_4_finding_locations/lesson_4_2_geoparsing_mapping.ipynb" \
-    "lesson_4_finding_locations/lesson_4_3_model_training.ipynb" \
+    "lesson_4_finding_locations/lesson_4_2_using_ner.ipynb" \
+    "lesson_4_finding_locations/lesson_4_3_geoparsing_mapping.ipynb" \
+    "lesson_4_finding_locations/lesson_4_y_model_training.ipynb" \
     "lesson_6_sentiment_analysis/lesson_5_sentiment_analysis.ipynb" \
     2>/dev/null && echo "          ✓ Done" || echo "          ⚠ Some notebooks not found (may be added later)"
 

@@ -79,7 +79,7 @@ Commit **frequently and in small chunks** — after finishing each chapter or ea
 Run this from anywhere in the repo terminal:
 
 ```bash
-bash project_5_mapping_emotions/publish.sh
+bash project_mapping_emotions/publish.sh
 ```
 
 This exports the notebook, assembles all website files into `docs/`, and pushes to GitHub Pages in one step. **Always `git pull` first** so you have everyone's latest changes before publishing.

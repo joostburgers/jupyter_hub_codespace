@@ -4,4 +4,4 @@
 #   bash publish.sh
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-exec bash "$SCRIPT_DIR/project_5_mapping_emotions/publish.sh"
+exec bash "$SCRIPT_DIR/project_mapping_emotions/publish.sh"

@@ -7,7 +7,7 @@
 # Run from the Codespaces terminal (from anywhere inside the repo):
 #   bash publish.sh
 #
-# Or from inside project_5_mapping_emotions/:
+# Or from inside project_mapping_emotions/:
 #   bash publish.sh
 #
 # GitHub Pages must be enabled for this repo with source set to:
@@ -160,8 +160,8 @@ echo "Step 4/5: Committing changes..."
 cd "$REPO_ROOT"
 git add \
     docs/ \
-    project_5_mapping_emotions/whitepaper.html \
-    project_5_mapping_emotions/team_data.json \
+    project_mapping_emotions/whitepaper.html \
+    project_mapping_emotions/team_data.json \
     lesson_1_the_team/data/team.csv 2>/dev/null || true
 
 if git diff --cached --quiet; then

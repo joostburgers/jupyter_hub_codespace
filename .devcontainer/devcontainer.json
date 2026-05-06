@@ -4,6 +4,7 @@
     "features": {
         "ghcr.io/devcontainers/features/git:1": {}
     },
+    "onCreateCommand": "bash .devcontainer/post-create.sh",
     "postCreateCommand": "bash setup.sh",
     "customizations": {
         "vscode": {

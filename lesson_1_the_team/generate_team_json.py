@@ -17,7 +17,7 @@ import os
 # ── Paths ─────────────────────────────────────────────────────────────────────
 INPUT_CSV = os.path.join(os.path.dirname(__file__), "data", "team.csv")
 OUTPUT_JSON = os.path.join(
-    os.path.dirname(__file__), "..", "project_5_mapping_emotions", "team_data.json"
+    os.path.dirname(__file__), "..", "project_mapping_emotions", "team_data.json"
 )
 
 # ── Load ──────────────────────────────────────────────────────────────────────
