@@ -59,6 +59,187 @@ DATA_DIR   = SCRIPT_DIR / "data"
 # Add config dir to sys.path so reddit_auth can be imported from anywhere
 sys.path.insert(0, str(CONFIG_DIR))
 
+# ---------------------------------------------------------------------------
+# feature_type → place_type mapping
+# Mirrors the taxonomy used in Lesson 4.4 and the pre-processed CSVs.
+# feature_type values not listed here are left blank (natural features, etc.)
+# ---------------------------------------------------------------------------
+FEATURE_TYPE_MAP = {
+    # Country
+    'independent political entity': 'Country',
+    'semi-independent political entity': 'Country',
+    'dependent political entity': 'Country',
+    'freely associated state': 'Country',
+    'continent': 'Country',
+    'political entity': 'Country',
+    # State
+    'first-order administrative division': 'State',
+    'second-order administrative division': 'State',
+    'province': 'State',
+    'historical second-order administrative division': 'State',
+    # Region
+    'region': 'Region',
+    'economic region': 'Region',
+    # City
+    'populated place': 'City',
+    'seat of a first-order administrative division': 'City',
+    'seat of a second-order administrative division': 'City',
+    'seat of a third-order administrative division': 'City',
+    'seat of a fourth-order administrative division': 'City',
+    'third-order administrative division': 'City',
+    'fourth-order administrative division': 'City',
+    'capital of a political entity': 'City',
+    'populated locality': 'City',
+    'locality': 'City',
+    'abandoned populated place': 'City',
+    'destroyed populated place': 'City',
+    # Neighborhood
+    'section of populated place': 'Neighborhood',
+    'administrative division': 'Neighborhood',
+    'common': 'Neighborhood',
+    'park': 'Neighborhood',
+    # University
+    'university': 'University',
+    'college': 'University',
+    # Road
+    'road': 'Road',
+    'street': 'Road',
+    'road junction': 'Road',
+    'intersection': 'Road',
+    'bridge': 'Road',
+    'railroad station': 'Road',
+    'railroad siding': 'Road',
+    'wharf(-ves)': 'Road',
+    'trail': 'Road',
+    'canal': 'Road',
+    'harbor(s)': 'Road',
+    'metro station': 'Road',
+    # Building
+    'building(s)': 'Building',
+    'area': 'Building',
+    'hotel': 'Building',
+    'school': 'Building',
+    'church': 'Building',
+    'airport': 'Building',
+    'stadium': 'Building',
+    'hospital': 'Building',
+    'mall': 'Building',
+    'library': 'Building',
+    'diplomatic facility': 'Building',
+    'cemetery': 'Building',
+    'castle': 'Building',
+    'restaurant': 'Building',
+    'monument': 'Building',
+    'museum': 'Building',
+    'administrative facility': 'Building',
+    'office building': 'Building',
+    'historical site': 'Building',
+    'mosque': 'Building',
+    'tower': 'Building',
+    'store': 'Building',
+    'storehouse': 'Building',
+    'market': 'Building',
+    'camp(s)': 'Building',
+    'farm': 'Building',
+    'farmstead': 'Building',
+    'homestead': 'Building',
+    'country house': 'Building',
+    'palace': 'Building',
+    'clinic': 'Building',
+    'post office': 'Building',
+    'religious center': 'Building',
+    'water tank': 'Building',
+    'police post': 'Building',
+    'amusement park': 'Building',
+    'golf course': 'Building',
+    'resort': 'Building',
+    'bus stop': 'Building',
+    'heliport': 'Building',
+    'airfield': 'Building',
+    'airbase': 'Building',
+    'seaplane landing area': 'Building',
+    'military installation': 'Building',
+    'mine(s)': 'Building',
+    'observation point': 'Building',
+    'square': 'Building',
+    'garden(s)': 'Building',
+    'tomb(s)': 'Building',
+    'dam': 'Building',
+    'abandoned airfield': 'Building',
+    'abandoned camp': 'Building',
+    'well': 'Building',
+    'estate(s)': 'Building',
+    # Natural features
+    'stream': 'Natural Feature',
+    'mountain': 'Natural Feature',
+    'mountains': 'Natural Feature',
+    'lake': 'Natural Feature',
+    'lakes': 'Natural Feature',
+    'hill': 'Natural Feature',
+    'hills': 'Natural Feature',
+    'valley': 'Natural Feature',
+    'ridge': 'Natural Feature',
+    'island': 'Natural Feature',
+    'islands': 'Natural Feature',
+    'cape': 'Natural Feature',
+    'point': 'Natural Feature',
+    'zone': 'Natural Feature',
+    'reservoir': 'Natural Feature',
+    'bay': 'Natural Feature',
+    'plain': 'Natural Feature',
+    'canyon': 'Natural Feature',
+    'beach': 'Natural Feature',
+    'rock': 'Natural Feature',
+    'rocks': 'Natural Feature',
+    'atoll': 'Natural Feature',
+    'overfalls': 'Natural Feature',
+    'bar': 'Natural Feature',
+    'bank': 'Natural Feature',
+    'bank(s)': 'Natural Feature',
+    'stream bank': 'Natural Feature',
+    'cliff': 'Natural Feature',
+    'slope': 'Natural Feature',
+    'spur': 'Natural Feature',
+    'depression': 'Natural Feature',
+    'cove': 'Natural Feature',
+    'sea': 'Natural Feature',
+    'desert': 'Natural Feature',
+    'pond': 'Natural Feature',
+    'islet': 'Natural Feature',
+    'field': 'Natural Feature',
+    'grazing area': 'Natural Feature',
+    'reservation': 'Natural Feature',
+    'gap': 'Natural Feature',
+    'reef': 'Natural Feature',
+    'cave': 'Natural Feature',
+    'triangulation station': 'Natural Feature',
+    'arch': 'Natural Feature',
+    'intermittent stream': 'Natural Feature',
+    'forest': 'Natural Feature',
+    'swamp': 'Natural Feature',
+    'marsh': 'Natural Feature',
+    'wetland': 'Natural Feature',
+    'volcano': 'Natural Feature',
+    'peninsula': 'Natural Feature',
+    'lagoon': 'Natural Feature',
+    'inlet': 'Natural Feature',
+    'channel': 'Natural Feature',
+    'strait': 'Natural Feature',
+    'waterfall': 'Natural Feature',
+    'spring(s)': 'Natural Feature',
+    'glacier': 'Natural Feature',
+    'gorge': 'Natural Feature',
+    'ravine': 'Natural Feature',
+    'plateau': 'Natural Feature',
+    'headland': 'Natural Feature',
+    'promontory': 'Natural Feature',
+    'pass': 'Natural Feature',
+    'dune': 'Natural Feature',
+    'butte': 'Natural Feature',
+    'mesa': 'Natural Feature',
+    'peak': 'Natural Feature',
+}
+
 # Emoji regex — covers all major emoji/symbol Unicode blocks
 # The original Lesson 3.1 pattern missed U+1F900-U+1F9FF (e.g. 🤮 U+1F92E)
 EMOJI_PATTERN = (
@@ -284,6 +465,22 @@ def stage_geoparse(school, df_sentences, geo, out_dir):
         "feature_type", "admin1_name", "admin2_name", "country_name",
     ]
     df_long = df.explode(list_cols).reset_index(drop=True)
+
+    # Auto-assign place_type from feature_type; unmapped values remain NaN
+    df_long["place_type"] = df_long["feature_type"].map(FEATURE_TYPE_MAP)
+
+    # Pre-compute how many rows share each (place, latitude, longitude) combination.
+    # Students can sort by this column in Google Sheets to prioritise high-frequency places.
+    df_long["place_count"] = (
+        df_long.groupby(["place", "latitude", "longitude"])["place"]
+               .transform("count")
+    )
+
+    # Add empty review columns so the CSV is ready for Google Sheets review (lesson 4.4).
+    # corrected_latlon accepts a Google Maps "lat, lon" paste string; Part C splits it.
+    for col in ["action", "corrected_name", "corrected_latlon",
+                "corrected_place_type", "reviewer"]:
+        df_long[col] = ""
 
     df_long.to_csv(out_csv, index=False)
     print("[{}] Stage 3/3: {:,} rows -> {}".format(
