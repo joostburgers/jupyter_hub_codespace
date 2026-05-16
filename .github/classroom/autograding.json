@@ -1,0 +1,124 @@
+﻿{
+  "tests": [
+    {
+      "name": "T1a - Cleaned file exists (2 pts)",
+      "setup": "pip install pandas pytest -q",
+      "run": "pytest tests/test_universal.py::test_cleaned_file_exists -v --tb=short",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 60,
+      "points": 2
+    },
+    {
+      "name": "T1b - No review columns in export (1 pt)",
+      "setup": "pip install pandas pytest -q",
+      "run": "pytest tests/test_universal.py::test_no_review_columns -v --tb=short",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 60,
+      "points": 1
+    },
+    {
+      "name": "T1c - All coordinates are numeric (1 pt)",
+      "setup": "pip install pandas pytest -q",
+      "run": "pytest tests/test_universal.py::test_coordinates_numeric -v --tb=short",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 60,
+      "points": 1
+    },
+    {
+      "name": "T2 - All cnt>=5 location groups reviewed (3 pts)",
+      "setup": "pip install pandas pytest -q",
+      "run": "pytest tests/test_universal.py::test_all_high_count_actioned -v --tb=short",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 60,
+      "points": 3
+    },
+    {
+      "name": "T3 - 75% of cnt>=3 location groups reviewed (2 pts)",
+      "setup": "pip install pandas pytest -q",
+      "run": "pytest tests/test_universal.py::test_majority_medium_count_actioned -v --tb=short",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 60,
+      "points": 2
+    },
+    {
+      "name": "T4 - RoBERTa sentiment committed (2 pts)",
+      "setup": "pip install pandas pytest -q",
+      "run": "pytest tests/test_universal.py::test_roberta_sentiment_committed -v --tb=short",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 60,
+      "points": 2
+    },
+    {
+      "name": "J1 - Jiamusi corrected to JMU - place_count 23 (2 pts)",
+      "setup": "pip install pandas pytest -q",
+      "run": "pytest tests/test_review.py::test_jiamusi_corrected -v --tb=short",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 60,
+      "points": 2
+    },
+    {
+      "name": "J2 - D-Hall corrected to JMU campus - place_count 8 (1 pt)",
+      "setup": "pip install pandas pytest -q",
+      "run": "pytest tests/test_review.py::test_d_hall_ny_corrected -v --tb=short",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 60,
+      "points": 1
+    },
+    {
+      "name": "J3 - Bailiwick of Jersey corrected to New Jersey - place_count 5 (1 pt)",
+      "setup": "pip install pandas pytest -q",
+      "run": "pytest tests/test_review.py::test_bailiwick_jersey_corrected -v --tb=short",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 60,
+      "points": 1
+    },
+    {
+      "name": "J4 - Rockingham County corrected to Virginia - place_count 7 (1 pt)",
+      "setup": "pip install pandas pytest -q",
+      "run": "pytest tests/test_review.py::test_rockingham_nh_corrected -v --tb=short",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 60,
+      "points": 1
+    },
+    {
+      "name": "J5 - Sunbelt Strip airport removed - place_count 4 (1 pt)",
+      "setup": "pip install pandas pytest -q",
+      "run": "pytest tests/test_review.py::test_sunbelt_airport_removed -v --tb=short",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 60,
+      "points": 1
+    },
+    {
+      "name": "J6 - North 38 corrected to Harrisonburg VA - place_count 4 (1 pt)",
+      "setup": "pip install pandas pytest -q",
+      "run": "pytest tests/test_review.py::test_north38_corrected -v --tb=short",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 60,
+      "points": 1
+    }
+  ]
+}
