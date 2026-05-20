@@ -14,7 +14,6 @@ pip install --quiet --no-cache-dir \
     plotly \
     nltk \
     spacy \
-    geoparser \
     tqdm \
     mapclassify \
     nbformat \
@@ -39,17 +38,6 @@ echo "Downloading spaCy models..."
 python -m spacy download --quiet en_core_web_sm
 python -m spacy download --quiet en_core_web_md
 python -m spacy download --quiet en_core_web_trf
-
-echo ""
-if [ -f "${HOME}/.local/share/geoparser/geoparser.db" ]; then
-    echo "GeoNames gazetteer already installed, skipping download."
-else
-    echo "Downloading GeoNames gazetteer (~13 GB, may take 15-30 minutes)..."
-    # Required by the geoparser library — builds a local SQLite database used for
-    # toponym disambiguation. Without this step, geo.parse() fails with:
-    #   'no such table: names_ft'
-    python -m geoparser download geonames
-fi
 
 echo ""
 echo "Linking system Python to devcontainer Python..."

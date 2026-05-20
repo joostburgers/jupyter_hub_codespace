@@ -23,7 +23,6 @@
                     { "path": "/bin/python3", "type": "pythonEnvironment" }
                 ],
                 "files.exclude": {
-                    "gazetteer.py": true,
                     "LICENSE": true,
                     ".devcontainer": true,
                     ".github": true,

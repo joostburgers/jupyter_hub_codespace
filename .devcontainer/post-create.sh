@@ -2,7 +2,7 @@
 # Prebuild install script for DS 101
 # Runs during Codespace prebuild (onCreateCommand) — output is cached in the
 # prebuild image so students don't wait for installs on first launch.
-# Contains only environment-level setup: packages, models, gazetteer.
+# Contains only environment-level setup: packages and models.
 # Git operations are intentionally excluded — they must run in the student's
 # repo context via setup.sh (postCreateCommand), not during prebuild.
 
@@ -17,7 +17,6 @@ pip install --quiet --no-cache-dir \
     plotly \
     nltk \
     spacy \
-    geoparser \
     tqdm \
     mapclassify \
     nbformat \
@@ -43,14 +42,6 @@ python -m spacy download --quiet en_core_web_sm
 python -m spacy download --quiet en_core_web_md
 python -m spacy download --quiet en_core_web_trf
 
-echo ""
-echo "Downloading GeoNames gazetteer (~13 GB, may take 15-30 minutes)..."
-# Required by the geoparser library — builds a local SQLite database used for
-# toponym disambiguation. Without this step, geo.parse() fails with:
-#   'no such table: names_ft'
-python -m geoparser download geonames
-
-echo ""
 echo "Linking system Python to devcontainer Python..."
 ln -sf /usr/local/bin/python /usr/bin/python3
 
