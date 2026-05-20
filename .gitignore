@@ -39,3 +39,6 @@ desktop.ini
 
 # Utility notebooks (not for students)
 lesson_4_finding_locations/generate_jmu_backup_sentiment.ipynb
+
+# Instructor-only files
+instructor/

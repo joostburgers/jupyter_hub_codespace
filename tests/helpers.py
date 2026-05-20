@@ -4,6 +4,8 @@ Importable from both pytest (via conftest.py) and standalone scripts.
 """
 
 import pandas as pd
+import mapclassify
+import plotly.colors as pc
 from pathlib import Path
 
 KNOWN_SCHOOLS = ['GMU', 'JMU', 'ODU', 'UNC', 'UVA', 'VCU', 'VirginiaTech', 'WM']
@@ -289,6 +291,88 @@ def load_and_validate_review_sheet(url: str) -> pd.DataFrame | None:
         print("\n✅ No validation issues found — safe to proceed to Parts D and E.")
 
     return df
+
+
+def aggregate_places(df: pd.DataFrame, sentiment: bool = False) -> pd.DataFrame:
+    """Collapse raw long-format rows to one row per unique place.
+
+    If sentiment=True, also aggregates roberta_compound → avg_roberta_compound.
+    """
+    subset = ['place', 'latitude', 'longitude']
+    agg = dict(
+        location_count=('place', 'size'),
+        latitude=('latitude', 'first'),
+        longitude=('longitude', 'first'),
+        place_type=('place_type', lambda s: s.dropna().mode().iloc[0] if s.dropna().size else 'Unknown'),
+    )
+    if sentiment:
+        subset.append('roberta_compound')
+        agg['avg_roberta_compound'] = ('roberta_compound', 'mean')
+    return (
+        df.dropna(subset=subset)
+        .astype({'latitude': float, 'longitude': float})
+        .groupby('place', sort=False)
+        .agg(**agg)
+        .reset_index()
+    )
+
+
+def jenks_size_classify(df_places: pd.DataFrame, n_size: int) -> None:
+    """Apply Jenks NaturalBreaks on location_count; add size_class column only (no color)."""
+    counts = df_places['location_count'].values
+    k_s = min(n_size, len(counts))
+    df_places['size_class'] = (mapclassify.NaturalBreaks(counts, k=k_s).yb + 1).astype(float)
+
+
+def jenks_count_classify(df_places: pd.DataFrame, color_scale: str,
+                         n_size: int, n_color: int) -> tuple:
+    """Apply Jenks NaturalBreaks on location_count; add size_class / color_class columns.
+
+    Returns (labels, color_map) for use in px.scatter_map.
+    """
+    counts = df_places['location_count'].values
+    k_s, k_c = min(n_size, len(counts)), min(n_color, len(counts))
+    df_places['size_class'] = (mapclassify.NaturalBreaks(counts, k=k_s).yb + 1).astype(float)
+    jnb_c = mapclassify.NaturalBreaks(counts, k=k_c)
+    lo, labels = float(df_places['location_count'].min()), []
+    for hi in jnb_c.bins:
+        labels.append(f'{int(lo)}\u2013{int(hi)}')
+        lo = hi
+    df_places['color_class'] = pd.cut(
+        df_places['location_count'], bins=[-float('inf')] + list(jnb_c.bins), labels=labels
+    )
+    palette = pc.sample_colorscale(color_scale, [i / (k_c - 1) for i in range(k_c)])
+    return labels, dict(zip(labels, palette))
+
+
+def jenks_sentiment_classify(df_work: pd.DataFrame, color_scale: str,
+                              n_size: int, n_color: int) -> tuple:
+    """Apply Jenks NaturalBreaks on avg_roberta_compound; add size_class / color_class columns.
+
+    Returns (labels, color_map) for use in px.scatter_map.
+    """
+    counts, scores = df_work['location_count'].values, df_work['avg_roberta_compound']
+    k_s, k_c = min(n_size, len(counts)), min(n_color, len(counts))
+    df_work['size_class'] = (mapclassify.NaturalBreaks(counts, k=k_s).yb + 1).astype(float)
+    jnb_c = mapclassify.NaturalBreaks(scores.values, k=k_c)
+    lo, labels = float(scores.min()), []
+    for hi in jnb_c.bins:
+        labels.append(f'{lo:.2f} to {hi:.2f}')
+        lo = hi
+    df_work['color_class'] = pd.cut(
+        scores, bins=[-float('inf')] + list(jnb_c.bins), labels=labels
+    )
+    palette = pc.sample_colorscale(color_scale, [i / (k_c - 1) for i in range(k_c)])
+    return labels, dict(zip(labels, palette))
+
+
+def filter_places(df_places: pd.DataFrame, min_count: int = 1,
+                  place_types: list | None = None) -> pd.DataFrame:
+    """Filter an aggregated places DataFrame by minimum count and optional place types."""
+    mask = df_places['location_count'] >= min_count
+    if place_types is not None:
+        mask &= df_places['place_type'].isin(place_types)
+    return df_places[mask].copy()
 
 
 def coverage_stats(df: pd.DataFrame, min_count: int) -> tuple[int, int]:
