@@ -52,8 +52,8 @@ Work through these notebooks in order after completing the lessons. Each part bu
 |------|----------|-------|-----------------|
 | 1 | `project_part_1_data_pipeline.ipynb` | Data Pipeline | Clean your school's Reddit dataset and run RoBERTa sentiment analysis on it. |
 | 2 | `project_part_2_whitepaper.ipynb` | Analysis & Whitepaper | Analyze and compare sentiment patterns across schools; write up your findings. |
-| 3 | `project_part_3_base_map.ipynb` | Base Map | Build an interactive map combining your school's data with the JMU baseline. |
-| 4 | `project_part_4_flythrough.ipynb` | Flythrough & Scrollytelling | Add a scroll-driven narrative layer to your map and publish the final site. |
+| 3 | `project_part_3_interactive_tour.ipynb` | Interactive Tour | Build an interactive map combining your school's data with the JMU baseline. |
+| 4 | `project_part_4_global_variables.ipynb` | Global Variables & Submission | Configure global variables, finalize your site, and publish to GitHub Pages. |
 
 ---
 
@@ -110,7 +110,7 @@ bash publish.sh
 This will:
 1. Rebuild the team page from your `team.csv`
 2. Export the whitepaper notebook to HTML
-3. Copy all pages (`index.html`, `team.html`, `flythrough_template.html`, `whitepaper.html`) into `docs/`
+3. Copy all pages (`index.html`, `team.html`, `interactive_tour.html`, `whitepaper.html`) into `docs/`
 4. Commit and push to GitHub
 
 Your site will be live at:

@@ -323,7 +323,6 @@ p {
     align-items: flex-start;
     padding: 1.5rem;
     background-color: var(--bg-light);
-    border-radius: 10px;
     transition: all 0.3s ease;
 }
 

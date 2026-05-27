@@ -152,7 +152,7 @@ out = f"""<!DOCTYPE html>
     <nav class="main-nav">
         <a href="index.html">Home</a>
         <a href="team.html">Team</a>
-        <a href="flythrough_template.html">Interactive Tour</a>
+        <a href="interactive_tour.html">Interactive Tour</a>
         <a href="whitepaper.html" class="active">Whitepaper</a>
     </nav>
     <div class="wp-layout">
@@ -184,10 +184,10 @@ mkdir -p "$DOCS/images"
 # Core website pages
 cp "$PROJECT_DIR/index.html"               "$DOCS/index.html"
 cp "$PROJECT_DIR/team.html"                "$DOCS/team.html"
-cp "$PROJECT_DIR/flythrough_template.html" "$DOCS/flythrough_template.html"
+cp "$PROJECT_DIR/interactive_tour.html" "$DOCS/interactive_tour.html"
 cp "$PROJECT_DIR/whitepaper.html"          "$DOCS/whitepaper.html"
 cp "$PROJECT_DIR/styles.css"               "$DOCS/styles.css"
-cp "$PROJECT_DIR/flythrough_config.js"     "$DOCS/flythrough_config.js"
+cp "$PROJECT_DIR/interactive_tour_config.js"     "$DOCS/interactive_tour_config.js"
 
 # Team data (populated after Lesson 1 is merged)
 if [ -f "$PROJECT_DIR/team_data.json" ]; then
@@ -259,7 +259,7 @@ echo ""
 echo " Pages:"
 echo "   Home          → https://${GITHUB_USER}.github.io/${REPO_NAME}/"
 echo "   Team          → https://${GITHUB_USER}.github.io/${REPO_NAME}/team.html"
-echo "   Interactive   → https://${GITHUB_USER}.github.io/${REPO_NAME}/flythrough_template.html"
+echo "   Interactive   → https://${GITHUB_USER}.github.io/${REPO_NAME}/interactive_tour.html"
 echo "   Whitepaper    → https://${GITHUB_USER}.github.io/${REPO_NAME}/whitepaper.html"
 echo "=============================================="
 echo ""
