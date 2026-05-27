@@ -29,9 +29,14 @@ Do NOT use `**Note**` bold inline or `### Note` heading. Use these four blockquo
   - For discussion and critical thinking prompts asking students to interpret or compare results
   - Example: `> 💡 **Reflection:** Do the two charts tell the same story?`
 
-- **Student activity** — `> ✍️ **Activity:** plain text`
-  - For hands-on tasks where students must write or modify code themselves
-  - Example: `> ✍️ **Activity:** Try to create a sentence with a compound polarity score of 1.0.`
+---
+
+## Critical Activity Sections
+- Do NOT format student activities as blockquotes.
+- Use a section heading in this pattern: `### ✍️ 1.4 Critical Activity - Making Emotions`
+- The text after the hyphen should name the task students are about to do and should be specific to the content.
+- Use these headings when a hands-on task should stand apart from the surrounding explanation and code.
+- Example: `### ✍️ 2.3 Critical Activity - Sorting Keyword Scores`
 
 ---
 
@@ -90,8 +95,66 @@ Do NOT use `**Note**` bold inline or `### Note` heading. Use these four blockquo
 ---
 
 ## Lesson Structure Template
-1. `# Lesson X.Y: Title` (H1)
-2. `## Overview` — bullet list of what will be covered + prerequisites
-3. Numbered sections: `## 1 Section Name`, `### 1.1 Subsection Name`
-4. `## Lesson Summary` — grouped by part with bullet points of key functions/concepts
-5. `➡️ **Next:** [Lesson X.Y — Title](filename.ipynb)` closing link
+
+Every lesson notebook must follow this exact skeletal pattern. Lesson 1.1 (`lesson_1_1_git_and_pull_requests.ipynb`) is the canonical reference.
+
+```
+# Lesson X.Y: Title
+```
+- Single H1. Title format: `Lesson X.Y: Descriptive Title`.
+
+---
+
+```
+## Overview
+```
+- Immediately after the H1, no separator line before it.
+- Bullet list of what students will do/learn.
+- `**Prerequisites:**` line linking to any required prior lessons.
+
+---
+
+```
+---
+
+## 1 Section Name
+```
+- Each top-level section is preceded by a `---` rule (horizontal rule as its own markdown cell or on its own line).
+- Section numbers are plain integers: `## 1`, `## 2`, … `## N`.
+- Section title is Title Case.
+
+```
+### 1.1 Subsection Name
+```
+- Subsections numbered `X.Y` matching the parent section.
+
+```
+### ✍️ 1.4 Critical Activity - Specific Task Name
+```
+- Activities are numbered as subsections within their parent section.
+- Text after the hyphen names the specific task — not generic ("Critical Activity 1").
+
+---
+
+*(Repeat `---` + `## N …` blocks for each major section.)*
+
+---
+
+```
+---
+
+## Lesson Summary
+```
+- Preceded by a `---` rule.
+- Grouped by part with `### Part N: Name` sub-headings.
+- Each part is a bullet list of key functions, concepts, or commands covered.
+
+---
+
+```
+---
+
+➡️ **Next:** [Lesson X.Y — Title](filename.ipynb)
+```
+- After the final `---` rule.
+- Plain inline link — no heading wrapper.
