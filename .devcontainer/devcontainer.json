@@ -26,7 +26,6 @@
                     "LICENSE": true,
                     ".devcontainer": true,
                     ".github": true,
-                    "lesson_1_the_team/lesson_1_the_team.ipynb": true,
                     "lesson_5_sentiment_analysis/sentiment_utils.py": true
                 }
             }

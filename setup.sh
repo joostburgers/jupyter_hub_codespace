@@ -71,14 +71,22 @@ git update-index --assume-unchanged \
     "lesson_1_the_team/lesson_1_1_git_and_pull_requests.ipynb" \
     "lesson_1_the_team/lesson_1_2_merge_conflicts.ipynb" \
     "lesson_1_the_team/lesson_1_3_dynamic_input.ipynb" \
-    "lesson_2_very_basic_python/lesson_2_very_basic_python.ipynb" \
-    "lesson_3_introduction_pandas/lesson 3_introduction_pandas_datawrangling.ipynb" \
-    "lesson_3_introduction_pandas/lesson_3_mini_practice.ipynb" \
+    "lesson_2_very_basic_python/lesson_2_1_overview_variables.ipynb" \
+    "lesson_2_very_basic_python/lesson_2_2_functions_methods.ipynb" \
+    "lesson_2_very_basic_python/lesson_2_3_packages.ipynb" \
+    "lesson_2_very_basic_python/lesson_2_4_reading_code.ipynb" \
+    "lesson_3_introduction_pandas/lesson_3_1_loading_and_cleaning.ipynb" \
+    "lesson_3_introduction_pandas/lesson_3_2_plotly_visualization.ipynb" \
+    "lesson_3_introduction_pandas/lesson_3_3_plotly_practice.ipynb" \
     "lesson_4_finding_locations/lesson_4_1_extracting_locations.ipynb" \
     "lesson_4_finding_locations/lesson_4_2_using_ner.ipynb" \
     "lesson_4_finding_locations/lesson_4_3_geoparsing_mapping.ipynb" \
-    "lesson_4_finding_locations/lesson_4_y_model_training.ipynb" \
-    "lesson_6_sentiment_analysis/lesson_5_sentiment_analysis.ipynb" \
+    "lesson_4_finding_locations/lesson_4_4_preparing_review_sheet.ipynb" \
+    "lesson_4_finding_locations/lesson_4_5_technical_reference_geoparser.ipynb" \
+    "lesson_5_sentiment_analysis/lesson_5_1_sentiment_analysis.ipynb" \
+    "lesson_5_sentiment_analysis/lesson_5_2_roberta_sentiment.ipynb" \
+    "lesson_6_mapping_fundamentals/lesson_6_mapping_fundamentals.ipynb" \
+    "project_mapping_emotions/project_part_1_data_pipeline.ipynb" \
     2>/dev/null && echo "          ✓ Done" || echo "          ⚠ Some notebooks not found (may be added later)"
 
 echo ""
