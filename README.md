@@ -1,6 +1,34 @@
 # DS 101 — Mapping Emotions: Reddit Sentiment Analysis
 
-Welcome to your Codespace! Everything you need is already installed. No setup required — just open a lesson and start working.
+---
+
+## Getting Started
+
+Your instructor has added you to your team's repository. Follow these two steps to open your workspace.
+
+### Step 1 — Open a Codespace
+
+On this repository's page on GitHub.com, click the green **Code** button, select the **Codespaces** tab, then click **Create codespace on main**.
+
+```
+┌─────────────────────────────┐
+│  Code  ▾                    │
+├─────────────────────────────┤
+│  Local  │  Codespaces       │  ← click Codespaces
+├─────────────────────────────┤
+│  +  Create codespace on main│  ← click this
+└─────────────────────────────┘
+```
+
+The first build takes **10–15 minutes** — packages, models, and tools are all being installed. After that, reopening takes only a few seconds.
+
+> **Each team member opens their own Codespace** from the shared team repo. Your work is separate until you commit and push.
+
+### Step 2 — Start working
+
+Once your Codespace is open, everything is already installed. Open the first lesson to begin:
+
+**Explorer** (left sidebar) → `lesson_1_the_team/` → `lesson_1_1_git_and_pull_requests.ipynb`
 
 ---
 
