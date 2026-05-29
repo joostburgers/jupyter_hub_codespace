@@ -1050,17 +1050,15 @@
                                     _hlRef.addLayer(marker);
                                 };
 
-                                // Wait for flyTo to complete before adding the ring.
-                                // flyTo always fires moveend (even for zero-movement) so no
-                                // Two-path trigger: if a moveend fires after this point
-                                // (e.g. refresh / zero-movement flyTo), use it immediately.
-                                // If no further moveend occurs — the normal Scrollama case
-                                // where this code runs INSIDE the moveend callback from
-                                // setActiveChapter so the event has already fired — the
-                                // 300ms timeout ensures the ring is added after the map has
-                                // fully settled.  The _added guard prevents double-execution.
-                                map.once('moveend', _addPulseRing);
-                                setTimeout(_addPulseRing, 300);
+                                // updateDataLayers is only ever called after the map is
+                                // fully settled (either from within a moveend handler, or
+                                // synchronously when samePosition=true).  There is no active
+                                // flyTo animation at this point, so calling _addPulseRing()
+                                // directly is safe — no GPU composite-layer conflict.
+                                // Registering map.once('moveend', ...) here was wrong: it
+                                // would fire for the NEXT chapter's flyTo, adding the ring
+                                // just before updateDataLayers(nextChapter) wiped it.
+                                _addPulseRing();
                             }
                         }
                     }
