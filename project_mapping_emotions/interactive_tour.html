@@ -493,6 +493,7 @@
         let activeTypeFilter  = null;  // null = show all; Set<string> when filtering by place type
         let currentYearScores = null;  // last year-filtered data, used to reapply when type filter changes
         let _isUpdating = false;       // mutex: prevents concurrent chapter transitions
+        let _pendingChapter = null;    // last chapter requested while _isUpdating was true
 
         // Initialize the application
         function initializeApp() {
@@ -858,9 +859,23 @@
             window.addEventListener('resize', handleResize);
         }
 
+        function _onTransitionEnd() {
+            _isUpdating = false;
+            if (_pendingChapter && _pendingChapter.id !== activeChapter) {
+                const next = _pendingChapter;
+                _pendingChapter = null;
+                setActiveChapter(next);
+            }
+        }
+
         function setActiveChapter(chapter) {
             if (activeChapter === chapter.id) return;
-            if (_isUpdating) return;
+            if (_isUpdating) {
+                // Queue most recent request; processed when current transition ends.
+                _pendingChapter = chapter;
+                return;
+            }
+            _pendingChapter = null;
             _isUpdating = true;
 
             activeChapter = chapter.id;
@@ -884,11 +899,11 @@
 
                 if (samePosition) {
                     updateDataLayers(chapter);
-                    _isUpdating = false;
+                    _onTransitionEnd();
                 } else {
                     map.once('moveend', () => {
                         updateDataLayers(chapter);
-                        _isUpdating = false;
+                        _onTransitionEnd();
                     });
                 }
 
@@ -903,7 +918,7 @@
                 );
             } else {
                 updateDataLayers(chapter);
-                _isUpdating = false;
+                _onTransitionEnd();
             }
 
             // Apply per-chapter place-type filter (set in notebook via 'hide_place_types')
