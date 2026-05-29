@@ -8,17 +8,13 @@ Your instructor has added you to your team's repository. Follow these two steps 
 
 ### Step 1 — Open a Codespace
 
-On this repository's page on GitHub.com, click the green **Code** button, select the **Codespaces** tab, then click **Create codespace on main**.
+On this repository's page on GitHub.com, click the green **Code** button, then select the **Codespaces** tab:
 
-```
-┌─────────────────────────────┐
-│  Code  ▾                    │
-├─────────────────────────────┤
-│  Local  │  Codespaces       │  ← click Codespaces
-├─────────────────────────────┤
-│  +  Create codespace on main│  ← click this
-└─────────────────────────────┘
-```
+<img src="lesson_assets/images/github/code-button-click.png" alt="Click the Code button and select the Codespaces tab" width="25%">
+
+Then click **Create codespace on main**:
+
+<img src="lesson_assets/images/github/codespaces-create-codespaces.png" alt="Click Create codespace on main" width="25%">
 
 The first build takes **10–15 minutes** — packages, models, and tools are all being installed. After that, reopening takes only a few seconds.
 
