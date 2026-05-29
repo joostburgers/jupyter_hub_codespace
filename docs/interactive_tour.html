@@ -1052,11 +1052,15 @@
 
                                 // Wait for flyTo to complete before adding the ring.
                                 // flyTo always fires moveend (even for zero-movement) so no
-                                // fallback timer is needed.  Adding the ring during the
-                                // animation — as a 600ms fallback did — caused it to be
-                                // composited into the GPU layer Leaflet creates for the zoom
-                                // animation, making it invisible for the full 2-second flyTo.
+                                // Two-path trigger: if a moveend fires after this point
+                                // (e.g. refresh / zero-movement flyTo), use it immediately.
+                                // If no further moveend occurs — the normal Scrollama case
+                                // where this code runs INSIDE the moveend callback from
+                                // setActiveChapter so the event has already fired — the
+                                // 300ms timeout ensures the ring is added after the map has
+                                // fully settled.  The _added guard prevents double-execution.
                                 map.once('moveend', _addPulseRing);
+                                setTimeout(_addPulseRing, 300);
                             }
                         }
                     }
