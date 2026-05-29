@@ -5,35 +5,35 @@
       "major": "Digital Studies",
       "role": "Project Manager",
       "github": "https://github.com/aaliyahcarter",
-      "headshot": ""
+      "headshot": "images/headshot-dukedog.jpg"
     },
     {
       "name": "Marcus Chen",
       "major": "Computer Science",
       "role": "Data Engineer",
       "github": "https://github.com/marcuschen",
-      "headshot": ""
+      "headshot": "images/headshot-dukedog.jpg"
     },
     {
       "name": "Sofia Delgado",
       "major": "Sociology",
       "role": "Text Analyst",
       "github": "https://github.com/sofiadelgado",
-      "headshot": ""
+      "headshot": "images/headshot-dukedog.jpg"
     },
     {
       "name": "Jordan Kim",
       "major": "Geography",
       "role": "GIS Specialist",
       "github": "https://github.com/jordankim",
-      "headshot": ""
+      "headshot": "images/headshot-dukedog.jpg"
     },
     {
       "name": "Priya Patel",
       "major": "Political Science",
       "role": "Visualization Lead",
       "github": "https://github.com/priyapatel",
-      "headshot": ""
+      "headshot": "images/headshot-dukedog.jpg"
     }
   ]
 }
