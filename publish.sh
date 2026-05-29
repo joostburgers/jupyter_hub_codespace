@@ -45,15 +45,7 @@ echo "Step 2/5: Exporting whitepaper notebook to HTML..."
 
 NOTEBOOK="$PROJECT_DIR/project_part_2_whitepaper.ipynb"
 if [ -f "$NOTEBOOK" ]; then
-    jupyter nbconvert \
-        --to html \
-        --no-input \
-        --TagRemovePreprocessor.enabled=True \
-        --TagRemovePreprocessor.remove_cell_tags="['remove_cell']" \
-        --TagRemovePreprocessor.remove_all_outputs_tags="['remove_output']" \
-        --output whitepaper.html \
-        --output-dir "$PROJECT_DIR" \
-        "$NOTEBOOK"
+    python3 "$REPO_ROOT/convert_whitepaper.py" "$NOTEBOOK" "$PROJECT_DIR"
     echo "          ✓ whitepaper.html generated"
 else
     echo "          ⚠ Notebook not found — using existing whitepaper.html"

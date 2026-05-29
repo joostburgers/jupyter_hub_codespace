@@ -41,27 +41,17 @@ try {
 # -----------------------------------------------------------------------------
 Write-Host "Step 2/5: Exporting whitepaper notebook to HTML..."
 
-$Notebook = Join-Path $ProjectDir 'project_part_2_whitepaper.ipynb'
-if (Test-Path $Notebook) {
-    $nbArgs = @(
-        '-m', 'jupyter', 'nbconvert',
-        '--to', 'html',
-        '--no-input',
-        '--TagRemovePreprocessor.enabled=True',
-        '--TagRemovePreprocessor.remove_cell_tags=["remove_cell"]',
-        '--TagRemovePreprocessor.remove_all_outputs_tags=["remove_output"]',
-        '--output', 'whitepaper.html',
-        '--output-dir', $ProjectDir,
-        $Notebook
-    )
+$Notebook    = Join-Path $ProjectDir 'project_part_2_whitepaper.ipynb'
+$ConvScript  = Join-Path $RepoRoot 'convert_whitepaper.py'
+if ((Test-Path $Notebook) -and (Test-Path $ConvScript)) {
     try {
-        python @nbArgs
+        python $ConvScript $Notebook $ProjectDir
         Write-Host "          v whitepaper.html generated"
     } catch {
-        Write-Host "          ! nbconvert failed - using existing whitepaper.html"
+        Write-Host "          ! convert_whitepaper.py failed - using existing whitepaper.html"
     }
 } else {
-    Write-Host "          ! Notebook not found - using existing whitepaper.html"
+    Write-Host "          ! Notebook or convert script not found - using existing whitepaper.html"
 }
 
 # Inject site navigation via the shared Python script
