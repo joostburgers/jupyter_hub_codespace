@@ -525,11 +525,19 @@
                 // Create story sections
                 createStoryContent();
 
+                // Hide loading screen before Scrollama so it can measure step heights correctly.
+                document.getElementById('loading').style.display = 'none';
+
                 // Initialize scroll-driven interactions
                 initializeScrollytelling();
 
-                // Hide loading screen
-                document.getElementById('loading').style.display = 'none';
+                // Explicitly activate the first chapter — Scrollama only fires onStepEnter
+                // when a step crosses the scroll offset, but the first step is already in
+                // view on load (so it never "enters"). Direct call ensures markers appear
+                // immediately without requiring the user to scroll away and back.
+                if (config.chapters.length > 0) {
+                    setActiveChapter(config.chapters[0]);
+                }
 
             } catch (error) {
                 console.error('Initialization error:', error);
@@ -857,27 +865,6 @@
 
             // Handle window resize
             window.addEventListener('resize', handleResize);
-
-            // Scrollama only fires onStepEnter when a step crosses the offset threshold.
-            // On initial load the first step is already in view and never "enters", so
-            // markers for chapter-0 would not load until the user scrolls away and back.
-            // Manually activate whichever chapter is closest to the viewport on load.
-            const steps = Array.from(document.querySelectorAll('#scrolly article .step'));
-            if (steps.length > 0) {
-                const viewportMid = window.innerHeight * 0.33;
-                let closest = steps[0];
-                let closestDist = Infinity;
-                steps.forEach(step => {
-                    const rect = step.getBoundingClientRect();
-                    const dist = Math.abs(rect.top - viewportMid);
-                    if (dist < closestDist) { closestDist = dist; closest = step; }
-                });
-                const initChapter = config.chapters.find(c => c.id === closest.id);
-                if (initChapter) {
-                    closest.classList.add('is-active');
-                    setActiveChapter(initChapter);
-                }
-            }
         }
 
         function _onTransitionEnd() {
