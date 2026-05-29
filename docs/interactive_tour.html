@@ -1,0 +1,1369 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Mapping Emotions: Reddit Sentiment Analysis</title>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Leaflet CSS (Free alternative to Mapbox) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin=""/>
+    
+    <!-- Main website styles -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Scrollama for scroll-driven storytelling -->
+    <script src="https://unpkg.com/intersection-observer@0.12.0/intersection-observer.js"></script>
+    <script src="https://unpkg.com/scrollama"></script>
+    
+    <!-- Our configuration file -->
+    <script src="./interactive_tour_config.js"></script>
+    
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        a, a:hover, a:visited {
+            color: #0071bc;
+        }
+
+        #header {
+            display: none; /* Hidden - using banner from styles.css instead */
+        }
+
+        #scrolly {
+            position: relative;
+            display: flex;
+            padding: 0;
+        }
+
+        #scrolly > * {
+            flex: 1;
+        }
+
+        article {
+            position: relative;
+            padding: 0;
+            max-width: 40rem;
+            min-width: 0;
+            z-index: 10;
+        }
+
+        figure {
+            position: sticky;
+            width: 100%;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            margin: 0;
+            z-index: 1;
+        }
+
+        #map {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step {
+            margin: 0 auto 2rem auto;
+            padding: 25px 50px;
+            background-color: rgba(255,255,255,0.95);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            opacity: 0.5;
+            transform: translateY(10px);
+            transition: opacity 0.3s, transform 0.35s ease-out;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .step:first-child {
+            margin-top: 0;
+        }
+
+        .step:last-child {
+            margin-bottom: 0;
+        }
+
+        .step.is-active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .step img {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            display: block;
+            margin: 15px 0;
+        }
+
+        /* Fixed aspect ratio — enabled via image_aspect_ratio in FLYTHROUGH_CONFIG */
+        .step img.img-fixed-ratio {
+            object-fit: cover;
+        }
+
+        /* Image caption */
+        .step-caption {
+            font-size: 12px;
+            color: #777;
+            font-style: italic;
+            margin: -8px 0 12px;
+            line-height: 1.4;
+        }
+
+        /* Chapter counter — "3 / 7" shown above the step title */
+        .step-counter {
+            display: block;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #aaa;
+            margin: 0 0 6px 0;
+        }
+
+        /* Stats badge — post count and sentiment score */
+        .step-badge-stats {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            color: #fff;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.35);
+            border-radius: 12px;
+            padding: 2px 10px;
+            margin: 0 0 12px 0;
+        }
+
+        /* Place type badge — geographic category (Building, City, Street, etc.) */
+        .step-badge-place-type {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #555;
+            background: #efefef;
+            border-radius: 10px;
+            padding: 2px 8px;
+            margin: 4px 0 12px 0;
+        }
+
+        /* Combined pill — type, stats, and date range merge into one span */
+        .step-badge-combined {
+            display: inline-flex;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 0 0 12px 0;
+            font-weight: 600;
+        }
+        .step-badge-combined-type {
+            font-size: 11px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #555;
+            background: #efefef;
+            padding: 2px 8px;
+        }
+        .step-badge-combined-stats {
+            font-size: 12px;
+            letter-spacing: 0.04em;
+            color: #fff;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.35);
+            padding: 2px 10px;
+        }
+        .step-badge-combined-date {
+            font-size: 12px;
+            letter-spacing: 0.04em;
+            color: #fff;
+            background: #4a6fa5;
+            padding: 2px 10px;
+        }
+
+        /* Pulse animation for highlighted markers in individual mode */
+        @keyframes pulse-ring {
+            0%   { transform: scale(1);   opacity: 0.7; }
+            100% { transform: scale(2.6); opacity: 0;   }
+        }
+        .pulse-ring-div {
+            border-radius: 50%;
+            animation: pulse-ring 1.5s ease-out infinite;
+            pointer-events: none;
+        }
+
+        .step-title {
+            font-weight: bold;
+            font-size: 24px;
+            margin: 0 0 8px 0;
+            color: #2d3748;
+        }
+
+        .date-range-badge {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            color: #fff;
+            background: #4a6fa5;
+            border-radius: 12px;
+            padding: 2px 10px;
+            margin: 0 0 12px 0;
+        }
+        
+        .step p {
+            margin: 15px 0 0 0;
+            font-weight: normal;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #444;
+        }
+
+        .step blockquote {
+            margin: 14px 0 0 0;
+            padding: 10px 14px;
+            border-left: 3px solid #4a6fa5;
+            background: rgba(74, 111, 165, 0.06);
+            border-radius: 0 4px 4px 0;
+            font-style: italic;
+            font-size: 14px;
+            line-height: 1.55;
+            color: #555;
+        }
+
+        .step pre {
+            max-width: 100%;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-break: break-word;
+            background: #f5f7fa;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            padding: 10px 12px;
+            margin: 10px 0 0 0;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .step pre code {
+            font-family: 'Courier New', Courier, monospace;
+            color: #2d3748;
+        }
+
+        /* Permanent map label for show_label: True stops */
+        .location-label {
+            background: rgba(255, 255, 255, 0.88);
+            border: none;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.22);
+            font-weight: 600;
+            font-size: 12px;
+            padding: 3px 8px;
+            border-radius: 3px;
+            white-space: nowrap;
+            color: #2d3748;
+        }
+        .location-label::before { display: none; }
+
+        #footer {
+            width: 100%;
+            padding: 3vh 2vw;
+            text-align: center;
+            background-color: #f8f9fa;
+            color: #888;
+        }
+
+        /* Map controls styling - Leaflet legend */
+        .leaflet-control .legend,
+        .legend {
+            background: rgba(255,255,255,0.95);
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            font-size: 12px;
+            line-height: 18px;
+            color: #333;
+        }
+
+        .leaflet-control .legend h4,
+        .legend h4 {
+            margin: 0 0 10px;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .leaflet-control .legend div span,
+        .legend div span {
+            border-radius: 50%;
+            width: 10px;
+            height: 10px;
+            margin-right: 5px;
+            display: inline-block;
+        }
+
+        /* Loading screen */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #2d3748;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            font-size: 18px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 750px) {
+            #scrolly {
+                flex-direction: column;
+            }
+
+            figure {
+                height: 50vh;
+            }
+
+            .step {
+                max-width: 100%;
+                padding: 20px;
+            }
+            
+            .legend {
+                font-size: 10px;
+                padding: 10px;
+            }
+        }
+
+        /* Error messages */
+        .error-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(239, 68, 68, 0.9);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            z-index: 10000;
+            max-width: 80%;
+        }
+
+        /* Year-range filter slider (bottom-left of map) */
+        .year-filter-control {
+            background: rgba(255,255,255,0.95);
+            border-radius: 8px;
+            padding: 10px 14px 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+            min-width: 210px;
+        }
+        .year-filter-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .year-filter-label span { color: #2563eb; }
+        .year-range-track {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: #ddd;
+            border-radius: 2px;
+            z-index: 0;
+        }
+        .year-range-fill {
+            position: absolute;
+            height: 4px;
+            background: #2563eb;
+            border-radius: 2px;
+        }
+        .dual-range { position: relative; height: 24px; }
+        .dual-range input[type=range] {
+            position: absolute;
+            width: 100%;
+            height: 4px;
+            background: transparent;
+            pointer-events: none;
+            -webkit-appearance: none;
+            appearance: none;
+            top: 10px;
+            z-index: 1;
+        }
+        .dual-range input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #2563eb;
+            cursor: pointer;
+            pointer-events: auto;
+            border: 2px solid #fff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+        .dual-range input[type=range]::-moz-range-thumb {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #2563eb;
+            cursor: pointer;
+            pointer-events: auto;
+            border: 2px solid #fff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Banner -->
+    <div class="banner">
+        <h1>Mapping Emotions: Reddit Sentiment Analysis</h1>
+        <p>Exploring student perspectives across Virginia universities</p>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <a href="index.html">Home</a>
+        <a href="team.html">Team</a>
+        <a href="interactive_tour.html" class="active">Interactive Tour</a>
+        <a href="whitepaper.html">Whitepaper</a>
+    </nav>
+
+    <!-- Loading screen -->
+    <div id="loading" class="loading">
+        <div>Loading your flythrough experience...</div>
+    </div>
+
+    <!-- Header -->
+    <div id="header">
+        <h1 id="story-title">Loading...</h1>
+        <h2 id="story-subtitle">Please wait...</h2>
+        <p id="story-byline">Preparing your journey...</p>
+    </div>
+
+    <!-- Main scrolly section -->
+    <section id="scrolly">
+        <article id="features">
+            <!-- Steps will be dynamically added here -->
+        </article>
+
+        <figure>
+            <div id="map"></div>
+        </figure>
+    </section>
+
+    <!-- Footer -->
+    <div id="footer">
+        <p id="footer-text">Loading footer...</p>
+    </div>
+
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
+
+    <script>
+        // Initialize variables
+        let map;
+        let layerTypes = {};
+        let activeChapter = '';
+        let currentMarkers = [];
+        let highlightLayer;
+        let allLocations = [];
+        let individualHighlightLayer = null;
+        let individualBackgroundLayer = null;
+        let dimmedLayerGroup          = null;  // shared-layer copy with reduced opacity
+        let activeChapterObj = null;
+        let activeTypeFilter  = null;  // null = show all; Set<string> when filtering by place type
+        let currentYearScores = null;  // last year-filtered data, used to reapply when type filter changes
+        let _isUpdating = false;       // mutex: prevents concurrent chapter transitions
+
+        // Initialize the application
+        function initializeApp() {
+            try {
+                // Update footer with team-specific text from config
+                document.getElementById('footer-text').textContent = config.footer;
+
+                // Set theme
+                document.body.className = config.theme;
+
+                // Offset the sticky figure below any sticky nav so Leaflet controls
+                // are not hidden behind the site navigation bar.
+                const nav = document.querySelector('.main-nav');
+                if (nav) {
+                    const navH = nav.getBoundingClientRect().height;
+                    const fig  = document.querySelector('#scrolly figure');
+                    if (fig && navH > 0) {
+                        fig.style.top    = navH + 'px';
+                        fig.style.height = 'calc(100vh - ' + navH + 'px)';
+                    }
+                }
+
+                // Initialize the map
+                initializeMap();
+
+                // Initialize year-range filter slider (requires allLocations populated by initializeMap)
+                initializeYearFilter();
+
+                // Create story sections
+                createStoryContent();
+
+                // Initialize scroll-driven interactions
+                initializeScrollytelling();
+
+                // Hide loading screen
+                document.getElementById('loading').style.display = 'none';
+
+            } catch (error) {
+                console.error('Initialization error:', error);
+                showError('Failed to initialize the flythrough. Please check your configuration file.');
+            }
+        }
+
+        function initializeMap() {
+            // Create the map
+            map = L.map('map', {
+                zoomControl: false,
+                scrollWheelZoom: false,
+                doubleClickZoom: false,
+                boxZoom: false,
+                keyboard: false,
+                dragging: false,
+                touchZoom: false
+            });
+
+            // Add tile layer
+            L.tileLayer(config.tileLayer, {
+                maxZoom: 19,
+                attribution: config.attribution
+            }).addTo(map);
+
+            // Set initial view to first chapter
+            if (config.chapters.length > 0) {
+                const firstChapter = config.chapters[0];
+                map.setView(
+                    [firstChapter.camera.latitude, firstChapter.camera.longitude],
+                    firstChapter.camera.zoom
+                );
+            }
+
+            // Add zoom control to top-right
+            L.control.zoom({
+                position: 'topright'
+            }).addTo(map);
+
+            // Add custom legend control
+            const legend = L.control({ position: 'bottomright' });
+            
+            legend.onAdd = function(map) {
+                const div = L.DomUtil.create('div', 'legend');
+                div.innerHTML = `
+                    <h4>Sentiment Scale</h4>
+                    <div><span style="background-color: #388e3c"></span>Very Positive (0.6+)</div>
+                    <div><span style="background-color: #9ccc65"></span>Positive (0.3-0.6)</div>
+                    <div><span style="background-color: #ffeb3b"></span>Neutral (-0.3-0.3)</div>
+                    <div><span style="background-color: #ef5350"></span>Negative (-0.6–-0.3)</div>
+                    <div><span style="background-color: #d32f2f"></span>Very Negative (<-0.6)</div>
+                `;
+                return div;
+            };
+            
+            legend.addTo(map);
+
+            // Load and display data if available
+            loadSentimentData();
+        }
+
+        // Helper function to get color based on RoBERTa score (module-scoped so updateDataLayers can use it)
+        function getColorForScore(score, colorScale) {
+                    if (score === null || score === undefined) return '#999999';
+
+                    // Prefer data-driven Jenks breaks exported by the notebook — matches the Plotly map exactly.
+                    if (config.colorBreaks && config.colorPalette && config.colorBreaks.length > 0) {
+                        const breaks  = config.colorBreaks;
+                        const palette = config.colorPalette;
+                        for (let i = 0; i < breaks.length; i++) {
+                            if (score <= breaks[i]) return palette[i];
+                        }
+                        return palette[palette.length - 1];
+                    }
+
+                    // Fallback when colorBreaks are not present in config.
+                    if (colorScale === 'Portland') {
+                        // Blue (negative) -> White (neutral) -> Red (positive)
+                        if (score < -0.3) return '#0d47a1'; // Dark blue
+                        if (score < 0) return '#64b5f6';    // Light blue
+                        if (score < 0.3) return '#f5f5f5';  // Near white
+                        if (score < 0.6) return '#ef5350';  // Light red
+                        return '#c62828';                    // Dark red
+                    } else {
+                        // RdYlGn: Red (negative) -> Yellow (neutral) -> Green (positive)
+                        if (score < -0.3) return '#d32f2f'; // Dark red
+                        if (score < 0) return '#ef5350';    // Light red
+                        if (score < 0.3) return '#ffeb3b';  // Yellow
+                        if (score < 0.6) return '#9ccc65';  // Light green
+                        return '#388e3c';                    // Dark green
+                    }
+                }
+
+        function loadSentimentData() {
+            try {
+                // Use config.allLocations (full dataset) when available; otherwise
+                // fall back to unique locations derived from the chapter stops.
+                allLocations = [];
+                if (config.allLocations && config.allLocations.length > 0) {
+                    allLocations = config.allLocations;
+                } else {
+                    const locationNames = new Set();
+                    config.chapters.forEach(chapter => {
+                        if (chapter.location && chapter.location.name) {
+                            if (!locationNames.has(chapter.location.name)) {
+                                locationNames.add(chapter.location.name);
+                                allLocations.push(chapter.location);
+                            }
+                        }
+                    });
+                }
+
+                if (allLocations.length === 0) {
+                    console.warn('No location data found in chapters');
+                    return;
+                }
+
+                // Create markers for all locations
+                allLocations.forEach(location => {
+                    // Skip locations with no post count (overview/navigation points only)
+                    if (location.postCount === null || location.postCount === undefined) {
+                        return;
+                    }
+                    
+                    const color = getColorForScore(location.robertaScore, config.colorScale);
+                    const radius = location.postCount ? Math.min(5 + (location.postCount / 20), 15) : 6;
+                    
+                    const marker = L.circleMarker(
+                        [location.latitude, location.longitude],
+                        {
+                            radius: radius,
+                            fillColor: color,
+                            color: '#fff',
+                            weight: 1,
+                            opacity: 0.9,
+                            fillOpacity: 0.7
+                        }
+                    );
+
+                    // Add tooltip that shows on hover
+                    const tooltipContent = `
+                        <strong>${location.name}</strong><br>
+                        Posts: ${location.postCount || 'N/A'}<br>
+                        Score: ${location.robertaScore !== null ? location.robertaScore.toFixed(2) : 'N/A'}
+                    `;
+                    marker.bindTooltip(tooltipContent, {
+                        permanent: false,
+                        direction: 'top',
+                        offset: [0, -10]
+                    });
+
+                    // Add popup with more detailed information (on click)
+                    const sentiment = location.robertaScore === null ? 'N/A' :
+                                    location.robertaScore > 0.1 ? 'Positive' :
+                                    location.robertaScore < -0.1 ? 'Negative' : 'Mixed';
+                    
+                    const popupContent = `
+                        <strong>${location.name}</strong><br>
+                        ${location.isJMU ? '🎓 JMU Location' : '🏙️ Community Location'}<br>
+                        Sentiment: ${sentiment}<br>
+                        Score: ${location.robertaScore !== null ? location.robertaScore.toFixed(2) : 'N/A'}<br>
+                        Posts: ${location.postCount || 'N/A'}
+                    `;
+                    marker.bindPopup(popupContent);
+                    
+                    // Store marker with metadata
+                    marker.locationData = location;
+                    
+                    // Add to appropriate layer groups
+                    if (!layerTypes['all_locations']) layerTypes['all_locations'] = L.layerGroup();
+                    layerTypes['all_locations'].addLayer(marker);
+                    
+                    if (location.isJMU) {
+                        if (!layerTypes['jmu_locations']) layerTypes['jmu_locations'] = L.layerGroup();
+                        layerTypes['jmu_locations'].addLayer(marker);
+                    } else {
+                        if (!layerTypes['non_jmu_locations']) layerTypes['non_jmu_locations'] = L.layerGroup();
+                        layerTypes['non_jmu_locations'].addLayer(marker);
+                    }
+                });
+
+            } catch (error) {
+                console.error('Error loading sentiment data:', error);
+            }
+        }
+
+        function createStoryContent() {
+            const features = document.getElementById('features');
+            const total = config.chapters.length;
+
+            config.chapters.forEach((chapter, index) => {
+                const container = document.createElement('div');
+                container.className = 'step';
+                container.id = chapter.id;
+
+                // Chapter counter (hidden when there is only one stop)
+                if (total > 1) {
+                    const counter = document.createElement('span');
+                    counter.className = 'step-counter';
+                    counter.textContent = `${index + 1} / ${total}`;
+                    container.appendChild(counter);
+                }
+
+                // Add title
+                if (chapter.title) {
+                    const title = document.createElement('h3');
+                    title.className = 'step-title';
+                    title.innerHTML = chapter.title;
+                    container.appendChild(title);
+                }
+
+                // Unified pill — type, stats, and date range always merge into one span
+                const _showType  = chapter.location && chapter.location.showPlaceType && chapter.location.placeType;
+                const _showStats = chapter.location && chapter.location.showStats;
+                const _hasDate   = !!chapter.dateRange;
+
+                if (_showType || _showStats || _hasDate) {
+                    const combined = document.createElement('span');
+                    combined.className = 'step-badge-combined';
+
+                    // Left segment — place type (grey)
+                    if (_showType) {
+                        const typeHalf = document.createElement('span');
+                        typeHalf.className = 'step-badge-combined-type';
+                        typeHalf.textContent = chapter.location.placeType;
+                        combined.appendChild(typeHalf);
+                    }
+
+                    // Right segment — stats and/or date range
+                    const _rightParts = [];
+                    let   _rightBg    = null;
+
+                    if (_showStats) {
+                        const _score    = chapter.location.robertaScore;
+                        const _posts    = chapter.location.postCount;
+                        const _scoreStr = _score === null ? 'N/A' : (_score >= 0 ? '+' : '') + _score.toFixed(2);
+                        _rightParts.push(`${_posts !== null ? _posts : '?'} posts \u00b7 ${_scoreStr}`);
+                        _rightBg = getColorForScore(_score, config.colorScale);
+                    }
+
+                    if (_hasDate) {
+                        const _s = chapter.dateRange.start;
+                        const _e = chapter.dateRange.end;
+                        _rightParts.push(_s === _e ? `${_s}` : `${_s}\u2013${_e}`);
+                    }
+
+                    if (_rightParts.length > 0) {
+                        const rightHalf = document.createElement('span');
+                        rightHalf.className = _rightBg ? 'step-badge-combined-stats' : 'step-badge-combined-date';
+                        if (_rightBg) rightHalf.style.background = _rightBg;
+                        rightHalf.textContent = _rightParts.join(' \u00b7 ');
+                        combined.appendChild(rightHalf);
+                    }
+
+                    container.appendChild(combined);
+                }
+
+                // Add image
+                if (chapter.image) {
+                    const image = document.createElement('img');
+                    image.src = chapter.image;
+                    image.alt = chapter.title;
+                    if (config.imageAspectRatio) {
+                        image.classList.add('img-fixed-ratio');
+                        image.style.aspectRatio = config.imageAspectRatio;
+                    }
+                    image.onerror = function() {
+                        this.style.display = 'none';
+                        const cap = this.nextElementSibling;
+                        if (cap && cap.classList.contains('step-caption')) cap.style.display = 'none';
+                        console.warn(`Image not found: ${chapter.image}`);
+                    };
+                    container.appendChild(image);
+                    if (chapter.caption) {
+                        const caption = document.createElement('p');
+                        caption.className = 'step-caption';
+                        caption.textContent = chapter.caption;
+                        container.appendChild(caption);
+                    }
+                }
+
+                // Add description
+                if (chapter.description) {
+                    const description = document.createElement('p');
+                    description.innerHTML = chapter.description;
+                    container.appendChild(description);
+                }
+
+                // Add quote (representative data excerpt)
+                if (chapter.quote) {
+                    const quote = document.createElement('blockquote');
+                    quote.textContent = chapter.quote;
+                    container.appendChild(quote);
+                }
+
+                features.appendChild(container);
+            });
+        }
+
+        function initializeScrollytelling() {
+            // Initialize Scrollama
+            const scroller = scrollama();
+
+            // Handle window resize
+            function handleResize() {
+                scroller.resize();
+            }
+
+            scroller
+                .setup({
+                    step: '#scrolly article .step',
+                    offset: 0.33,
+                    progress: false
+                })
+                .onStepEnter(response => {
+                    const chapter = config.chapters.find(c => c.id === response.element.id);
+                    if (chapter) {
+                        setActiveChapter(chapter);
+                        response.element.classList.add('is-active');
+                    }
+                })
+                .onStepExit(response => {
+                    response.element.classList.remove('is-active');
+                });
+
+            // Handle window resize
+            window.addEventListener('resize', handleResize);
+        }
+
+        function setActiveChapter(chapter) {
+            if (activeChapter === chapter.id) return;
+            if (_isUpdating) return;
+            _isUpdating = true;
+
+            activeChapter = chapter.id;
+            activeChapterObj = chapter;
+
+            // Animate map to new location; defer layer update until after flyTo settles
+            // to avoid layer-DOM rebuilds competing with the GPU animation (fixes jank),
+            // and to ensure the pulse ring is added after the map is stationary.
+            if (chapter.camera) {
+                const center = [chapter.camera.latitude, chapter.camera.longitude];
+                const duration = chapter.duration || 2000;
+
+                // If the camera is already at the target, flyTo may not fire moveend —
+                // call updateDataLayers directly in that case.
+                const currentCenter = map.getCenter();
+                const samePosition = (
+                    Math.abs(currentCenter.lat - center[0]) < 1e-10 &&
+                    Math.abs(currentCenter.lng - center[1]) < 1e-10 &&
+                    map.getZoom() === chapter.camera.zoom
+                );
+
+                if (samePosition) {
+                    updateDataLayers(chapter);
+                    _isUpdating = false;
+                } else {
+                    map.once('moveend', () => {
+                        updateDataLayers(chapter);
+                        _isUpdating = false;
+                    });
+                }
+
+                // Smooth transition
+                map.flyTo(
+                    center,
+                    chapter.camera.zoom,
+                    {
+                        duration: duration / 1000,
+                        easeLinearity: 0.25
+                    }
+                );
+            } else {
+                updateDataLayers(chapter);
+                _isUpdating = false;
+            }
+
+            // Apply per-chapter place-type filter (set in notebook via 'hide_place_types')
+            if (chapter.hidePlaceTypes && chapter.hidePlaceTypes.length > 0) {
+                const allTypes = new Set(
+                    allLocations.filter(l => l.postCount != null).map(l => l.placeType || 'Other')
+                );
+                activeTypeFilter = new Set([...allTypes].filter(t => !chapter.hidePlaceTypes.includes(t)));
+            } else {
+                activeTypeFilter = null;
+            }
+            applyTypeFilter();
+
+            // Update highlight
+            updateHighlight(chapter);
+
+            // Sync year filter slider to this chapter's date range (if any)
+            const startInput = document.getElementById('year-start');
+            const endInput   = document.getElementById('year-end');
+            if (startInput && endInput) {
+                if (chapter.dateRange) {
+                    startInput.value = chapter.dateRange.start;
+                    endInput.value   = chapter.dateRange.end;
+                } else {
+                    startInput.value = startInput.min;
+                    endInput.value   = endInput.max;
+                }
+                startInput.dispatchEvent(new Event('input'));
+            }
+
+            // Legend is always visible as a Leaflet control
+        }
+
+        function updateDataLayers(chapter) {
+            // Hide all layers first (shared pools + any previous individual layers)
+            Object.values(layerTypes).forEach(layer => {
+                if (map.hasLayer(layer)) {
+                    map.removeLayer(layer);
+                }
+            });
+            if (individualBackgroundLayer) {
+                map.removeLayer(individualBackgroundLayer);
+                individualBackgroundLayer = null;
+            }
+            if (individualHighlightLayer) {
+                map.removeLayer(individualHighlightLayer);
+                individualHighlightLayer = null;
+            }
+            if (dimmedLayerGroup) {
+                map.removeLayer(dimmedLayerGroup);
+                dimmedLayerGroup = null;
+            }
+
+            // Show layers based on showData property
+            if (chapter.showData && chapter.showData !== 'none') {
+                if (chapter.showData === 'individual') {
+                    // Build a background group from all_locations, excluding the chapter's own location
+                    // to prevent a duplicate circle from appearing under the highlight marker.
+                    // opacity on the chapter dims the background so the highlight pops;
+                    // background markers get fresh copies at the requested opacity.
+                    const bgOpacity = (chapter.location && chapter.location.opacity !== undefined && chapter.location.opacity !== null)
+                        ? chapter.location.opacity : 1.0;
+                    const bgGroup = L.layerGroup();
+                    if (layerTypes['all_locations']) {
+                        layerTypes['all_locations'].eachLayer(function(m) {
+                            if (!chapter.location || !m.locationData ||
+                                    m.locationData.name !== chapter.location.name) {
+                                const bgMarker = bgOpacity < 1.0
+                                    ? createMarkerForLocation(Object.assign({}, m.locationData, { opacity: bgOpacity }))
+                                    : m;
+                                bgGroup.addLayer(bgMarker);
+                            }
+                        });
+                    }
+                    individualBackgroundLayer = bgGroup;
+                    map.addLayer(individualBackgroundLayer);
+                    if (chapter.location && chapter.location.name) {
+                        const loc = chapter.location;
+                        if (loc.postCount !== null && loc.postCount !== undefined) {
+                            const color  = getColorForScore(loc.robertaScore, config.colorScale);
+                            // Highlighted marker is slightly larger with a bolder border to stand out.
+                            // It is always full opacity so it pops against the dimmed background.
+                            const radius = Math.min(5 + (loc.postCount / 20), 15) + 3;
+                            const marker = L.circleMarker(
+                                [loc.latitude, loc.longitude],
+                                {
+                                    radius:      radius,
+                                    fillColor:   color,
+                                    color:       '#fff',
+                                    weight:      2.5,
+                                    opacity:     1.0,
+                                    fillOpacity: 0.9
+                                }
+                            );
+                            if (loc.label) {
+                                marker.bindTooltip(loc.name, {
+                                    permanent:  true,
+                                    direction:  'top',
+                                    offset:     [0, -(radius + 4)],
+                                    className:  'location-label'
+                                });
+                            } else {
+                                marker.bindTooltip(
+                                    `<strong>${loc.name}</strong><br>Posts: ${loc.postCount}<br>Score: ${loc.robertaScore !== null ? loc.robertaScore.toFixed(2) : 'N/A'}`,
+                                    { permanent: false, direction: 'top', offset: [0, -10] }
+                                );
+                            }
+                            // Build the highlight layer with just the main marker.
+                            // The pulse ring (if requested) is added after the map settles
+                            // (moveend) to avoid Leaflet's flyTo zoom animation promoting
+                            // the markerPane to a GPU composite layer and hiding the ring
+                            // beneath it ("in DOM but invisible" during flythrough nav).
+                            // Earlier issues fixed: SVG circleMarker → divIcon (shaking);
+                            // zIndexOffset -1000 removed (ring was behind background markers).
+                            individualHighlightLayer = L.layerGroup([marker]);
+                            map.addLayer(individualHighlightLayer);
+
+                            if (loc.pulse) {
+                                const _pxSize  = (radius + 4) * 2;
+                                const _hlRef   = individualHighlightLayer; // capture before async
+                                const _marker  = marker;                   // capture before async
+                                let   _added   = false;
+
+                                const _addPulseRing = () => {
+                                    if (_added) return;
+                                    _added = true;
+                                    // Guard: user navigated away or year filter rebuilt the layer — discard silently.
+                                    if (!map.hasLayer(_hlRef) || !_hlRef.hasLayer(_marker)) return;
+                                    const pulseRing = L.marker(
+                                        [loc.latitude, loc.longitude],
+                                        {
+                                            icon: L.divIcon({
+                                                className: '',
+                                                html: `<div class="pulse-ring-div" style="width:${_pxSize}px;height:${_pxSize}px;border:2.5px solid ${color};"></div>`,
+                                                iconSize:   [_pxSize, _pxSize],
+                                                iconAnchor: [_pxSize / 2, _pxSize / 2],
+                                            }),
+                                            interactive: false,
+                                        }
+                                    );
+                                    // Add ring BEHIND the main marker: remove marker, add ring, re-add marker.
+                                    _hlRef.removeLayer(marker);
+                                    _hlRef.addLayer(pulseRing);
+                                    _hlRef.addLayer(marker);
+                                };
+
+                                // Wait for flyTo to complete before adding the ring.
+                                // flyTo always fires moveend (even for zero-movement) so no
+                                // fallback timer is needed.  Adding the ring during the
+                                // animation — as a 600ms fallback did — caused it to be
+                                // composited into the GPU layer Leaflet creates for the zoom
+                                // animation, making it invisible for the full 2-second flyTo.
+                                map.once('moveend', _addPulseRing);
+                            }
+                        }
+                    }
+                } else if (layerTypes[chapter.showData]) {
+                    // Show all_locations, jmu_locations, or non_jmu_locations.
+                    // If opacity < 1.0, build a fresh dimmed copy so the shared layer
+                    // markers are not mutated for subsequent chapters.
+                    const layerOpacity = (chapter.location && chapter.location.opacity !== undefined && chapter.location.opacity !== null)
+                        ? chapter.location.opacity : 1.0;
+                    if (layerOpacity < 1.0) {
+                        dimmedLayerGroup = L.layerGroup();
+                        layerTypes[chapter.showData].eachLayer(function(m) {
+                            if (m.locationData) {
+                                dimmedLayerGroup.addLayer(
+                                    createMarkerForLocation(Object.assign({}, m.locationData, { opacity: layerOpacity }))
+                                );
+                            }
+                        });
+                        map.addLayer(dimmedLayerGroup);
+                    } else {
+                        map.addLayer(layerTypes[chapter.showData]);
+                    }
+                }
+            }
+        }
+
+        function updateHighlight(chapter) {
+            // Remove existing highlight
+            if (highlightLayer) {
+                map.removeLayer(highlightLayer);
+                highlightLayer = null;
+            }
+
+            // Add new highlight if specified
+            if (chapter.highlightData) {
+                const highlight = chapter.highlightData;
+                
+                if (highlight.type === 'circle') {
+                    highlightLayer = L.circle(highlight.center, {
+                        radius: highlight.radius,
+                        color: highlight.color,
+                        weight: 3,
+                        opacity: 0.8,
+                        fillOpacity: 0.1,
+                        className: 'highlight-circle'
+                    });
+                    highlightLayer.addTo(map);
+                }
+            }
+        }
+
+        function showError(message) {
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.innerHTML = `
+                <h3>Error</h3>
+                <p>${message}</p>
+                <p>Please check the browser console for more details.</p>
+            `;
+            document.body.appendChild(errorDiv);
+
+            // Remove loading screen
+            const loading = document.getElementById('loading');
+            if (loading) {
+                loading.style.display = 'none';
+            }
+        }
+
+        // ── Helper: create a fresh Leaflet circle marker from a location object ──────
+        function createMarkerForLocation(loc) {
+            const color  = getColorForScore(loc.robertaScore, config.colorScale);
+            const radius = Math.min(5 + (loc.postCount / 20), 15);
+            const op     = (loc.opacity !== undefined && loc.opacity !== null) ? loc.opacity : 1.0;
+            const marker = L.circleMarker(
+                [loc.latitude, loc.longitude],
+                { radius, fillColor: color, color: '#fff', weight: 1, opacity: op, fillOpacity: op * 0.8 }
+            );
+            marker.bindTooltip(
+                `<strong>${loc.name}</strong><br>Posts: ${loc.postCount}<br>Score: ${loc.robertaScore !== null ? loc.robertaScore.toFixed(2) : 'N/A'}`,
+                { permanent: false, direction: 'top', offset: [0, -10] }
+            );
+            marker.locationData = loc;
+            return marker;
+        }
+
+        // ── Rebuild shared layer groups from a pre-filtered {place: {score, count}} map ──
+        function rebuildSharedLayers(filteredLocations) {
+            const visibleKeys = ['all_locations', 'jmu_locations', 'non_jmu_locations']
+                .filter(k => layerTypes[k] && map.hasLayer(layerTypes[k]));
+
+            ['all_locations', 'jmu_locations', 'non_jmu_locations'].forEach(k => {
+                if (layerTypes[k] && map.hasLayer(layerTypes[k])) map.removeLayer(layerTypes[k]);
+                layerTypes[k] = L.layerGroup();
+            });
+
+            allLocations.forEach(baseLoc => {
+                // Apply place-type filter (null activeTypeFilter means show all)
+                if (activeTypeFilter !== null && !activeTypeFilter.has(baseLoc.placeType || 'Other')) return;
+                const data = filteredLocations[baseLoc.name];
+                if (!data || data.count === 0) return;
+                const loc = Object.assign({}, baseLoc, {
+                    postCount:    data.count,
+                    robertaScore: parseFloat(data.score.toFixed(3))
+                });
+                const marker = createMarkerForLocation(loc);
+                layerTypes['all_locations'].addLayer(marker);
+                if (baseLoc.isJMU) {
+                    layerTypes['jmu_locations'].addLayer(marker);
+                } else {
+                    layerTypes['non_jmu_locations'].addLayer(marker);
+                }
+            });
+
+            visibleKeys.forEach(k => { if (layerTypes[k]) map.addLayer(layerTypes[k]); });
+
+            // If currently in individual mode, rebuild the background layer with the fresh
+            // year-filtered data (excluding the highlighted chapter location).
+            if (activeChapterObj && activeChapterObj.showData === 'individual') {
+                if (individualBackgroundLayer && map.hasLayer(individualBackgroundLayer)) {
+                    map.removeLayer(individualBackgroundLayer);
+                }
+                const bgGroup = L.layerGroup();
+                const bgOpacity2 = (activeChapterObj.location && activeChapterObj.location.opacity !== undefined && activeChapterObj.location.opacity !== null)
+                    ? activeChapterObj.location.opacity : 1.0;
+                layerTypes['all_locations'].eachLayer(function(m) {
+                    if (!activeChapterObj.location || !m.locationData ||
+                            m.locationData.name !== activeChapterObj.location.name) {
+                        const bgMarker = bgOpacity2 < 1.0
+                            ? createMarkerForLocation(Object.assign({}, m.locationData, { opacity: bgOpacity2 }))
+                            : m;
+                        bgGroup.addLayer(bgMarker);
+                    }
+                });
+                individualBackgroundLayer = bgGroup;
+                map.addLayer(individualBackgroundLayer);
+
+                // Also update the highlight marker with the year-filtered score/count.
+                if (individualHighlightLayer && map.hasLayer(individualHighlightLayer)) {
+                    map.removeLayer(individualHighlightLayer);
+                    individualHighlightLayer = null;
+                }
+                const baseLoc = activeChapterObj.location;
+                if (baseLoc) {
+                    const fd = filteredLocations[baseLoc.name];
+                    if (fd && fd.count > 0) {
+                        const score  = parseFloat(fd.score.toFixed(3));
+                        const count  = fd.count;
+                        const color  = getColorForScore(score, config.colorScale);
+                        const radius = Math.min(5 + (count / 20), 15) + 3;
+                        // Highlight is always full opacity — opacity dims the background, not this marker.
+                        const m = L.circleMarker(
+                            [baseLoc.latitude, baseLoc.longitude],
+                            { radius, fillColor: color, color: '#fff', weight: 2.5, opacity: 1.0, fillOpacity: 0.9 }
+                        );
+                        if (baseLoc.label) {
+                            m.bindTooltip(baseLoc.name, {
+                                permanent:  true,
+                                direction:  'top',
+                                offset:     [0, -(radius + 4)],
+                                className:  'location-label'
+                            });
+                        } else {
+                            m.bindTooltip(
+                                `<strong>${baseLoc.name}</strong><br>Posts: ${count}<br>Score: ${score.toFixed(2)}`,
+                                { permanent: false, direction: 'top', offset: [0, -10] }
+                            );
+                        }
+                        individualHighlightLayer = L.layerGroup([m]);
+                        map.addLayer(individualHighlightLayer);
+                    }
+                }
+            }
+        }
+
+        // ── Place-type filter ─────────────────────────────────────────────────────────
+        // Configured per chapter via 'hidePlaceTypes'; no visible map UI.
+        // setActiveChapter updates activeTypeFilter before each updateDataLayers call.
+
+        // Rebuilds layer pools from allLocations native scores, respecting activeTypeFilter.
+        // Does not touch map layer visibility — updateDataLayers handles that.
+        function rebuildBaseSharedLayers() {
+            ['all_locations', 'jmu_locations', 'non_jmu_locations'].forEach(k => {
+                if (layerTypes[k] && map.hasLayer(layerTypes[k])) map.removeLayer(layerTypes[k]);
+                layerTypes[k] = L.layerGroup();
+            });
+
+            allLocations.forEach(loc => {
+                if (loc.postCount === null || loc.postCount === undefined) return;
+                if (activeTypeFilter !== null && !activeTypeFilter.has(loc.placeType || 'Other')) return;
+                const marker = createMarkerForLocation(loc);
+                layerTypes['all_locations'].addLayer(marker);
+                if (loc.isJMU) {
+                    layerTypes['jmu_locations'].addLayer(marker);
+                } else {
+                    layerTypes['non_jmu_locations'].addLayer(marker);
+                }
+            });
+        }
+
+        // Routes pool rebuild to the correct function based on whether year filtering is active.
+        function applyTypeFilter() {
+            if (currentYearScores !== null) {
+                rebuildSharedLayers(currentYearScores);
+            } else {
+                rebuildBaseSharedLayers();
+            }
+        }
+
+        // ── Year-range slider (renders as a Leaflet control, bottom-left) ────────────
+        function initializeYearFilter() {
+            if (!config.yearlyData || Object.keys(config.yearlyData).length === 0) return;
+
+            let minYear = Infinity, maxYear = -Infinity;
+            Object.values(config.yearlyData).forEach(entries =>
+                entries.forEach(e => {
+                    if (e.year < minYear) minYear = e.year;
+                    if (e.year > maxYear) maxYear = e.year;
+                })
+            );
+            if (!isFinite(minYear)) return;
+
+            let startYear = minYear, endYear = maxYear;
+
+            const filterControl = L.control({ position: 'bottomleft' });
+            filterControl.onAdd = function() {
+                const div = L.DomUtil.create('div', 'year-filter-control');
+                div.innerHTML = `
+                    <div class="year-filter-label">Year Range: <span id="year-display">${minYear}&thinsp;–&thinsp;${maxYear}</span></div>
+                    <div class="dual-range">
+                        <div class="year-range-track"><div class="year-range-fill" id="year-range-fill" style="left:0%;width:100%"></div></div>
+                        <input type="range" id="year-start" min="${minYear}" max="${maxYear}" value="${minYear}" step="1">
+                        <input type="range" id="year-end"   min="${minYear}" max="${maxYear}" value="${maxYear}" step="1">
+                    </div>`;
+                L.DomEvent.disableClickPropagation(div);
+                L.DomEvent.disableScrollPropagation(div);
+                return div;
+            };
+            filterControl.addTo(map);
+
+            setTimeout(() => {
+                const startInput = document.getElementById('year-start');
+                const endInput   = document.getElementById('year-end');
+                const display    = document.getElementById('year-display');
+                const fill       = document.getElementById('year-range-fill');
+                if (!startInput || !endInput) return;
+
+                function updateFill() {
+                    const span = maxYear - minYear || 1;
+                    const lPct = ((startYear - minYear) / span) * 100;
+                    const rPct = ((endYear   - minYear) / span) * 100;
+                    fill.style.left  = lPct + '%';
+                    fill.style.width = (rPct - lPct) + '%';
+                }
+
+                function applyFilter() {
+                    startYear = Math.min(parseInt(startInput.value), parseInt(endInput.value));
+                    endYear   = Math.max(parseInt(startInput.value), parseInt(endInput.value));
+                    startInput.value = startYear;
+                    endInput.value   = endYear;
+                    display.innerHTML = startYear === endYear
+                        ? startYear
+                        : `${startYear}&thinsp;–&thinsp;${endYear}`;
+                    updateFill();
+
+                    const filtered = {};
+                    Object.entries(config.yearlyData).forEach(([place, entries]) => {
+                        const rel = entries.filter(e => e.year >= startYear && e.year <= endYear);
+                        if (rel.length > 0) {
+                            const totalCount = rel.reduce((a, e) => a + e.count, 0);
+                            filtered[place] = {
+                                score: rel.reduce((a, e) => a + e.score * e.count, 0) / totalCount,
+                                count: totalCount
+                            };
+                        }
+                    });
+                    currentYearScores = filtered;
+                    rebuildSharedLayers(filtered);
+                }
+
+                let _sliderTimer = null;
+                startInput.addEventListener('input', () => {
+                    clearTimeout(_sliderTimer);
+                    _sliderTimer = setTimeout(applyFilter, 150);
+                });
+                endInput.addEventListener('input', () => {
+                    clearTimeout(_sliderTimer);
+                    _sliderTimer = setTimeout(applyFilter, 150);
+                });
+                updateFill();
+            }, 200);
+        }
+
+        // Start the application when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Small delay to ensure all resources are loaded
+            setTimeout(initializeApp, 100);
+        });
+
+        // Handle errors (ignore benign ResizeObserver warnings)
+        window.addEventListener('error', function(e) {
+            // Ignore ResizeObserver loop warnings - they're harmless
+            if (e.message && e.message.includes('ResizeObserver')) {
+                return;
+            }
+            console.error('Application error:', e);
+            // Don't show error UI - just log to console
+        });
+    </script>
+</body>
+</html>
