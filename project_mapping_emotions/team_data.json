@@ -1,17 +1,38 @@
 {
   "team": [
     {
-      "name": "Joost Burgers",
+      "name": "Aaliyah Carter",
       "major": "Digital Studies",
-      "role": "Coordinator",
-      "github": "https://github.com/joostburgers",
+      "role": "Project Manager",
+      "github": "https://github.com/aaliyahcarter",
       "headshot": ""
     },
     {
-      "name": "New name Replace with Last Name",
-      "major": "Replace with Major",
-      "role": "Being fun",
-      "github": "https://github.com/your_username",
+      "name": "Marcus Chen",
+      "major": "Computer Science",
+      "role": "Data Engineer",
+      "github": "https://github.com/marcuschen",
+      "headshot": ""
+    },
+    {
+      "name": "Sofia Delgado",
+      "major": "Sociology",
+      "role": "Text Analyst",
+      "github": "https://github.com/sofiadelgado",
+      "headshot": ""
+    },
+    {
+      "name": "Jordan Kim",
+      "major": "Geography",
+      "role": "GIS Specialist",
+      "github": "https://github.com/jordankim",
+      "headshot": ""
+    },
+    {
+      "name": "Priya Patel",
+      "major": "Political Science",
+      "role": "Visualization Lead",
+      "github": "https://github.com/priyapatel",
       "headshot": ""
     }
   ]
