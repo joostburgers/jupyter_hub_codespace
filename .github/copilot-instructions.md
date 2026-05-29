@@ -94,6 +94,15 @@ Do NOT use `**Note**` bold inline or `### Note` heading. Use these four blockquo
 
 ---
 
+## Video Embed
+- Place immediately after the H1 heading, before `## Overview`.
+- Format: `**🎬 Video:** [Lesson X.Y: Title](URL)`
+- Use a placeholder `#` for the URL when the video is not yet recorded.
+- Example: `**🎬 Video:** [Lesson 3.1: Loading and Cleaning Data](#)`
+- Render as a plain markdown paragraph cell (not a blockquote or heading).
+
+---
+
 ## Lesson Structure Template
 
 Every lesson notebook must follow this exact skeletal pattern. Lesson 1.1 (`lesson_1_1_git_and_pull_requests.ipynb`) is the canonical reference.
@@ -106,9 +115,16 @@ Every lesson notebook must follow this exact skeletal pattern. Lesson 1.1 (`less
 ---
 
 ```
+**🎬 Video:** [Lesson X.Y: Title](#)
+```
+- Video embed link. Placed immediately after the H1, before `## Overview`.
+
+---
+
+```
 ## Overview
 ```
-- Immediately after the H1, no separator line before it.
+- Immediately after the video embed, no separator line before it.
 - Bullet list of what students will do/learn.
 - `**Prerequisites:**` line linking to any required prior lessons.
 

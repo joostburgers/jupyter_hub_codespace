@@ -877,7 +877,7 @@
         }
 
         function setActiveChapter(chapter) {
-            if (activeChapter === chapter.id) return;
+            if (activeChapter === chapter.id) { return; }
             if (_isUpdating) {
                 // Queue most recent request; processed when current transition ends.
                 _pendingChapter = chapter;
@@ -1054,7 +1054,7 @@
                                     if (_added) return;
                                     _added = true;
                                     // Guard: user navigated away or year filter rebuilt the layer — discard silently.
-                                    if (!map.hasLayer(_hlRef) || !_hlRef.hasLayer(_marker)) return;
+                                    if (!map.hasLayer(_hlRef) || !_hlRef.hasLayer(_marker)) { return; }
                                     const pulseRing = L.marker(
                                         [loc.latitude, loc.longitude],
                                         {
