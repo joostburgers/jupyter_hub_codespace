@@ -857,6 +857,27 @@
 
             // Handle window resize
             window.addEventListener('resize', handleResize);
+
+            // Scrollama only fires onStepEnter when a step crosses the offset threshold.
+            // On initial load the first step is already in view and never "enters", so
+            // markers for chapter-0 would not load until the user scrolls away and back.
+            // Manually activate whichever chapter is closest to the viewport on load.
+            const steps = Array.from(document.querySelectorAll('#scrolly article .step'));
+            if (steps.length > 0) {
+                const viewportMid = window.innerHeight * 0.33;
+                let closest = steps[0];
+                let closestDist = Infinity;
+                steps.forEach(step => {
+                    const rect = step.getBoundingClientRect();
+                    const dist = Math.abs(rect.top - viewportMid);
+                    if (dist < closestDist) { closestDist = dist; closest = step; }
+                });
+                const initChapter = config.chapters.find(c => c.id === closest.id);
+                if (initChapter) {
+                    closest.classList.add('is-active');
+                    setActiveChapter(initChapter);
+                }
+            }
         }
 
         function _onTransitionEnd() {
