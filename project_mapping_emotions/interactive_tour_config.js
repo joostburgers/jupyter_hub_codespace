@@ -4,7 +4,7 @@ var config = {
   "attribution": "&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors &copy; <a href=\"https://carto.com/attributions\">CARTO</a>",
   "colorScale": "RdYlGn",
   "theme": "light",
-  "footer": "Write 1\u20132 sentences reflecting on what the tour revealed.",
+  "footer": "",
   "imageAspectRatio": null,
   "chapters": [
     {
@@ -61,7 +61,7 @@ var config = {
         "placeType": "Building",
         "showPlaceType": false
       },
-      "showData": "individual"
+      "showData": "all_locations"
     },
     {
       "id": "chapter-2",
@@ -89,7 +89,7 @@ var config = {
         "placeType": "Building",
         "showPlaceType": false
       },
-      "showData": "individual",
+      "showData": "all_locations",
       "caption": "Bridgeforth Stadium"
     },
     {
@@ -118,7 +118,7 @@ var config = {
         "placeType": "Building",
         "showPlaceType": true
       },
-      "showData": "individual",
+      "showData": "all_locations",
       "quote": "A representative quote from the data that stands out.",
       "caption": "Bridgeforth Stadium"
     },
@@ -148,7 +148,7 @@ var config = {
         "placeType": "Building",
         "showPlaceType": false
       },
-      "showData": "individual"
+      "showData": "all_locations"
     },
     {
       "id": "chapter-5",
@@ -265,7 +265,7 @@ var config = {
     {
       "id": "chapter-9",
       "title": "Filtering by Place Type",
-      "description": "<code>hide_place_types</code> removes markers of the listed geographic types from the map. Here Buildings, Roads, and Neighborhoods are hidden to surface only City- and State-level patterns and remove map clutter:<br><pre><code>\"hide_place_types\": [\"Building\", \"Road\", \"Suburb\", \"Neighborhood\"]</code></pre>",
+      "description": "<code>hide_place_types</code> removes markers of the listed geographic types from the map. Here Buildings, Roads, and Neighborhoods are hidden to surface only City- and State-level patterns and remove map clutter:<br><pre><code>\"hide_place_types\": [\"Building\", \"Road\", \"Neighborhood\"]</code></pre>",
       "image": null,
       "duration": 2000,
       "transition": "normal",
@@ -292,14 +292,13 @@ var config = {
       "hidePlaceTypes": [
         "Building",
         "Road",
-        "Suburb",
         "Neighborhood"
       ]
     },
     {
       "id": "chapter-10",
       "title": "Marker Opacity",
-      "description": "<code>opacity</code> dims all background markers so the highlighted location stands out. A value of <code>0.5</code> gives enough surrounding context without competing with the focus location \u2014 use <code>0.0</code> to hide all others entirely:<br><pre><code>\"opacity\":   0.5,\n\"show_data\": \"individual\"</code></pre>",
+      "description": "<code>opacity</code> dims all background markers so the highlighted location stands out. A value of <code>0.5</code> gives enough surrounding context without competing with the focus location \u2014 use <code>0.0</code> to hide all others entirely:<br><pre><code>\"opacity\":   0.5,\n\"show_data\": \"all_locations\"</code></pre>",
       "image": "./images/bridgeforth-stadium.jpg",
       "duration": 2000,
       "transition": "normal",
@@ -322,7 +321,7 @@ var config = {
         "placeType": "Building",
         "showPlaceType": false
       },
-      "showData": "individual"
+      "showData": "all_locations"
     },
     {
       "id": "chapter-11",
@@ -350,7 +349,7 @@ var config = {
         "placeType": "Building",
         "showPlaceType": false
       },
-      "showData": "individual"
+      "showData": "all_locations"
     },
     {
       "id": "chapter-12",
@@ -378,7 +377,7 @@ var config = {
         "placeType": "Building",
         "showPlaceType": false
       },
-      "showData": "individual"
+      "showData": "all_locations"
     },
     {
       "id": "chapter-13",
@@ -406,7 +405,7 @@ var config = {
         "placeType": "Building",
         "showPlaceType": true
       },
-      "showData": "individual"
+      "showData": "all_locations"
     },
     {
       "id": "chapter-14",
@@ -434,7 +433,7 @@ var config = {
         "placeType": "Building",
         "showPlaceType": true
       },
-      "showData": "individual",
+      "showData": "all_locations",
       "dateRange": {
         "start": 2019,
         "end": 2020
@@ -466,7 +465,7 @@ var config = {
         "placeType": "Building",
         "showPlaceType": true
       },
-      "showData": "individual",
+      "showData": "all_locations",
       "dateRange": {
         "start": 2022,
         "end": 2026
@@ -498,7 +497,7 @@ var config = {
         "placeType": "Building",
         "showPlaceType": false
       },
-      "showData": "individual"
+      "showData": "all_locations"
     }
   ],
   "colorBreaks": [
@@ -515,6 +514,24 @@ var config = {
     "rgb(134, 203, 102)",
     "rgb(0, 104, 55)"
   ],
+  "sizeBreaks": [
+    23,
+    52,
+    95,
+    134
+  ],
+  "jmuSizeBreaks": [
+    8,
+    23,
+    77,
+    131
+  ],
+  "nonJmuSizeBreaks": [
+    21,
+    67,
+    95,
+    134
+  ],
   "allLocations": [
     {
       "name": "Harrisonburg",
@@ -523,6 +540,7 @@ var config = {
       "postCount": 131,
       "robertaScore": -0.102,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "City"
     },
     {
@@ -532,6 +550,7 @@ var config = {
       "postCount": 77,
       "robertaScore": -0.069,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "State"
     },
     {
@@ -541,6 +560,7 @@ var config = {
       "postCount": 52,
       "robertaScore": -0.272,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "Country"
     },
     {
@@ -550,6 +570,7 @@ var config = {
       "postCount": 23,
       "robertaScore": -0.129,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "University"
     },
     {
@@ -559,6 +580,7 @@ var config = {
       "postCount": 16,
       "robertaScore": 0.275,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "University"
     },
     {
@@ -568,6 +590,7 @@ var config = {
       "postCount": 14,
       "robertaScore": -0.363,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "Building"
     },
     {
@@ -577,6 +600,7 @@ var config = {
       "postCount": 12,
       "robertaScore": 0.126,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "State"
     },
     {
@@ -586,6 +610,7 @@ var config = {
       "postCount": 8,
       "robertaScore": -0.132,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "Building"
     },
     {
@@ -595,6 +620,7 @@ var config = {
       "postCount": 13,
       "robertaScore": -0.293,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "State"
     },
     {
@@ -604,6 +630,7 @@ var config = {
       "postCount": 8,
       "robertaScore": -0.276,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "Building"
     },
     {
@@ -613,6 +640,7 @@ var config = {
       "postCount": 19,
       "robertaScore": -0.151,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "Building"
     },
     {
@@ -622,6 +650,7 @@ var config = {
       "postCount": 7,
       "robertaScore": -0.185,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "Building"
     },
     {
@@ -631,6 +660,7 @@ var config = {
       "postCount": 7,
       "robertaScore": 0.022,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "City"
     },
     {
@@ -640,6 +670,7 @@ var config = {
       "postCount": 7,
       "robertaScore": -0.095,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "Building"
     },
     {
@@ -649,6 +680,7 @@ var config = {
       "postCount": 7,
       "robertaScore": 0.058,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "State"
     },
     {
@@ -658,6 +690,7 @@ var config = {
       "postCount": 4,
       "robertaScore": -0.272,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "University"
     },
     {
@@ -667,6 +700,7 @@ var config = {
       "postCount": 11,
       "robertaScore": -0.009,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "Building"
     },
     {
@@ -676,6 +710,7 @@ var config = {
       "postCount": 8,
       "robertaScore": -0.092,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "Region"
     },
     {
@@ -685,6 +720,7 @@ var config = {
       "postCount": 5,
       "robertaScore": -0.111,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "University"
     },
     {
@@ -694,6 +730,7 @@ var config = {
       "postCount": 5,
       "robertaScore": -0.044,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "Country"
     },
     {
@@ -703,6 +740,7 @@ var config = {
       "postCount": 5,
       "robertaScore": -0.174,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "State"
     },
     {
@@ -712,6 +750,7 @@ var config = {
       "postCount": 5,
       "robertaScore": -0.163,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "University"
     },
     {
@@ -721,6 +760,7 @@ var config = {
       "postCount": 5,
       "robertaScore": -0.137,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "Building"
     },
     {
@@ -730,6 +770,7 @@ var config = {
       "postCount": 5,
       "robertaScore": 0.377,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "Building"
     },
     {
@@ -739,6 +780,7 @@ var config = {
       "postCount": 5,
       "robertaScore": 0.056,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "Building"
     },
     {
@@ -748,6 +790,7 @@ var config = {
       "postCount": 7,
       "robertaScore": 0.281,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "Building"
     },
     {
@@ -757,6 +800,7 @@ var config = {
       "postCount": 5,
       "robertaScore": -0.097,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "City"
     },
     {
@@ -766,6 +810,7 @@ var config = {
       "postCount": 5,
       "robertaScore": 0.017,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "City"
     },
     {
@@ -775,6 +820,7 @@ var config = {
       "postCount": 6,
       "robertaScore": -0.184,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "Building"
     },
     {
@@ -784,6 +830,7 @@ var config = {
       "postCount": 4,
       "robertaScore": 0.23,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "University"
     },
     {
@@ -793,6 +840,7 @@ var config = {
       "postCount": 4,
       "robertaScore": -0.259,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "Building"
     },
     {
@@ -802,6 +850,7 @@ var config = {
       "postCount": 4,
       "robertaScore": 0.206,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "Building"
     },
     {
@@ -811,6 +860,7 @@ var config = {
       "postCount": 4,
       "robertaScore": -0.21,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "State"
     },
     {
@@ -820,6 +870,7 @@ var config = {
       "postCount": 4,
       "robertaScore": 0.006,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "Natural Feature"
     },
     {
@@ -829,6 +880,7 @@ var config = {
       "postCount": 4,
       "robertaScore": 0.026,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "Building"
     },
     {
@@ -838,6 +890,7 @@ var config = {
       "postCount": 4,
       "robertaScore": -0.15,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "Region"
     },
     {
@@ -847,6 +900,7 @@ var config = {
       "postCount": 4,
       "robertaScore": -0.056,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "Building"
     },
     {
@@ -856,6 +910,7 @@ var config = {
       "postCount": 3,
       "robertaScore": 0.085,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "City"
     },
     {
@@ -865,6 +920,7 @@ var config = {
       "postCount": 3,
       "robertaScore": -0.239,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "Building"
     },
     {
@@ -874,6 +930,7 @@ var config = {
       "postCount": 3,
       "robertaScore": 0.107,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "Building"
     },
     {
@@ -883,6 +940,7 @@ var config = {
       "postCount": 3,
       "robertaScore": 0.014,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "Building"
     },
     {
@@ -892,6 +950,7 @@ var config = {
       "postCount": 3,
       "robertaScore": -0.204,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "Country"
     },
     {
@@ -901,6 +960,7 @@ var config = {
       "postCount": 3,
       "robertaScore": 0.008,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "State"
     },
     {
@@ -910,6 +970,7 @@ var config = {
       "postCount": 3,
       "robertaScore": -0.059,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "City"
     },
     {
@@ -919,6 +980,7 @@ var config = {
       "postCount": 3,
       "robertaScore": 0.128,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "State"
     },
     {
@@ -928,6 +990,7 @@ var config = {
       "postCount": 3,
       "robertaScore": 0.207,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "City"
     },
     {
@@ -937,6 +1000,7 @@ var config = {
       "postCount": 3,
       "robertaScore": 0.06,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "Neighborhood"
     },
     {
@@ -946,6 +1010,7 @@ var config = {
       "postCount": 3,
       "robertaScore": 0.053,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "Building"
     },
     {
@@ -955,6 +1020,7 @@ var config = {
       "postCount": 3,
       "robertaScore": 0.269,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "Building"
     },
     {
@@ -964,6 +1030,7 @@ var config = {
       "postCount": 3,
       "robertaScore": -0.253,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "Country"
     },
     {
@@ -973,6 +1040,7 @@ var config = {
       "postCount": 3,
       "robertaScore": -0.24,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "State"
     },
     {
@@ -982,6 +1050,7 @@ var config = {
       "postCount": 3,
       "robertaScore": -0.437,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "State"
     },
     {
@@ -991,6 +1060,7 @@ var config = {
       "postCount": 3,
       "robertaScore": -0.088,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "State"
     },
     {
@@ -1000,6 +1070,7 @@ var config = {
       "postCount": 4,
       "robertaScore": 0.231,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "Building"
     },
     {
@@ -1009,6 +1080,7 @@ var config = {
       "postCount": 3,
       "robertaScore": 0.257,
       "isJMU": true,
+      "school": "JMU",
       "placeType": "Building"
     },
     {
@@ -1018,6 +1090,7 @@ var config = {
       "postCount": 132,
       "robertaScore": -0.055,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "State"
     },
     {
@@ -1027,6 +1100,7 @@ var config = {
       "postCount": 95,
       "robertaScore": -0.264,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "Country"
     },
     {
@@ -1036,6 +1110,7 @@ var config = {
       "postCount": 134,
       "robertaScore": 0.002,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "City"
     },
     {
@@ -1045,6 +1120,7 @@ var config = {
       "postCount": 50,
       "robertaScore": 0.083,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "University"
     },
     {
@@ -1054,6 +1130,7 @@ var config = {
       "postCount": 42,
       "robertaScore": -0.459,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "Country"
     },
     {
@@ -1063,6 +1140,7 @@ var config = {
       "postCount": 67,
       "robertaScore": -0.147,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "Road"
     },
     {
@@ -1072,6 +1150,7 @@ var config = {
       "postCount": 16,
       "robertaScore": -0.382,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "City"
     },
     {
@@ -1081,6 +1160,7 @@ var config = {
       "postCount": 21,
       "robertaScore": 0.087,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "City"
     },
     {
@@ -1090,6 +1170,7 @@ var config = {
       "postCount": 12,
       "robertaScore": -0.115,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "City"
     },
     {
@@ -1099,6 +1180,7 @@ var config = {
       "postCount": 11,
       "robertaScore": -0.25,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "Building"
     },
     {
@@ -1108,6 +1190,7 @@ var config = {
       "postCount": 11,
       "robertaScore": 0.029,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "State"
     },
     {
@@ -1117,6 +1200,7 @@ var config = {
       "postCount": 9,
       "robertaScore": -0.272,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "City"
     },
     {
@@ -1126,6 +1210,7 @@ var config = {
       "postCount": 9,
       "robertaScore": 0.039,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "Country"
     },
     {
@@ -1135,6 +1220,7 @@ var config = {
       "postCount": 8,
       "robertaScore": -0.049,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "Country"
     },
     {
@@ -1144,6 +1230,7 @@ var config = {
       "postCount": 8,
       "robertaScore": -0.369,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "City"
     },
     {
@@ -1153,6 +1240,7 @@ var config = {
       "postCount": 8,
       "robertaScore": 0.019,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "Country"
     },
     {
@@ -1162,6 +1250,7 @@ var config = {
       "postCount": 8,
       "robertaScore": 0.151,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "Building"
     },
     {
@@ -1171,6 +1260,7 @@ var config = {
       "postCount": 8,
       "robertaScore": -0.184,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "City"
     },
     {
@@ -1180,6 +1270,7 @@ var config = {
       "postCount": 11,
       "robertaScore": -0.012,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "City"
     },
     {
@@ -1189,6 +1280,7 @@ var config = {
       "postCount": 8,
       "robertaScore": -0.007,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "State"
     },
     {
@@ -1198,6 +1290,7 @@ var config = {
       "postCount": 7,
       "robertaScore": -0.286,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "Country"
     },
     {
@@ -1207,6 +1300,7 @@ var config = {
       "postCount": 7,
       "robertaScore": -0.443,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "Region"
     },
     {
@@ -1216,6 +1310,7 @@ var config = {
       "postCount": 7,
       "robertaScore": -0.108,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "City"
     },
     {
@@ -1225,6 +1320,7 @@ var config = {
       "postCount": 7,
       "robertaScore": -0.617,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "Country"
     },
     {
@@ -1234,6 +1330,7 @@ var config = {
       "postCount": 7,
       "robertaScore": -0.464,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "Country"
     },
     {
@@ -1243,6 +1340,7 @@ var config = {
       "postCount": 7,
       "robertaScore": -0.267,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "State"
     },
     {
@@ -1252,6 +1350,7 @@ var config = {
       "postCount": 6,
       "robertaScore": -0.047,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "City"
     },
     {
@@ -1261,6 +1360,7 @@ var config = {
       "postCount": 6,
       "robertaScore": 0.294,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "State"
     },
     {
@@ -1270,6 +1370,7 @@ var config = {
       "postCount": 6,
       "robertaScore": -0.034,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "State"
     },
     {
@@ -1279,6 +1380,7 @@ var config = {
       "postCount": 7,
       "robertaScore": 0.015,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "Natural Feature"
     },
     {
@@ -1288,6 +1390,7 @@ var config = {
       "postCount": 6,
       "robertaScore": 0.132,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "State"
     },
     {
@@ -1297,6 +1400,7 @@ var config = {
       "postCount": 5,
       "robertaScore": -0.333,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "Country"
     },
     {
@@ -1306,6 +1410,7 @@ var config = {
       "postCount": 5,
       "robertaScore": -0.022,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "City"
     },
     {
@@ -1315,6 +1420,7 @@ var config = {
       "postCount": 5,
       "robertaScore": -0.031,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "City"
     },
     {
@@ -1324,6 +1430,7 @@ var config = {
       "postCount": 5,
       "robertaScore": 0.085,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "Building"
     },
     {
@@ -1333,6 +1440,7 @@ var config = {
       "postCount": 5,
       "robertaScore": 0.014,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "State"
     },
     {
@@ -1342,6 +1450,7 @@ var config = {
       "postCount": 5,
       "robertaScore": -0.037,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "City"
     },
     {
@@ -1351,6 +1460,7 @@ var config = {
       "postCount": 5,
       "robertaScore": 0.188,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "City"
     },
     {
@@ -1360,6 +1470,7 @@ var config = {
       "postCount": 5,
       "robertaScore": -0.318,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "City"
     },
     {
@@ -1369,6 +1480,7 @@ var config = {
       "postCount": 5,
       "robertaScore": -0.178,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "State"
     },
     {
@@ -1378,6 +1490,7 @@ var config = {
       "postCount": 4,
       "robertaScore": -0.394,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "Building"
     },
     {
@@ -1387,6 +1500,7 @@ var config = {
       "postCount": 4,
       "robertaScore": 0.239,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "Building"
     },
     {
@@ -1396,6 +1510,7 @@ var config = {
       "postCount": 4,
       "robertaScore": -0.118,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "State"
     },
     {
@@ -1405,6 +1520,7 @@ var config = {
       "postCount": 4,
       "robertaScore": -0.09,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "State"
     },
     {
@@ -1414,6 +1530,7 @@ var config = {
       "postCount": 4,
       "robertaScore": -0.171,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "Country"
     },
     {
@@ -1423,6 +1540,7 @@ var config = {
       "postCount": 4,
       "robertaScore": -0.276,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "City"
     },
     {
@@ -1432,6 +1550,7 @@ var config = {
       "postCount": 4,
       "robertaScore": 0.114,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "City"
     },
     {
@@ -1441,6 +1560,7 @@ var config = {
       "postCount": 4,
       "robertaScore": 0.114,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "Building"
     },
     {
@@ -1450,6 +1570,7 @@ var config = {
       "postCount": 4,
       "robertaScore": -0.068,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "State"
     },
     {
@@ -1459,6 +1580,7 @@ var config = {
       "postCount": 6,
       "robertaScore": 0.171,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "Country"
     },
     {
@@ -1468,6 +1590,7 @@ var config = {
       "postCount": 3,
       "robertaScore": -0.366,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "Building"
     },
     {
@@ -1477,6 +1600,7 @@ var config = {
       "postCount": 3,
       "robertaScore": -0.455,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "Country"
     },
     {
@@ -1486,6 +1610,7 @@ var config = {
       "postCount": 3,
       "robertaScore": -0.063,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "State"
     },
     {
@@ -1495,6 +1620,7 @@ var config = {
       "postCount": 3,
       "robertaScore": 0.059,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "Building"
     },
     {
@@ -1504,6 +1630,7 @@ var config = {
       "postCount": 3,
       "robertaScore": -0.448,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "Natural Feature"
     },
     {
@@ -1513,6 +1640,7 @@ var config = {
       "postCount": 3,
       "robertaScore": 0.06,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "State"
     },
     {
@@ -1522,6 +1650,7 @@ var config = {
       "postCount": 4,
       "robertaScore": 0.025,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "Building"
     },
     {
@@ -1531,6 +1660,7 @@ var config = {
       "postCount": 3,
       "robertaScore": 0.023,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "City"
     },
     {
@@ -1540,6 +1670,7 @@ var config = {
       "postCount": 3,
       "robertaScore": 0.277,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "Region"
     },
     {
@@ -1549,6 +1680,7 @@ var config = {
       "postCount": 3,
       "robertaScore": -0.046,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "City"
     },
     {
@@ -1558,6 +1690,7 @@ var config = {
       "postCount": 3,
       "robertaScore": -0.066,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "Neighborhood"
     },
     {
@@ -1567,6 +1700,7 @@ var config = {
       "postCount": 5,
       "robertaScore": 0.057,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "Neighborhood"
     },
     {
@@ -1576,6 +1710,7 @@ var config = {
       "postCount": 9,
       "robertaScore": 0.031,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "State"
     },
     {
@@ -1585,6 +1720,7 @@ var config = {
       "postCount": 3,
       "robertaScore": -0.002,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "Building"
     },
     {
@@ -1594,6 +1730,7 @@ var config = {
       "postCount": 5,
       "robertaScore": -0.253,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "City"
     },
     {
@@ -1603,6 +1740,7 @@ var config = {
       "postCount": 3,
       "robertaScore": 0.037,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "Building"
     },
     {
@@ -1612,6 +1750,7 @@ var config = {
       "postCount": 3,
       "robertaScore": -0.057,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "Country"
     },
     {
@@ -1621,6 +1760,7 @@ var config = {
       "postCount": 3,
       "robertaScore": -0.312,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "Country"
     },
     {
@@ -1630,6 +1770,7 @@ var config = {
       "postCount": 3,
       "robertaScore": -0.369,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "State"
     },
     {
@@ -1639,6 +1780,7 @@ var config = {
       "postCount": 3,
       "robertaScore": 0.034,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "State"
     },
     {
@@ -1648,6 +1790,7 @@ var config = {
       "postCount": 3,
       "robertaScore": -0.151,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "City"
     },
     {
@@ -1657,6 +1800,7 @@ var config = {
       "postCount": 3,
       "robertaScore": -0.616,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "Building"
     },
     {
@@ -1666,6 +1810,7 @@ var config = {
       "postCount": 3,
       "robertaScore": -0.163,
       "isJMU": false,
+      "school": "UNC",
       "placeType": "City"
     }
   ],
@@ -1674,6056 +1819,7192 @@ var config = {
       {
         "year": 2021,
         "score": -0.18,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "501": [
       {
         "year": 2021,
         "score": -0.675,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Acland": [
       {
         "year": 2020,
         "score": -0.238,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       }
     ],
     "Acushnet Avenue School": [
       {
         "year": 2020,
         "score": -0.766,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Airport": [
       {
         "year": 2015,
         "score": -0.337,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       }
     ],
     "Akron": [
       {
         "year": 2025,
         "score": 0.438,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       }
     ],
     "Al Bank al Br\u012b\u0163\u0101n\u012b lish Sharq al Awsa\u0163": [
       {
         "year": 2024,
         "score": -0.448,
-        "count": 3
+        "count": 3,
+        "school": "UNC"
       }
     ],
     "Alabama": [
       {
         "year": 2020,
         "score": 0.033,
-        "count": 3
+        "count": 3,
+        "school": "UNC"
       },
       {
         "year": 2025,
-        "score": -0.058,
-        "count": 5
+        "score": -0.088,
+        "count": 3,
+        "school": "JMU"
+      },
+      {
+        "year": 2025,
+        "score": -0.013,
+        "count": 2,
+        "school": "UNC"
       }
     ],
     "Alamance County": [
       {
         "year": 2025,
         "score": -0.004,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Albert": [
       {
         "year": 2022,
         "score": 0.018,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Alpine County": [
       {
         "year": 2023,
         "score": 0.001,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Altitude": [
       {
         "year": 2020,
         "score": 0.688,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Alumni Hall": [
       {
         "year": 2023,
         "score": 0.002,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Apollo": [
       {
         "year": 2021,
         "score": 0.003,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Arab Republic of Egypt": [
       {
         "year": 2025,
         "score": -0.055,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Arboretum": [
       {
         "year": 2025,
         "score": -0.154,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       }
     ],
     "Arizona": [
       {
         "year": 2020,
-        "score": -0.369,
-        "count": 2
+        "score": -0.741,
+        "count": 1,
+        "school": "JMU"
+      },
+      {
+        "year": 2020,
+        "score": 0.002,
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2022,
         "score": 0.026,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2024,
         "score": -0.036,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": -0.078,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       }
     ],
     "Arkansas": [
       {
         "year": 2025,
         "score": -0.009,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       }
     ],
     "Arlington": [
       {
         "year": 2020,
         "score": 0.085,
-        "count": 3
+        "count": 3,
+        "school": "JMU"
       }
     ],
     "Ashby Hall (JMU)": [
       {
         "year": 2020,
         "score": 0.386,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       },
       {
         "year": 2026,
         "score": -0.0,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Asheville": [
       {
         "year": 2020,
         "score": -0.347,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2023,
         "score": -0.515,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Asia": [
       {
         "year": 2021,
         "score": -0.496,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Auburntown": [
       {
         "year": 2025,
         "score": -0.0,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Augusta County": [
       {
         "year": 2020,
         "score": -0.472,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2022,
         "score": -0.543,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Austurland": [
       {
         "year": 2020,
         "score": -0.0,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2021,
         "score": -0.0,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2024,
         "score": 0.09,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       },
       {
         "year": 2026,
         "score": 0.949,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Ave. Morumbi": [
       {
         "year": 2026,
         "score": -0.0,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Avery": [
       {
         "year": 2026,
         "score": 0.002,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "B.S. Well": [
       {
         "year": 2023,
         "score": 0.006,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Bailiwick of Jersey": [
       {
         "year": 2021,
         "score": 0.019,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Baltimore": [
       {
         "year": 2022,
         "score": -0.275,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       }
     ],
     "Baton Rouge": [
       {
         "year": 2022,
         "score": 0.066,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       }
     ],
     "Battle Park": [
       {
         "year": 2023,
         "score": -0.253,
-        "count": 5
+        "count": 5,
+        "school": "UNC"
       }
     ],
     "Bear Lake": [
       {
         "year": 2026,
         "score": 0.706,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Beckley": [
       {
         "year": 2020,
         "score": 0.014,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2021,
         "score": -0.38,
-        "count": 3
+        "count": 3,
+        "school": "UNC"
       },
       {
         "year": 2022,
         "score": 0.004,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2023,
         "score": -0.61,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       },
       {
         "year": 2024,
         "score": 0.001,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": -0.108,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Bell Tower": [
       {
         "year": 2023,
         "score": -0.077,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Benito Ju\u00e1rez Dos": [
       {
         "year": 2021,
         "score": 0.055,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Berkeley": [
       {
         "year": 2022,
         "score": -0.138,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": 0.002,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Big Sky": [
       {
         "year": 2020,
         "score": -0.137,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       }
     ],
     "Bingham": [
       {
         "year": 2019,
         "score": 0.001,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Blacksburg": [
       {
         "year": 2020,
         "score": -0.589,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Blue Ridge School": [
       {
         "year": 2012,
         "score": 0.001,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Bluestone": [
       {
         "year": 2015,
         "score": -0.03,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Bojangles'": [
       {
         "year": 2023,
         "score": -0.148,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Bolzano": [
       {
         "year": 2025,
         "score": -0.73,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Bol\u2019shoy": [
       {
         "year": 2019,
         "score": -0.001,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Boston": [
       {
         "year": 2019,
         "score": 0.016,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2021,
         "score": -0.474,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       }
     ],
     "Boston City Hall": [
       {
         "year": 2021,
         "score": 0.001,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Boulder": [
       {
         "year": 2020,
         "score": 0.005,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2023,
         "score": -0.334,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Boundary": [
       {
         "year": 2022,
         "score": 0.007,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Bradford County": [
       {
         "year": 2023,
         "score": 0.012,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Breeze": [
       {
         "year": 2020,
         "score": -0.137,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Bridgeforth Stadium": [
       {
         "year": 2020,
         "score": -0.684,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2021,
         "score": 0.419,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       },
       {
         "year": 2025,
         "score": 0.611,
-        "count": 3
+        "count": 3,
+        "school": "JMU"
       },
       {
         "year": 2026,
         "score": -0.019,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Bridgewater": [
       {
         "year": 2020,
         "score": 0.477,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       },
       {
         "year": 2022,
         "score": -0.716,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2024,
         "score": -0.362,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       }
     ],
     "Buns Basin": [
       {
         "year": 2026,
         "score": -0.127,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Burg": [
       {
         "year": 2026,
         "score": 0.949,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Burg-Grambke": [
       {
         "year": 2012,
         "score": 0.07,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Burlington": [
       {
         "year": 2024,
         "score": -0.566,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Burruss Hall": [
       {
         "year": 2021,
         "score": -0.079,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2026,
         "score": 0.006,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Caldwell Parish": [
       {
         "year": 2024,
         "score": 0.013,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "California": [
       {
         "year": 2020,
         "score": 0.145,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       },
       {
         "year": 2022,
         "score": 0.025,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2023,
         "score": 0.225,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2025,
-        "score": 0.149,
-        "count": 5
+        "score": 0.206,
+        "count": 1,
+        "school": "JMU"
+      },
+      {
+        "year": 2025,
+        "score": 0.135,
+        "count": 4,
+        "school": "UNC"
       },
       {
         "year": 2026,
         "score": -0.255,
-        "count": 3
+        "count": 3,
+        "school": "UNC"
       }
     ],
     "Cameron Indoor Stadium": [
       {
         "year": 2022,
         "score": 0.001,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Campus": [
       {
         "year": 2020,
         "score": 0.602,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2026,
         "score": 0.242,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Canada": [
       {
         "year": 2025,
         "score": -0.333,
-        "count": 5
+        "count": 5,
+        "school": "UNC"
       }
     ],
     "Canal del Forn de la Cal\u00e7": [
       {
         "year": 2020,
         "score": -0.136,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       }
     ],
     "Cannes": [
       {
         "year": 2024,
         "score": 0.065,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Cannon Air Force Base": [
       {
         "year": 2020,
         "score": 0.161,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Cape Woollen": [
       {
         "year": 2025,
         "score": -0.055,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Caps": [
       {
         "year": 2021,
         "score": -0.429,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       },
       {
         "year": 2023,
         "score": 0.352,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       },
       {
         "year": 2024,
         "score": 0.002,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Caribbean": [
       {
         "year": 2020,
         "score": 0.005,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Carmichael": [
       {
         "year": 2025,
         "score": 0.02,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Carmichaels": [
       {
         "year": 2021,
         "score": -0.005,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2024,
         "score": -0.009,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Carolina": [
       {
         "year": 2022,
         "score": -0.005,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       },
       {
         "year": 2023,
         "score": 0.171,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2024,
         "score": 0.125,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": -0.002,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Carolina Hall (historical)": [
       {
         "year": 2019,
         "score": 0.002,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Carolina Municipio": [
       {
         "year": 2022,
         "score": -0.367,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Carr Mill": [
       {
         "year": 2024,
         "score": -0.066,
-        "count": 3
+        "count": 3,
+        "school": "UNC"
       }
     ],
     "Carr Mill Mall": [
       {
         "year": 2024,
         "score": -0.324,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       }
     ],
     "Carrboro": [
       {
         "year": 2020,
         "score": -0.34,
-        "count": 5
+        "count": 5,
+        "school": "UNC"
       },
       {
         "year": 2021,
         "score": 0.061,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       },
       {
         "year": 2023,
         "score": -0.642,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2024,
         "score": 0.365,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": 0.002,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2026,
         "score": 0.103,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Carrier": [
       {
         "year": 2017,
         "score": -0.924,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Carrier Library": [
       {
         "year": 2021,
         "score": 0.139,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       }
     ],
     "Carroll Hall": [
       {
         "year": 2021,
         "score": 0.762,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Cary": [
       {
         "year": 2026,
         "score": -0.342,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Caudill Mountain": [
       {
         "year": 2023,
         "score": -0.11,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Champions Church": [
       {
         "year": 2026,
         "score": 0.039,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Chandler Hall": [
       {
         "year": 2020,
         "score": -0.009,
-        "count": 4
+        "count": 4,
+        "school": "JMU"
       },
       {
         "year": 2021,
         "score": -0.004,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2022,
         "score": -0.01,
-        "count": 6
+        "count": 6,
+        "school": "JMU"
       }
     ],
     "Chapel": [
       {
         "year": 2026,
         "score": -0.171,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Chapel Hill": [
       {
         "year": 2020,
         "score": -0.109,
-        "count": 43
+        "count": 43,
+        "school": "UNC"
       },
       {
         "year": 2021,
         "score": 0.091,
-        "count": 15
+        "count": 15,
+        "school": "UNC"
       },
       {
         "year": 2022,
         "score": 0.078,
-        "count": 13
+        "count": 13,
+        "school": "UNC"
       },
       {
         "year": 2023,
         "score": -0.097,
-        "count": 11
+        "count": 11,
+        "school": "UNC"
       },
       {
         "year": 2024,
         "score": -0.134,
-        "count": 20
+        "count": 20,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": 0.274,
-        "count": 12
+        "count": 12,
+        "school": "UNC"
       },
       {
         "year": 2026,
         "score": 0.15,
-        "count": 20
+        "count": 20,
+        "school": "UNC"
       }
     ],
     "Chapel Ridge": [
       {
         "year": 2021,
         "score": 0.302,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Chapel of the Cross": [
       {
         "year": 2024,
         "score": -0.002,
-        "count": 3
+        "count": 3,
+        "school": "UNC"
       }
     ],
     "Chapman Hill": [
       {
         "year": 2023,
         "score": -0.55,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Charleston": [
       {
         "year": 2020,
         "score": -0.589,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2022,
         "score": 0.937,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Charlotte": [
       {
         "year": 2021,
         "score": 0.004,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2023,
         "score": -0.321,
-        "count": 5
+        "count": 5,
+        "school": "UNC"
       },
       {
         "year": 2024,
         "score": 0.351,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2025,
-        "score": -0.109,
-        "count": 2
+        "score": -0.0,
+        "count": 1,
+        "school": "JMU"
+      },
+      {
+        "year": 2025,
+        "score": -0.218,
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Charlottesville": [
       {
         "year": 2020,
         "score": 0.057,
-        "count": 4
+        "count": 4,
+        "school": "JMU"
       },
       {
         "year": 2022,
         "score": -0.142,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Chase": [
       {
         "year": 2020,
         "score": -0.069,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2022,
         "score": 0.01,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Chatham County": [
       {
         "year": 2020,
         "score": -0.012,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Chesapeake": [
       {
         "year": 2020,
         "score": -0.017,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2021,
         "score": -0.004,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Chesney": [
       {
         "year": 2025,
         "score": 0.001,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Chesnut Ridge Apartments": [
       {
         "year": 2015,
         "score": -0.402,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       },
       {
         "year": 2020,
         "score": -0.29,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2021,
         "score": -0.003,
-        "count": 3
+        "count": 3,
+        "school": "JMU"
       }
     ],
     "Chicago": [
       {
         "year": 2021,
         "score": -0.001,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": -0.451,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2026,
         "score": -0.0,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "City Hall Plaza": [
       {
         "year": 2021,
         "score": -0.007,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "City of Covington": [
       {
         "year": 2026,
         "score": -0.487,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Cleveland Hall": [
       {
         "year": 2023,
         "score": 0.258,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Cobb County": [
       {
         "year": 2020,
         "score": -0.18,
-        "count": 4
+        "count": 4,
+        "school": "UNC"
       },
       {
         "year": 2022,
         "score": -0.383,
-        "count": 3
+        "count": 3,
+        "school": "UNC"
       }
     ],
     "College Avenue Park": [
       {
         "year": 2026,
         "score": -0.0,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "College Avenue School": [
       {
         "year": 2026,
         "score": -0.185,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "College Park": [
       {
         "year": 2026,
         "score": -0.35,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Columbia": [
       {
         "year": 2024,
         "score": 0.059,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Columbia Center": [
       {
         "year": 2021,
         "score": 0.001,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Commons": [
       {
         "year": 2019,
         "score": -0.525,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Commonwealth": [
       {
         "year": 2021,
         "score": -0.132,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Commonwealth of Australia": [
       {
         "year": 2023,
         "score": 0.127,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Community Christian School of the Shenandoah Valley": [
       {
         "year": 2018,
         "score": -0.093,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Comonotto": [
       {
         "year": 2022,
-        "score": 0.063,
-        "count": 2
+        "score": 0.043,
+        "count": 1,
+        "school": "JMU"
+      },
+      {
+        "year": 2022,
+        "score": 0.083,
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Concord": [
       {
         "year": 2025,
         "score": 0.206,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Connecticut": [
       {
         "year": 2020,
-        "score": -0.065,
-        "count": 2
+        "score": 0.005,
+        "count": 1,
+        "school": "JMU"
+      },
+      {
+        "year": 2020,
+        "score": -0.134,
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Converse": [
       {
         "year": 2023,
         "score": -0.046,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Converse Hall": [
       {
         "year": 2024,
         "score": -0.033,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Coosa Backcountry Trail": [
       {
         "year": 2020,
         "score": -0.503,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Copenhagen": [
       {
         "year": 2025,
         "score": 0.003,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Copper": [
       {
         "year": 2021,
         "score": -0.307,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       }
     ],
     "Copper Beach Harrisonburg Apartments": [
       {
         "year": 2021,
         "score": -0.239,
-        "count": 3
+        "count": 3,
+        "school": "JMU"
       }
     ],
     "Copper Beech Elementary School": [
       {
         "year": 2021,
         "score": -0.187,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Corona": [
       {
         "year": 2020,
         "score": -0.792,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Craige": [
       {
         "year": 2020,
         "score": -0.017,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2024,
         "score": -0.0,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": -0.12,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Craige North Residence Hall": [
       {
         "year": 2020,
         "score": -0.023,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Craige Residence Hall": [
       {
         "year": 2025,
         "score": -0.017,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Crest Drive Elementary School": [
       {
         "year": 2024,
         "score": 0.0,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "D-Hall (JMU)": [
       {
         "year": 2016,
         "score": -0.239,
-        "count": 4
+        "count": 4,
+        "school": "JMU"
       },
       {
         "year": 2018,
         "score": -0.306,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2020,
         "score": -0.127,
-        "count": 6
+        "count": 6,
+        "school": "JMU"
       },
       {
         "year": 2021,
         "score": -0.001,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       },
       {
         "year": 2023,
         "score": -0.093,
-        "count": 5
+        "count": 5,
+        "school": "JMU"
       },
       {
         "year": 2025,
         "score": -0.384,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Dallas": [
       {
         "year": 2020,
         "score": 0.968,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Davie Hall": [
       {
         "year": 2025,
         "score": 0.107,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Davie Poplar": [
       {
         "year": 2021,
         "score": 0.037,
-        "count": 3
+        "count": 3,
+        "school": "UNC"
       }
     ],
     "Davis": [
       {
         "year": 2024,
         "score": -0.002,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Davis Corner": [
       {
         "year": 2023,
         "score": 0.003,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Dawsons Creek": [
       {
         "year": 2024,
         "score": 0.002,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Dayton": [
       {
         "year": 2021,
         "score": 0.087,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "DeJong Reservoir": [
       {
         "year": 2019,
         "score": -0.0,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Death Valley National Park": [
       {
         "year": 2026,
         "score": 0.241,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Decimomannu": [
       {
         "year": 2025,
         "score": 0.547,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Delaware": [
       {
         "year": 2019,
         "score": 0.056,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2026,
         "score": -0.677,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Delta State": [
       {
         "year": 2021,
         "score": -0.452,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Denver": [
       {
         "year": 2021,
         "score": -0.941,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2023,
         "score": 0.121,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Derbent": [
       {
         "year": 2025,
         "score": -0.026,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Devon": [
       {
         "year": 2024,
         "score": -0.022,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Dey Hall": [
       {
         "year": 2025,
         "score": 0.192,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Deyang": [
       {
         "year": 2019,
         "score": 0.004,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2023,
         "score": 0.982,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "District 1": [
       {
         "year": 2022,
         "score": -0.095,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "District 401": [
       {
         "year": 2021,
         "score": 0.01,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "District of Columbia": [
       {
         "year": 2019,
         "score": 0.016,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2020,
         "score": 0.081,
-        "count": 4
+        "count": 4,
+        "school": "JMU"
       },
       {
         "year": 2021,
         "score": 0.019,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       },
       {
         "year": 2022,
         "score": 0.601,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       },
       {
         "year": 2023,
         "score": 0.095,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2024,
         "score": 0.146,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       },
       {
         "year": 2025,
-        "score": 0.217,
-        "count": 6
+        "score": 0.195,
+        "count": 4,
+        "school": "JMU"
+      },
+      {
+        "year": 2025,
+        "score": 0.262,
+        "count": 2,
+        "school": "UNC"
       }
     ],
     "Dorm": [
       {
         "year": 2020,
         "score": -0.01,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Dukes County": [
       {
         "year": 2020,
         "score": 0.914,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Durham": [
       {
         "year": 2020,
         "score": -0.005,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2021,
         "score": 0.047,
-        "count": 6
+        "count": 6,
+        "school": "UNC"
       },
       {
         "year": 2022,
         "score": 0.169,
-        "count": 5
+        "count": 5,
+        "school": "UNC"
       },
       {
         "year": 2023,
         "score": 0.017,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2024,
         "score": 0.123,
-        "count": 4
+        "count": 4,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": 0.165,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2026,
         "score": 0.012,
-        "count": 3
+        "count": 3,
+        "school": "UNC"
       }
     ],
     "Durham County": [
       {
         "year": 2024,
         "score": -0.683,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Eagle Field": [
       {
         "year": 2020,
         "score": 0.004,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Eagle Hall": [
       {
         "year": 2020,
         "score": -0.002,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Eagle Hall (JMU)": [
       {
         "year": 2020,
         "score": -0.925,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2021,
         "score": -0.761,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2022,
         "score": 0.013,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       },
       {
         "year": 2024,
         "score": -0.137,
-        "count": 4
+        "count": 4,
+        "school": "JMU"
       }
     ],
     "Earth": [
       {
         "year": 2021,
         "score": -0.021,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2024,
-        "score": -0.178,
-        "count": 2
+        "score": 0.513,
+        "count": 1,
+        "school": "JMU"
+      },
+      {
+        "year": 2024,
+        "score": -0.869,
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2026,
         "score": -0.208,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "East Campus (JMU)": [
       {
         "year": 2020,
         "score": -0.033,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2021,
         "score": -0.21,
-        "count": 6
+        "count": 6,
+        "school": "JMU"
       }
     ],
     "East Campus Power Plant": [
       {
         "year": 2021,
         "score": -0.026,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "East Coast": [
       {
         "year": 2021,
         "score": 0.283,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       },
       {
         "year": 2025,
-        "score": 0.075,
-        "count": 3
+        "score": -0.02,
+        "count": 2,
+        "school": "JMU"
+      },
+      {
+        "year": 2025,
+        "score": 0.265,
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "East Franklin": [
       {
         "year": 2024,
         "score": 0.114,
-        "count": 4
+        "count": 4,
+        "school": "UNC"
       }
     ],
     "Eda": [
       {
         "year": 2026,
         "score": 0.949,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Eglisau / Burg": [
       {
         "year": 2020,
         "score": -0.004,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Ehringhaus Residence Hall": [
       {
         "year": 2020,
         "score": -0.006,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       }
     ],
     "El Paso": [
       {
         "year": 2021,
         "score": -0.09,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2024,
         "score": -0.075,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Elat": [
       {
         "year": 2024,
         "score": -0.371,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Elektr\u0117nai": [
       {
         "year": 2020,
         "score": -0.053,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Ellicott City": [
       {
         "year": 2020,
         "score": 0.361,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Embassy of the United Kingdom in Austria": [
       {
         "year": 2021,
         "score": -0.006,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Embassy of the United States": [
       {
         "year": 2023,
         "score": -0.478,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2024,
         "score": -0.027,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2025,
-        "score": -0.65,
-        "count": 4
+        "score": -0.765,
+        "count": 2,
+        "school": "JMU"
+      },
+      {
+        "year": 2025,
+        "score": -0.535,
+        "count": 2,
+        "school": "UNC"
       }
     ],
     "Emeryville": [
       {
         "year": 2023,
         "score": -0.015,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Engeo": [
       {
         "year": 2023,
         "score": 0.837,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "England": [
       {
         "year": 2021,
         "score": -0.746,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       }
     ],
     "Erickson": [
       {
         "year": 2019,
         "score": -0.005,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Erwin": [
       {
         "year": 2022,
         "score": 0.534,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": 0.008,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Esp": [
       {
         "year": 2020,
         "score": -0.888,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Estado de M\u00e9xico": [
       {
         "year": 2020,
         "score": 0.054,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Europe": [
       {
         "year": 2020,
         "score": 0.059,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       },
       {
         "year": 2025,
         "score": -0.331,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "European Union": [
       {
         "year": 2025,
         "score": -0.124,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Exton": [
       {
         "year": 2025,
         "score": 0.417,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       }
     ],
     "Fairfax": [
       {
         "year": 2020,
         "score": -0.036,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Farafangana": [
       {
         "year": 2025,
         "score": 0.653,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Fargo": [
       {
         "year": 2026,
         "score": 0.968,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Federal Republic of Germany": [
       {
         "year": 2023,
         "score": -0.572,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2024,
         "score": -0.423,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Festi": [
       {
         "year": 2020,
         "score": 0.002,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Fetzer": [
       {
         "year": 2025,
         "score": 0.164,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Flint": [
       {
         "year": 2024,
         "score": -0.942,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Florence": [
       {
         "year": 2018,
         "score": -0.004,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Florida": [
       {
         "year": 2020,
         "score": -0.43,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       },
       {
         "year": 2022,
         "score": 0.011,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": -0.004,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2026,
         "score": -0.034,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Fordyce": [
       {
         "year": 2020,
         "score": -0.877,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Forest Hills": [
       {
         "year": 2020,
         "score": 0.007,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Four Corners": [
       {
         "year": 2022,
         "score": -0.382,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Frankfurt am Main": [
       {
         "year": 2023,
         "score": -0.156,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Franklin": [
       {
         "year": 2024,
         "score": -0.036,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": -0.334,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Franklin Street": [
       {
         "year": 2020,
         "score": -0.769,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2021,
         "score": 0.136,
-        "count": 14
+        "count": 14,
+        "school": "UNC"
       },
       {
         "year": 2022,
         "score": -0.266,
-        "count": 24
+        "count": 24,
+        "school": "UNC"
       },
       {
         "year": 2023,
         "score": -0.416,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       },
       {
         "year": 2024,
         "score": -0.211,
-        "count": 18
+        "count": 18,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": 0.002,
-        "count": 6
+        "count": 6,
+        "school": "UNC"
       },
       {
         "year": 2026,
         "score": 0.009,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       }
     ],
     "Fredensborg Kommune": [
       {
         "year": 2020,
         "score": -0.0,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Gansville": [
       {
         "year": 2025,
         "score": 0.002,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Garber": [
       {
         "year": 2025,
         "score": -0.001,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Garber Hall": [
       {
         "year": 2025,
         "score": -0.147,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       }
     ],
     "Gauri B\u0101z\u0101r Railroad Station": [
       {
         "year": 2019,
         "score": 0.007,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Gaza": [
       {
         "year": 2021,
         "score": -0.198,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2023,
         "score": -0.482,
-        "count": 9
+        "count": 9,
+        "school": "UNC"
       },
       {
         "year": 2024,
         "score": -0.253,
-        "count": 7
+        "count": 7,
+        "school": "UNC"
       }
     ],
     "Genesee": [
       {
         "year": 2022,
         "score": -0.004,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Georgia": [
       {
         "year": 2022,
         "score": 0.003,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2025,
         "score": -0.02,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Gifford": [
       {
         "year": 2020,
         "score": -0.017,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2022,
         "score": 0.011,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2024,
         "score": -0.422,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Gillings-R\u00f6dkl\u00e4pparna": [
       {
         "year": 2021,
         "score": -0.054,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Godwin Hall (JMU)": [
       {
         "year": 2020,
         "score": -0.105,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2025,
         "score": 0.213,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       }
     ],
     "Government Center": [
       {
         "year": 2021,
         "score": -0.003,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       }
     ],
     "Grace Street House": [
       {
         "year": 2020,
         "score": -0.047,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Granville": [
       {
         "year": 2020,
         "score": -0.015,
-        "count": 3
+        "count": 3,
+        "school": "UNC"
       },
       {
         "year": 2021,
         "score": 0.301,
-        "count": 3
+        "count": 3,
+        "school": "UNC"
       },
       {
         "year": 2022,
         "score": -0.058,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2024,
         "score": -0.766,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": -0.085,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       },
       {
         "year": 2026,
         "score": -0.0,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Granville County": [
       {
         "year": 2021,
         "score": -0.035,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Greenland": [
       {
         "year": 2025,
         "score": -0.464,
-        "count": 7
+        "count": 7,
+        "school": "UNC"
       }
     ],
     "Greenlaw": [
       {
         "year": 2021,
         "score": 0.212,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Greensboro": [
       {
         "year": 2021,
         "score": 0.016,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       }
     ],
     "Greenville": [
       {
         "year": 2021,
         "score": 0.373,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "H2O 911 Restoration": [
       {
         "year": 2020,
         "score": 0.185,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Hall E": [
       {
         "year": 2021,
         "score": -0.78,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Hall Mountain": [
       {
         "year": 2020,
         "score": 0.001,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Hall Valley": [
       {
         "year": 2020,
         "score": 0.001,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Halls": [
       {
         "year": 2023,
         "score": 0.01,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2024,
         "score": -0.023,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Hamas": [
       {
         "year": 2023,
         "score": -0.098,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Hamilton": [
       {
         "year": 2023,
         "score": 0.055,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Hamilton Hall": [
       {
         "year": 2021,
         "score": -0.616,
-        "count": 3
+        "count": 3,
+        "school": "UNC"
       }
     ],
     "Hampton Inn & Suites Chapel Hill Carrboro": [
       {
         "year": 2021,
         "score": -0.171,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Hampton Inn Chapel Hill 15-501": [
       {
         "year": 2025,
         "score": -0.004,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Hampton Inn St. Louis-Columbia": [
       {
         "year": 2025,
         "score": 0.01,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Hampton Roads": [
       {
         "year": 2020,
         "score": -0.839,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Hanes Art Center": [
       {
         "year": 2021,
         "score": -0.344,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Harpers Ferry": [
       {
         "year": 2023,
         "score": -0.949,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Harrison County": [
       {
         "year": 2020,
         "score": 0.005,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2026,
         "score": 0.003,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Harrison Hall": [
       {
         "year": 2020,
         "score": -0.023,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Harrison Township": [
       {
         "year": 2020,
         "score": 0.013,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Harrisonburg": [
       {
         "year": 2012,
         "score": 0.851,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2013,
         "score": -0.856,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2014,
         "score": 0.086,
-        "count": 5
+        "count": 5,
+        "school": "JMU"
       },
       {
         "year": 2015,
         "score": 0.119,
-        "count": 3
+        "count": 3,
+        "school": "JMU"
       },
       {
         "year": 2018,
         "score": 0.203,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2019,
         "score": -0.215,
-        "count": 8
+        "count": 8,
+        "school": "JMU"
       },
       {
         "year": 2020,
         "score": -0.173,
-        "count": 75
+        "count": 75,
+        "school": "JMU"
       },
       {
         "year": 2021,
         "score": -0.096,
-        "count": 14
+        "count": 14,
+        "school": "JMU"
       },
       {
         "year": 2022,
         "score": -0.177,
-        "count": 7
+        "count": 7,
+        "school": "JMU"
       },
       {
         "year": 2023,
         "score": 0.49,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       },
       {
         "year": 2024,
         "score": -0.002,
-        "count": 3
+        "count": 3,
+        "school": "JMU"
       },
       {
         "year": 2025,
         "score": 0.157,
-        "count": 8
+        "count": 8,
+        "school": "JMU"
       },
       {
         "year": 2026,
         "score": 0.208,
-        "count": 3
+        "count": 3,
+        "school": "JMU"
       }
     ],
     "Hartford": [
       {
         "year": 2020,
         "score": 0.005,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Health and Human Services Building": [
       {
         "year": 2025,
         "score": -0.007,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Henderson": [
       {
         "year": 2026,
         "score": 0.005,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Henderson County": [
       {
         "year": 2024,
         "score": 0.013,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Hill Hall": [
       {
         "year": 2025,
         "score": 0.125,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       }
     ],
     "Hillsborough": [
       {
         "year": 2022,
         "score": 0.007,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Hillside Suites": [
       {
         "year": 2012,
         "score": -0.001,
-        "count": 4
+        "count": 4,
+        "school": "JMU"
       },
       {
         "year": 2020,
         "score": -0.948,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2024,
         "score": -0.036,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       },
       {
         "year": 2026,
         "score": -0.032,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Hinton James Housing (UNC)": [
       {
         "year": 2020,
         "score": -0.257,
-        "count": 5
+        "count": 5,
+        "school": "UNC"
       },
       {
         "year": 2021,
         "score": 0.032,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2022,
         "score": -0.522,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       },
       {
         "year": 2024,
         "score": -0.416,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": -0.032,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2026,
         "score": -0.008,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Hinton James Residence Hall": [
       {
         "year": 2020,
         "score": 0.173,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2023,
         "score": 0.002,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": 0.001,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Hollywood": [
       {
         "year": 2026,
         "score": -0.122,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Hooverville": [
       {
         "year": 2025,
         "score": 0.001,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Houses Pond": [
       {
         "year": 2020,
         "score": -0.001,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Houston": [
       {
         "year": 2020,
         "score": -0.078,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2025,
         "score": 0.469,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Howard County": [
       {
         "year": 2020,
         "score": 0.702,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Hubble": [
       {
         "year": 2021,
         "score": 0.421,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Hunter Ridge": [
       {
         "year": 2019,
         "score": -0.525,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Hunters Ridge": [
       {
         "year": 2021,
         "score": -0.915,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "H\u00e5nes": [
       {
         "year": 2021,
         "score": 0.879,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "I-40 Park": [
       {
         "year": 2021,
         "score": -0.778,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "I-81 Scenic View": [
       {
         "year": 2021,
         "score": -0.739,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2025,
         "score": -0.507,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Illinois": [
       {
         "year": 2021,
         "score": 0.258,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": -0.078,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       }
     ],
     "Indiana University": [
       {
         "year": 2025,
         "score": -0.014,
-        "count": 3
+        "count": 3,
+        "school": "JMU"
       },
       {
         "year": 2026,
         "score": 0.962,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Indianapolis": [
       {
         "year": 2022,
         "score": -0.036,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Interchange 110": [
       {
         "year": 2020,
         "score": -0.464,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2021,
         "score": 0.365,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Interchange 262": [
       {
         "year": 2021,
         "score": 0.624,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Interchange 401": [
       {
         "year": 2021,
         "score": 0.021,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Iowa": [
       {
         "year": 2019,
         "score": -0.004,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Islamic Republic of Afghanistan": [
       {
         "year": 2022,
         "score": 0.87,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": -0.817,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Islamic Republic of Iran": [
       {
         "year": 2023,
         "score": -0.859,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Isola Gemini": [
       {
         "year": 2021,
         "score": 0.003,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Israel Gap": [
       {
         "year": 2024,
         "score": -0.929,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Italian Republic": [
       {
         "year": 2021,
         "score": -0.03,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2024,
         "score": -0.453,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       }
     ],
     "Jackson": [
       {
         "year": 2020,
         "score": 0.386,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       }
     ],
     "Jackson Hall": [
       {
         "year": 2020,
         "score": -0.03,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Jacksontown": [
       {
         "year": 2020,
         "score": -0.219,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "James Madison University": [
       {
         "year": 2014,
         "score": -0.008,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2019,
         "score": -0.235,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2020,
         "score": -0.104,
-        "count": 10
+        "count": 10,
+        "school": "JMU"
       },
       {
         "year": 2021,
         "score": -0.186,
-        "count": 5
+        "count": 5,
+        "school": "JMU"
       },
       {
         "year": 2022,
         "score": -0.273,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       },
       {
         "year": 2023,
         "score": 0.001,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2025,
         "score": -0.072,
-        "count": 3
+        "count": 3,
+        "school": "JMU"
       }
     ],
     "Japan": [
       {
         "year": 2023,
         "score": 0.127,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Jefferson Street (historical)": [
       {
         "year": 2022,
         "score": 0.012,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Jennings Hall": [
       {
         "year": 2026,
         "score": 0.877,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Jersey Turnpike Heliport": [
       {
         "year": 2021,
         "score": -0.497,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Jincheng": [
       {
         "year": 2025,
         "score": 0.005,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "John Paul Jones Arena": [
       {
         "year": 2019,
         "score": 0.126,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Johnston Hall": [
       {
         "year": 2021,
         "score": -0.614,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Judaea": [
       {
         "year": 2021,
         "score": -0.198,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Kaarela": [
       {
         "year": 2014,
         "score": -0.404,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Kamalabaria N.C.": [
       {
         "year": 2020,
         "score": -0.018,
-        "count": 3
+        "count": 3,
+        "school": "UNC"
       },
       {
         "year": 2024,
         "score": -0.028,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       }
     ],
     "Kansas": [
       {
         "year": 2023,
         "score": 0.809,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Keezell Hall (JMU)": [
       {
         "year": 2020,
         "score": 0.032,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2022,
         "score": -0.021,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2023,
         "score": 0.03,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Kenan": [
       {
         "year": 2021,
         "score": 0.02,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       },
       {
         "year": 2023,
         "score": 0.029,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Kenan Stadium": [
       {
         "year": 2021,
         "score": 0.482,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       },
       {
         "year": 2023,
         "score": -0.011,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": 0.003,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Kenji": [
       {
         "year": 2025,
         "score": 0.014,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Kentucky": [
       {
         "year": 2020,
         "score": 0.1,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2022,
         "score": -0.563,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": -0.005,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       }
     ],
     "King Hall": [
       {
         "year": 2023,
         "score": 0.837,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2026,
         "score": 0.004,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Kingdom of Cambodia": [
       {
         "year": 2024,
         "score": -0.443,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Kingdom of Denmark": [
       {
         "year": 2021,
         "score": -0.004,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": 0.044,
-        "count": 8
+        "count": 8,
+        "school": "UNC"
       }
     ],
     "Kingdom of Norway": [
       {
         "year": 2025,
         "score": -0.02,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Kingdom of Saudi Arabia": [
       {
         "year": 2025,
         "score": -0.266,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2026,
         "score": -0.172,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       }
     ],
     "Koury": [
       {
         "year": 2024,
         "score": -0.416,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Kulosaari": [
       {
         "year": 2020,
         "score": 0.966,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "L'Union": [
       {
         "year": 2021,
         "score": 0.118,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Lac Natty": [
       {
         "year": 2022,
         "score": -0.397,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       }
     ],
     "Lake District": [
       {
         "year": 2026,
         "score": 0.926,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Lake Shenandoah": [
       {
         "year": 2026,
         "score": 0.0,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Lamb": [
       {
         "year": 2025,
         "score": -0.081,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Las Vegas": [
       {
         "year": 2019,
         "score": 0.016,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Latin America Bible Institute": [
       {
         "year": 2020,
         "score": 0.005,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Lebanon": [
       {
         "year": 2024,
         "score": -0.423,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Leeolou Alumni Center": [
       {
         "year": 2023,
         "score": 0.0,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       }
     ],
     "Leesburg": [
       {
         "year": 2020,
         "score": 0.01,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       }
     ],
     "Lehigh County": [
       {
         "year": 2025,
         "score": -0.166,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Lenoir City": [
       {
         "year": 2021,
         "score": 0.004,
-        "count": 3
+        "count": 3,
+        "school": "UNC"
       },
       {
         "year": 2024,
         "score": -0.098,
-        "count": 3
+        "count": 3,
+        "school": "UNC"
       }
     ],
     "Lenoir County": [
       {
         "year": 2024,
         "score": 0.036,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Lenoir Hall": [
       {
         "year": 2026,
         "score": -0.545,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Liberty Street": [
       {
         "year": 2020,
         "score": -0.019,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Lineberger Acres": [
       {
         "year": 2025,
         "score": -0.007,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Loch na Davie": [
       {
         "year": 2025,
         "score": 0.414,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Logan International Airport": [
       {
         "year": 2020,
         "score": -0.017,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "London": [
       {
         "year": 2020,
         "score": -0.572,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": 0.078,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Long Valley": [
       {
         "year": 2020,
         "score": -0.087,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       }
     ],
     "Longwood": [
       {
         "year": 2020,
         "score": -0.005,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2025,
         "score": -0.18,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Los Angeles": [
       {
         "year": 2021,
         "score": -0.317,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       },
       {
         "year": 2024,
         "score": -0.276,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       },
       {
         "year": 2025,
-        "score": -0.228,
-        "count": 3
+        "score": -0.139,
+        "count": 2,
+        "school": "JMU"
+      },
+      {
+        "year": 2025,
+        "score": -0.404,
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Louisiana": [
       {
         "year": 2020,
         "score": -0.562,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Louisville": [
       {
         "year": 2025,
-        "score": -0.074,
-        "count": 3
+        "score": -0.481,
+        "count": 1,
+        "school": "JMU"
+      },
+      {
+        "year": 2025,
+        "score": 0.13,
+        "count": 2,
+        "school": "UNC"
       }
     ],
     "Lowo Aepi": [
       {
         "year": 2024,
         "score": -0.065,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       }
     ],
     "Luhanka": [
       {
         "year": 2022,
         "score": -0.183,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Machapuchare Basecamp": [
       {
         "year": 2024,
         "score": 0.351,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Madison": [
       {
         "year": 2020,
         "score": -0.326,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       }
     ],
     "Madison Union Cemetery": [
       {
         "year": 2023,
         "score": 0.206,
-        "count": 4
+        "count": 4,
+        "school": "JMU"
       }
     ],
     "Magnolia @ Medical Drive": [
       {
         "year": 2021,
         "score": 0.899,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Maine": [
       {
         "year": 2021,
         "score": -0.213,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Makemo": [
       {
         "year": 2021,
         "score": 0.879,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2023,
         "score": 0.003,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Manning": [
       {
         "year": 2022,
         "score": 0.007,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Manning Hall": [
       {
         "year": 2021,
         "score": 0.124,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Marriott Executive Apartments Union Square Shanghai Pudong": [
       {
         "year": 2026,
         "score": -0.008,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Mars": [
       {
         "year": 2019,
         "score": 0.007,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Maryland": [
       {
         "year": 2020,
         "score": 0.346,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       },
       {
         "year": 2021,
         "score": -0.221,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2023,
         "score": -0.041,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2024,
         "score": -0.05,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       }
     ],
     "Mason": [
       {
         "year": 2020,
         "score": -0.036,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       }
     ],
     "Mason County": [
       {
         "year": 2020,
         "score": 0.126,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Mason Street": [
       {
         "year": 2020,
         "score": -0.011,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Massachusetts": [
       {
         "year": 2021,
         "score": -0.038,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2023,
         "score": -0.033,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": -0.078,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       }
     ],
     "Massachusetts Institute of Technology": [
       {
         "year": 2023,
         "score": 0.892,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Maury County": [
       {
         "year": 2020,
         "score": 0.77,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "McCorkle": [
       {
         "year": 2019,
         "score": -0.1,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2020,
         "score": -0.456,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "McCorkle Place": [
       {
         "year": 2025,
         "score": -0.334,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Meilahti": [
       {
         "year": 2021,
         "score": -0.675,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Melaka": [
       {
         "year": 2024,
         "score": -0.111,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2026,
-        "score": 0.103,
-        "count": 2
+        "score": -0.032,
+        "count": 1,
+        "school": "JMU"
+      },
+      {
+        "year": 2026,
+        "score": 0.237,
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Memorial": [
       {
         "year": 2020,
         "score": -0.248,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       }
     ],
     "Memorial Hall": [
       {
         "year": 2023,
         "score": -0.003,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Memphis": [
       {
         "year": 2023,
         "score": 0.0,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Metros Reef": [
       {
         "year": 2021,
         "score": 0.984,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Metula": [
       {
         "year": 2024,
         "score": -0.371,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Mexico": [
       {
         "year": 2023,
         "score": -0.429,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": -0.507,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Miami": [
       {
         "year": 2020,
         "score": -0.016,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": 0.003,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Michigan": [
       {
         "year": 2021,
         "score": -0.004,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2024,
-        "score": -0.11,
-        "count": 3
+        "score": 0.77,
+        "count": 1,
+        "school": "JMU"
+      },
+      {
+        "year": 2024,
+        "score": -0.551,
+        "count": 2,
+        "school": "UNC"
       }
     ],
     "Mid East Hospital Karachi": [
       {
         "year": 2026,
         "score": -0.629,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Middle East": [
       {
         "year": 2023,
         "score": -0.185,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": -0.419,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Midwest": [
       {
         "year": 2020,
         "score": -0.044,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Mill": [
       {
         "year": 2019,
         "score": -0.09,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2021,
         "score": 0.487,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Minnesota": [
       {
         "year": 2023,
         "score": 0.001,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Missouri": [
       {
         "year": 2025,
         "score": -0.007,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       }
     ],
     "Missouri Valley": [
       {
         "year": 2020,
         "score": -0.137,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       }
     ],
     "Mlk": [
       {
         "year": 2024,
         "score": 0.081,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Montgomery County": [
       {
         "year": 2020,
         "score": -0.009,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Montr\u00e9al": [
       {
         "year": 2020,
         "score": -0.273,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Moore County": [
       {
         "year": 2024,
         "score": -0.137,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Morehead": [
       {
         "year": 2021,
         "score": -0.937,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Morehead Patterson Bell Tower": [
       {
         "year": 2020,
         "score": -0.886,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Morehead Planetarium": [
       {
         "year": 2021,
         "score": 0.003,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2024,
         "score": 0.843,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Morgans Point": [
       {
         "year": 2019,
         "score": 0.01,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Morrison County": [
       {
         "year": 2025,
         "score": -0.726,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Mumbai": [
       {
         "year": 2023,
         "score": -0.746,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Myrtle": [
       {
         "year": 2023,
         "score": 0.627,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "NC State University Farm Pond Number Two": [
       {
         "year": 2023,
         "score": -0.155,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Nangan Dao": [
       {
         "year": 2025,
         "score": 0.005,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Nebraska": [
       {
         "year": 2021,
         "score": 0.006,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Neff": [
       {
         "year": 2026,
         "score": -0.0,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Neukirch-Egnach": [
       {
         "year": 2021,
         "score": 0.173,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "New Jersey": [
       {
         "year": 2019,
         "score": -0.062,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2020,
         "score": -0.187,
-        "count": 10
+        "count": 10,
+        "school": "JMU"
       },
       {
         "year": 2025,
         "score": -0.943,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       }
     ],
     "New Mexico": [
       {
         "year": 2022,
         "score": 0.008,
-        "count": 3
+        "count": 3,
+        "school": "JMU"
       },
       {
         "year": 2025,
         "score": -0.078,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       }
     ],
     "New Mexico State Capitol": [
       {
         "year": 2022,
         "score": 0.002,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "New Orleans": [
       {
         "year": 2022,
         "score": 0.041,
-        "count": 4
+        "count": 4,
+        "school": "UNC"
       },
       {
         "year": 2026,
         "score": -0.349,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "New York": [
       {
         "year": 2019,
         "score": 0.016,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2020,
         "score": -0.285,
-        "count": 3
+        "count": 3,
+        "school": "JMU"
       },
       {
         "year": 2026,
         "score": -0.618,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "New York City": [
       {
         "year": 2019,
         "score": -0.084,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       },
       {
         "year": 2020,
-        "score": -0.173,
-        "count": 3
+        "score": -0.009,
+        "count": 1,
+        "school": "JMU"
+      },
+      {
+        "year": 2020,
+        "score": -0.256,
+        "count": 2,
+        "school": "UNC"
       },
       {
         "year": 2021,
         "score": -0.036,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2023,
         "score": -0.556,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "New Zealand": [
       {
         "year": 2020,
         "score": -0.044,
-        "count": 5
+        "count": 5,
+        "school": "JMU"
       }
     ],
     "Newman Lake (JMU)": [
       {
         "year": 2013,
         "score": -0.067,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2020,
         "score": 0.076,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2021,
         "score": -0.216,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2026,
         "score": 0.232,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "NoVa (Northern Virginia)": [
       {
         "year": 2020,
         "score": -0.019,
-        "count": 3
+        "count": 3,
+        "school": "JMU"
       },
       {
         "year": 2022,
         "score": -0.543,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Nords Ranch": [
       {
         "year": 2020,
         "score": -0.104,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Norfolk": [
       {
         "year": 2025,
         "score": 0.006,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "North 38 Apartments": [
       {
         "year": 2020,
         "score": 0.026,
-        "count": 4
+        "count": 4,
+        "school": "JMU"
       }
     ],
     "North Brother Island": [
       {
         "year": 2020,
         "score": -0.068,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "North Carolina": [
       {
         "year": 2020,
-        "score": -0.103,
-        "count": 39
+        "score": -0.43,
+        "count": 3,
+        "school": "JMU"
+      },
+      {
+        "year": 2020,
+        "score": -0.076,
+        "count": 36,
+        "school": "UNC"
       },
       {
         "year": 2021,
         "score": -0.104,
-        "count": 32
+        "count": 32,
+        "school": "UNC"
       },
       {
         "year": 2022,
         "score": -0.005,
-        "count": 5
+        "count": 5,
+        "school": "UNC"
       },
       {
         "year": 2023,
         "score": 0.011,
-        "count": 7
+        "count": 7,
+        "school": "UNC"
       },
       {
         "year": 2024,
         "score": -0.253,
-        "count": 15
+        "count": 15,
+        "school": "UNC"
       },
       {
         "year": 2025,
-        "score": 0.086,
-        "count": 32
+        "score": 0.211,
+        "count": 2,
+        "school": "JMU"
+      },
+      {
+        "year": 2025,
+        "score": 0.078,
+        "count": 30,
+        "school": "UNC"
       },
       {
         "year": 2026,
         "score": 0.037,
-        "count": 7
+        "count": 7,
+        "school": "UNC"
       }
     ],
     "North Craig": [
       {
         "year": 2021,
         "score": -0.067,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Northern Colorado Rehabilitation Hospital": [
       {
         "year": 2023,
         "score": 0.001,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Northern Lights Hotel": [
       {
         "year": 2024,
         "score": 0.016,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Norths Landing": [
       {
         "year": 2020,
         "score": -0.026,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Oakland": [
       {
         "year": 2023,
         "score": -0.08,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Oasis": [
       {
         "year": 2021,
         "score": 0.334,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Obo Airport": [
       {
         "year": 2023,
         "score": 0.0,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Oceania": [
       {
         "year": 2021,
         "score": -0.496,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Ohio": [
       {
         "year": 2021,
         "score": -0.004,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2024,
         "score": -0.443,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Oklahoma": [
       {
         "year": 2021,
         "score": -0.086,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2023,
         "score": 0.002,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2025,
         "score": -0.006,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       }
     ],
     "Old East Cemetery": [
       {
         "year": 2024,
         "score": 0.005,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Old Fort": [
       {
         "year": 2021,
         "score": 0.01,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Old Well": [
       {
         "year": 2021,
         "score": 0.037,
-        "count": 3
+        "count": 3,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": -0.012,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Orange County": [
       {
         "year": 2020,
         "score": -0.063,
-        "count": 3
+        "count": 3,
+        "school": "UNC"
       },
       {
         "year": 2024,
         "score": 0.1,
-        "count": 5
+        "count": 5,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": -0.033,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Oregon": [
       {
         "year": 2021,
         "score": 0.954,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2022,
         "score": 0.012,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Outer Banks": [
       {
         "year": 2024,
         "score": 0.015,
-        "count": 7
+        "count": 7,
+        "school": "UNC"
       }
     ],
     "Oval": [
       {
         "year": 2025,
         "score": -0.004,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Palestine": [
       {
         "year": 2023,
         "score": -0.58,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       },
       {
         "year": 2024,
         "score": -0.564,
-        "count": 4
+        "count": 4,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": -0.903,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Paris": [
       {
         "year": 2023,
         "score": 0.307,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Parker": [
       {
         "year": 2020,
         "score": -0.023,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Parnell Observation Tower": [
       {
         "year": 2014,
         "score": 0.014,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Paul Jennings Hall (JMU)": [
       {
         "year": 2021,
         "score": -0.946,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2023,
         "score": -0.03,
-        "count": 3
+        "count": 3,
+        "school": "JMU"
       }
     ],
     "Peabody": [
       {
         "year": 2023,
         "score": -0.11,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Pennsylvania": [
       {
         "year": 2020,
         "score": -0.035,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2022,
         "score": -0.409,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2025,
         "score": 0.828,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "People\u2019s Republic of China": [
       {
         "year": 2020,
         "score": 0.067,
-        "count": 3
+        "count": 3,
+        "school": "UNC"
       },
       {
         "year": 2021,
         "score": 0.019,
-        "count": 3
+        "count": 3,
+        "school": "UNC"
       },
       {
         "year": 2023,
         "score": 0.017,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2025,
-        "score": -0.272,
-        "count": 2
+        "score": -0.419,
+        "count": 1,
+        "school": "JMU"
+      },
+      {
+        "year": 2025,
+        "score": -0.124,
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Pheasant Run": [
       {
         "year": 2021,
         "score": 0.002,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       }
     ],
     "Pheasant Run Townhomes": [
       {
         "year": 2019,
         "score": -0.09,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2020,
         "score": -0.111,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       },
       {
         "year": 2021,
         "score": -0.186,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       }
     ],
     "Phes": [
       {
         "year": 2020,
         "score": -0.236,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2021,
         "score": 0.747,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Philadelphia": [
       {
         "year": 2019,
         "score": 0.002,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2022,
         "score": -0.01,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2026,
         "score": 0.951,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Phillips": [
       {
         "year": 2022,
         "score": -0.853,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": -0.085,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Phoenix": [
       {
         "year": 2022,
         "score": -0.05,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Phoenixville": [
       {
         "year": 2025,
         "score": 0.023,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Pittsboro": [
       {
         "year": 2021,
         "score": 0.009,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Pittsburgh": [
       {
         "year": 2021,
         "score": -0.315,
-        "count": 5
+        "count": 5,
+        "school": "UNC"
       },
       {
         "year": 2023,
         "score": -0.04,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": -0.791,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2026,
         "score": -0.545,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Planetarium": [
       {
         "year": 2014,
         "score": 0.983,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2024,
         "score": 0.114,
-        "count": 4
+        "count": 4,
+        "school": "UNC"
       }
     ],
     "Polk Place": [
       {
         "year": 2020,
         "score": -0.582,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2024,
         "score": -0.328,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Port Republic": [
       {
         "year": 2020,
         "score": -0.29,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2026,
         "score": 0.008,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Port Road Dam": [
       {
         "year": 2020,
         "score": -0.023,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Portland": [
       {
         "year": 2020,
         "score": -0.671,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2022,
         "score": 0.037,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2025,
         "score": 0.505,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Potomac": [
       {
         "year": 2021,
         "score": -0.01,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       },
       {
         "year": 2025,
         "score": 0.642,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Potomac Hall (JMU)": [
       {
         "year": 2021,
         "score": 0.414,
-        "count": 3
+        "count": 3,
+        "school": "JMU"
       },
       {
         "year": 2022,
         "score": 0.001,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2025,
         "score": 0.642,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Princeton": [
       {
         "year": 2023,
         "score": 0.72,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Principality of Monaco": [
       {
         "year": 2025,
         "score": 0.109,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Prison": [
       {
         "year": 2024,
         "score": -0.888,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Provincie Gelderland": [
       {
         "year": 2020,
         "score": -0.268,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Provo": [
       {
         "year": 2020,
         "score": -0.221,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       }
     ],
     "Puntan Carolinas": [
       {
         "year": 2023,
         "score": -0.028,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Purcell Park": [
       {
         "year": 2022,
         "score": 0.006,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2026,
         "score": 0.088,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       }
     ],
     "Purgitsville": [
       {
         "year": 2022,
         "score": -0.062,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       }
     ],
     "Pu\u2018u Oo Horse Trail": [
       {
         "year": 2023,
         "score": -0.034,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Quad": [
       {
         "year": 2017,
         "score": -0.102,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2019,
         "score": -0.33,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       },
       {
         "year": 2021,
         "score": -0.079,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Quarantine": [
       {
         "year": 2020,
         "score": 0.001,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Radford": [
       {
         "year": 2025,
         "score": 0.006,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Radhamohanpur": [
       {
         "year": 2026,
         "score": 0.002,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Raleigh": [
       {
         "year": 2021,
         "score": 0.091,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2022,
         "score": -0.008,
-        "count": 3
+        "count": 3,
+        "school": "UNC"
       },
       {
         "year": 2024,
         "score": -0.304,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": 0.001,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2026,
         "score": -0.52,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Raleigh-Durham International Airport": [
       {
         "year": 2022,
         "score": -0.033,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Rama": [
       {
         "year": 2020,
         "score": -0.317,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Rams Head Center Recreation Center": [
       {
         "year": 2025,
         "score": 0.164,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Rams Hill Country Club": [
       {
         "year": 2022,
         "score": -0.049,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Ratnagiri": [
       {
         "year": 2022,
         "score": -0.204,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Region Hannover": [
       {
         "year": 2012,
         "score": 0.07,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Republic of Cameroon": [
       {
         "year": 2021,
         "score": 0.007,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2024,
         "score": -0.114,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": -0.065,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Republic of Chile": [
       {
         "year": 2023,
         "score": -0.032,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Republic of El Salvador": [
       {
         "year": 2025,
         "score": -0.663,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Republic of France": [
       {
         "year": 2015,
         "score": -0.005,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Republic of Haiti": [
       {
         "year": 2025,
         "score": -0.123,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Republic of India": [
       {
         "year": 2025,
-        "score": -0.083,
-        "count": 2
+        "score": -0.043,
+        "count": 1,
+        "school": "JMU"
+      },
+      {
+        "year": 2025,
+        "score": -0.124,
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Republic of Iraq": [
       {
         "year": 2021,
         "score": 0.856,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2025,
         "score": -0.817,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Republic of Kazakhstan": [
       {
         "year": 2025,
         "score": -0.081,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       }
     ],
     "Republic of Korea": [
       {
         "year": 2022,
         "score": -0.843,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2023,
         "score": -0.243,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Republic of Liberia": [
       {
         "year": 2025,
         "score": -0.015,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Republic of Malta": [
       {
         "year": 2014,
         "score": 0.51,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       }
     ],
     "Republic of Panama": [
       {
         "year": 2025,
         "score": -0.431,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Republic of Poland": [
       {
         "year": 2025,
         "score": -0.208,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Republic of Singapore": [
       {
         "year": 2025,
         "score": 0.85,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Richmond": [
       {
         "year": 2015,
         "score": 0.016,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2019,
         "score": 0.129,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2020,
         "score": -0.094,
-        "count": 4
+        "count": 4,
+        "school": "JMU"
       },
       {
         "year": 2022,
         "score": 0.386,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2024,
         "score": -0.016,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Richmond, VA Metro Area": [
       {
         "year": 2021,
         "score": 0.558,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": 0.653,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Ridge": [
       {
         "year": 2012,
         "score": 0.004,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Riu is Banditos": [
       {
         "year": 2025,
         "score": -0.381,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "River Lark": [
       {
         "year": 2026,
         "score": 0.237,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Riyadh": [
       {
         "year": 2026,
         "score": -0.629,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Road Ridge": [
       {
         "year": 2024,
         "score": -0.416,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Rockingham County": [
       {
         "year": 2020,
         "score": 0.196,
-        "count": 3
+        "count": 3,
+        "school": "JMU"
       },
       {
         "year": 2021,
         "score": -0.644,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2025,
         "score": -0.171,
-        "count": 4
+        "count": 4,
+        "school": "JMU"
       }
     ],
     "Rome": [
       {
         "year": 2021,
         "score": 0.017,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Roop Hall": [
       {
         "year": 2023,
         "score": 0.22,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       }
     ],
     "Rose Library (JMU)": [
       {
         "year": 2021,
         "score": 0.034,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2023,
         "score": 0.042,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       },
       {
         "year": 2026,
         "score": -0.342,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Rotunda": [
       {
         "year": 2025,
         "score": -0.175,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Rush County": [
       {
         "year": 2021,
         "score": 0.394,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Russian Federation": [
       {
         "year": 2021,
         "score": -0.17,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       },
       {
         "year": 2022,
         "score": -0.153,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2023,
         "score": -0.153,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2025,
-        "score": -0.443,
-        "count": 4
+        "score": -0.419,
+        "count": 1,
+        "school": "JMU"
+      },
+      {
+        "year": 2025,
+        "score": -0.451,
+        "count": 3,
+        "school": "UNC"
       }
     ],
     "Rutland Plains Airport": [
       {
         "year": 2024,
         "score": 0.351,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Ru\u0161e": [
       {
         "year": 2026,
         "score": 0.036,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Saint Peter": [
       {
         "year": 2022,
         "score": 0.534,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Sakai": [
       {
         "year": 2020,
         "score": -0.015,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2022,
         "score": -0.287,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Salt Lake City": [
       {
         "year": 2020,
         "score": 0.289,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Samaria": [
       {
         "year": 2021,
         "score": -0.198,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Sampson Hall": [
       {
         "year": 2020,
         "score": -0.327,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       }
     ],
     "Sam\u2019ad": [
       {
         "year": 2020,
         "score": 0.003,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "San Diego": [
       {
         "year": 2026,
         "score": 0.001,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "San Diego State University": [
       {
         "year": 2026,
         "score": -0.554,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "San Francisco": [
       {
         "year": 2024,
         "score": -0.263,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2026,
         "score": 0.967,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       }
     ],
     "San Francisco Bay Area": [
       {
         "year": 2023,
         "score": 0.002,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Sanpete County": [
       {
         "year": 2020,
         "score": 0.015,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Santa Ana Valley High School": [
       {
         "year": 2020,
         "score": -0.009,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Santa Fe": [
       {
         "year": 2022,
         "score": 0.002,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Scandinavia": [
       {
         "year": 2025,
         "score": 0.966,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Scollay Square": [
       {
         "year": 2021,
         "score": 0.001,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Scotland": [
       {
         "year": 2020,
         "score": -0.872,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Seattle": [
       {
         "year": 2021,
         "score": -0.472,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": 0.12,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Sedan": [
       {
         "year": 2022,
         "score": -0.037,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Seymour Care Center": [
       {
         "year": 2024,
         "score": 0.027,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Sheldon Hall": [
       {
         "year": 2023,
         "score": 0.258,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Showker Hall": [
       {
         "year": 2020,
         "score": -0.251,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       },
       {
         "year": 2022,
         "score": 0.66,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Siler City": [
       {
         "year": 2020,
         "score": -0.002,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Silsersee": [
       {
         "year": 2021,
         "score": 0.124,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Silver Lake": [
       {
         "year": 2026,
         "score": 0.005,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Skyline": [
       {
         "year": 2015,
         "score": 0.981,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2019,
         "score": 0.022,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2020,
         "score": -0.196,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "So Park Apartments": [
       {
         "year": 2021,
         "score": 0.029,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Sonner Hall": [
       {
         "year": 2026,
         "score": 0.706,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "South": [
       {
         "year": 2021,
         "score": 0.005,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       }
     ],
     "South Africa": [
       {
         "year": 2021,
         "score": -0.493,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "South Campus Complex": [
       {
         "year": 2020,
         "score": 0.859,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2021,
         "score": -0.675,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": 0.13,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       },
       {
         "year": 2026,
         "score": -0.021,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "South Carolina": [
       {
         "year": 2020,
         "score": 0.16,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       },
       {
         "year": 2023,
-        "score": -0.102,
-        "count": 4
+        "score": 0.515,
+        "count": 1,
+        "school": "JMU"
+      },
+      {
+        "year": 2023,
+        "score": -0.307,
+        "count": 3,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": 0.182,
-        "count": 3
+        "count": 3,
+        "school": "UNC"
       }
     ],
     "South Main": [
       {
         "year": 2020,
         "score": 0.042,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "South Main Street Park": [
       {
         "year": 2020,
         "score": 0.028,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "South Norwalk": [
       {
         "year": 2025,
         "score": 0.011,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "South Sudan": [
       {
         "year": 2025,
         "score": -0.167,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "South View": [
       {
         "year": 2019,
         "score": -0.101,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Southeast": [
       {
         "year": 2020,
         "score": -0.044,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Southern California": [
       {
         "year": 2026,
         "score": 0.96,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Southern Village Shopping Center": [
       {
         "year": 2021,
         "score": -0.432,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Southwest": [
       {
         "year": 2020,
         "score": -0.044,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Spencer": [
       {
         "year": 2022,
         "score": -0.009,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": 0.015,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Spots": [
       {
         "year": 2018,
         "score": -0.025,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Spotswood": [
       {
         "year": 2020,
         "score": -0.017,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2024,
         "score": -0.127,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Spruce Knob Lake": [
       {
         "year": 2014,
         "score": 0.014,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "St Columbia's Church": [
       {
         "year": 2022,
         "score": -0.527,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "State Highway 54": [
       {
         "year": 2020,
         "score": -0.549,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "State of Israel": [
       {
         "year": 2021,
         "score": -0.253,
-        "count": 3
+        "count": 3,
+        "school": "JMU"
       },
       {
         "year": 2023,
         "score": -0.494,
-        "count": 29
+        "count": 29,
+        "school": "UNC"
       },
       {
         "year": 2024,
         "score": -0.317,
-        "count": 11
+        "count": 11,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": -0.721,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       }
     ],
     "Stony Brook": [
       {
         "year": 2015,
         "score": -0.041,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Straupe": [
       {
         "year": 2023,
         "score": 0.095,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       }
     ],
     "Streatham Common Railway Station": [
       {
         "year": 2024,
         "score": -0.0,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Studio": [
       {
         "year": 2021,
         "score": 0.334,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Suite 524": [
       {
         "year": 2021,
         "score": -0.737,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Sunchase Iv Resort": [
       {
         "year": 2020,
         "score": -0.098,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Su\u00f0urland": [
       {
         "year": 2021,
         "score": -0.075,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       }
     ],
     "Switzerland": [
       {
         "year": 2021,
         "score": -0.424,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2022,
         "score": 0.259,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2024,
         "score": 0.007,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2026,
         "score": -0.525,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "T Roosevelt High School": [
       {
         "year": 2021,
         "score": -0.04,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "T Y C Sheffield Campus": [
       {
         "year": 2024,
         "score": 0.024,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Taiwan": [
       {
         "year": 2020,
         "score": -0.007,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2021,
         "score": 0.884,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": 0.037,
-        "count": 4
+        "count": 4,
+        "school": "UNC"
       }
     ],
     "Tandur": [
       {
         "year": 2023,
         "score": 0.049,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Taylor County": [
       {
         "year": 2021,
         "score": -0.42,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Teague": [
       {
         "year": 2020,
         "score": -0.007,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2024,
         "score": -0.009,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Tel Aviv": [
       {
         "year": 2023,
         "score": -0.003,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Tennessee": [
       {
         "year": 2025,
         "score": -0.004,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       }
     ],
     "Territories of the United States": [
       {
         "year": 2020,
         "score": -0.453,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       },
       {
         "year": 2023,
         "score": -0.019,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       },
       {
         "year": 2024,
         "score": -0.826,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": -0.665,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       }
     ],
     "Territory of Norfolk Island": [
       {
         "year": 2018,
         "score": 0.031,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Texas": [
       {
         "year": 2020,
         "score": -0.741,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2021,
         "score": 0.003,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2022,
         "score": 0.018,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2025,
         "score": -0.068,
-        "count": 4
+        "count": 4,
+        "school": "UNC"
       }
     ],
     "The Bronx": [
       {
         "year": 2024,
         "score": -0.267,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "The Carolina Inn-Chapel Hill": [
       {
         "year": 2024,
         "score": 0.036,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": 0.021,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "The Cave": [
       {
         "year": 2026,
         "score": 0.945,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "The Commons": [
       {
         "year": 2019,
         "score": 0.084,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "The George Washington University Smith Center": [
       {
         "year": 2021,
         "score": 0.155,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "The Hills Southview Apartments": [
       {
         "year": 2019,
         "score": -0.541,
-        "count": 7
+        "count": 7,
+        "school": "JMU"
       },
       {
         "year": 2021,
         "score": -0.287,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2022,
         "score": -0.033,
-        "count": 3
+        "count": 3,
+        "school": "JMU"
       },
       {
         "year": 2024,
         "score": -0.1,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       },
       {
         "year": 2025,
         "score": -0.714,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "The Morgan High School": [
       {
         "year": 2020,
         "score": -0.128,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "The New School of Northern Virginia": [
       {
         "year": 2020,
         "score": -0.067,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "The Old Well": [
       {
         "year": 2021,
         "score": -0.012,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       },
       {
         "year": 2024,
         "score": 0.325,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": 0.195,
-        "count": 3
+        "count": 3,
+        "school": "UNC"
       },
       {
         "year": 2026,
         "score": 0.001,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "The Village Green": [
       {
         "year": 2025,
         "score": 0.492,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "The West Coast": [
       {
         "year": 2023,
         "score": 0.206,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": 0.265,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "The White House": [
       {
         "year": 2025,
         "score": -0.693,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Tokyo Prefecture": [
       {
         "year": 2023,
         "score": 0.057,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Tondu Railway Station": [
       {
         "year": 2023,
         "score": -0.548,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Toronto": [
       {
         "year": 2014,
         "score": 0.039,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2019,
         "score": 0.016,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Triangle": [
       {
         "year": 2021,
         "score": 0.091,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2022,
         "score": 0.083,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": -0.663,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Tuscaloosa": [
       {
         "year": 2020,
         "score": -0.639,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       }
     ],
     "Ukmerg\u0117": [
       {
         "year": 2018,
         "score": -0.907,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2020,
         "score": -0.477,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Ukraine": [
       {
         "year": 2025,
         "score": -0.852,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Unguia": [
       {
         "year": 2020,
         "score": 0.399,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2023,
         "score": -0.642,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Union": [
       {
         "year": 2026,
         "score": -0.008,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Union Station": [
       {
         "year": 2026,
         "score": 0.237,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "United Kingdom of Great Britain and Northern Ireland": [
       {
         "year": 2019,
         "score": 0.629,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2020,
         "score": 0.149,
-        "count": 3
+        "count": 3,
+        "school": "UNC"
       },
       {
         "year": 2021,
         "score": -0.04,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2022,
         "score": -0.401,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       },
       {
         "year": 2023,
         "score": 0.127,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": -0.124,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "United States": [
       {
         "year": 2019,
         "score": -0.456,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       },
       {
         "year": 2020,
-        "score": -0.263,
-        "count": 37
+        "score": -0.295,
+        "count": 25,
+        "school": "JMU"
+      },
+      {
+        "year": 2020,
+        "score": -0.197,
+        "count": 12,
+        "school": "UNC"
       },
       {
         "year": 2021,
-        "score": -0.215,
-        "count": 13
+        "score": -0.29,
+        "count": 8,
+        "school": "JMU"
+      },
+      {
+        "year": 2021,
+        "score": -0.094,
+        "count": 5,
+        "school": "UNC"
       },
       {
         "year": 2022,
         "score": 0.262,
-        "count": 4
+        "count": 4,
+        "school": "UNC"
       },
       {
         "year": 2023,
-        "score": -0.238,
-        "count": 25
+        "score": -0.473,
+        "count": 1,
+        "school": "JMU"
+      },
+      {
+        "year": 2023,
+        "score": -0.228,
+        "count": 24,
+        "school": "UNC"
       },
       {
         "year": 2024,
         "score": -0.368,
-        "count": 24
+        "count": 24,
+        "school": "UNC"
       },
       {
         "year": 2025,
-        "score": -0.276,
-        "count": 41
+        "score": -0.154,
+        "count": 15,
+        "school": "JMU"
+      },
+      {
+        "year": 2025,
+        "score": -0.347,
+        "count": 26,
+        "school": "UNC"
       },
       {
         "year": 2026,
         "score": -0.756,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "United States Capitol": [
       {
         "year": 2021,
         "score": -0.062,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2025,
         "score": -0.831,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "University Commons": [
       {
         "year": 2026,
         "score": 0.257,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "University Park": [
       {
         "year": 2020,
         "score": -0.684,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "University of California, Berkeley": [
       {
         "year": 2025,
         "score": 0.002,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "University of Florida": [
       {
         "year": 2020,
         "score": -0.53,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       },
       {
         "year": 2023,
         "score": 0.279,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       },
       {
         "year": 2026,
         "score": -0.052,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "University of Mississippi": [
       {
         "year": 2025,
         "score": -0.024,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       }
     ],
     "University of North Carolina - Greensboro": [
       {
         "year": 2021,
         "score": 0.704,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "University of North Carolina at Chapel Hill": [
       {
         "year": 2020,
         "score": -0.011,
-        "count": 12
+        "count": 12,
+        "school": "UNC"
       },
       {
         "year": 2021,
         "score": 0.197,
-        "count": 10
+        "count": 10,
+        "school": "UNC"
       },
       {
         "year": 2022,
         "score": -0.109,
-        "count": 5
+        "count": 5,
+        "school": "UNC"
       },
       {
         "year": 2023,
         "score": 0.26,
-        "count": 14
+        "count": 14,
+        "school": "UNC"
       },
       {
         "year": 2024,
         "score": 0.419,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": -0.23,
-        "count": 7
+        "count": 7,
+        "school": "UNC"
       }
     ],
     "University of North Texas": [
       {
         "year": 2025,
         "score": -0.163,
-        "count": 5
+        "count": 5,
+        "school": "JMU"
       }
     ],
     "University of Oregon": [
       {
         "year": 2025,
         "score": 0.275,
-        "count": 16
+        "count": 16,
+        "school": "JMU"
       }
     ],
     "University of Oregon Autzen Stadium": [
       {
         "year": 2025,
         "score": 0.056,
-        "count": 5
+        "count": 5,
+        "school": "JMU"
       }
     ],
     "University of South Alabama": [
       {
         "year": 2025,
         "score": -0.712,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "University of the Philippines Los Ba\u00f1os Student Union": [
       {
         "year": 2026,
         "score": -0.108,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Upper Broughton": [
       {
         "year": 2021,
         "score": -0.016,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Utah": [
       {
         "year": 2020,
         "score": 0.132,
-        "count": 6
+        "count": 6,
+        "school": "UNC"
       }
     ],
     "Uva": [
       {
         "year": 2025,
         "score": 0.006,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Valley": [
       {
         "year": 2020,
         "score": -0.017,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Valley Creek": [
       {
         "year": 2012,
         "score": 0.004,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Valley View Early College Campus": [
       {
         "year": 2021,
         "score": 0.007,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Venable": [
       {
         "year": 2024,
         "score": -0.031,
-        "count": 2
+        "count": 2,
+        "school": "UNC"
       }
     ],
     "Vermont": [
       {
         "year": 2020,
         "score": -0.298,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       },
       {
         "year": 2022,
-        "score": -0.362,
-        "count": 2
+        "score": -0.716,
+        "count": 1,
+        "school": "JMU"
+      },
+      {
+        "year": 2022,
+        "score": -0.009,
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Veteran's Memorial Park": [
       {
         "year": 2020,
         "score": -0.684,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Village Dorms (JMU)": [
       {
         "year": 2016,
         "score": 0.007,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       },
       {
         "year": 2018,
         "score": -0.129,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2020,
         "score": -0.138,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       },
       {
         "year": 2021,
         "score": 0.003,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2024,
         "score": -0.277,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Virginia": [
       {
         "year": 2014,
         "score": 0.085,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2017,
         "score": 0.012,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       },
       {
         "year": 2019,
         "score": 0.117,
-        "count": 3
+        "count": 3,
+        "school": "JMU"
       },
       {
         "year": 2020,
         "score": -0.061,
-        "count": 37
+        "count": 37,
+        "school": "JMU"
       },
       {
         "year": 2021,
-        "score": -0.355,
-        "count": 8
+        "score": -0.337,
+        "count": 7,
+        "school": "JMU"
+      },
+      {
+        "year": 2021,
+        "score": -0.486,
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2022,
         "score": -0.153,
-        "count": 9
+        "count": 9,
+        "school": "JMU"
       },
       {
         "year": 2025,
         "score": -0.064,
-        "count": 15
+        "count": 15,
+        "school": "JMU"
       },
       {
         "year": 2026,
-        "score": 0.235,
-        "count": 4
+        "score": 0.378,
+        "count": 3,
+        "school": "JMU"
+      },
+      {
+        "year": 2026,
+        "score": -0.192,
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Virginia Western Community College": [
       {
         "year": 2019,
         "score": -0.004,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Viti": [
       {
         "year": 2019,
         "score": 0.007,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Vizsl\u00e1s": [
       {
         "year": 2021,
         "score": -0.006,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Vuosaari": [
       {
         "year": 2021,
         "score": -0.708,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Wake County": [
       {
         "year": 2024,
         "score": -0.011,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2025,
         "score": -0.578,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Wakefield": [
       {
         "year": 2020,
         "score": 0.002,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Walmart": [
       {
         "year": 2020,
         "score": -0.866,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2021,
         "score": 0.091,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Wampler": [
       {
         "year": 2020,
         "score": -0.017,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Warren County": [
       {
         "year": 2023,
         "score": -0.0,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Warren Hall": [
       {
         "year": 2020,
         "score": 0.001,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Washington": [
       {
         "year": 2020,
         "score": -0.595,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       },
       {
         "year": 2025,
-        "score": -0.188,
-        "count": 2
+        "score": -0.376,
+        "count": 1,
+        "school": "JMU"
+      },
+      {
+        "year": 2025,
+        "score": -0.0,
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Washington State University": [
       {
         "year": 2025,
         "score": -0.272,
-        "count": 4
+        "count": 4,
+        "school": "JMU"
       }
     ],
     "Washington-Arlington-Alexandria, DC-VA-MD-WV Metro Area": [
       {
         "year": 2022,
         "score": 0.01,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Waterview": [
       {
         "year": 2025,
         "score": -0.001,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Wayland Hall (JMU)": [
       {
         "year": 2019,
         "score": -0.039,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2024,
         "score": 0.321,
-        "count": 3
+        "count": 3,
+        "school": "JMU"
       }
     ],
     "West Bank": [
       {
         "year": 2024,
         "score": -0.003,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "West Coast": [
       {
         "year": 2021,
         "score": 0.562,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "West Side of the Mountain Cemetery": [
       {
         "year": 2022,
         "score": 0.398,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "West Virginia": [
       {
         "year": 2014,
         "score": 0.255,
-        "count": 3
+        "count": 3,
+        "school": "JMU"
       },
       {
         "year": 2019,
         "score": -0.539,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2021,
         "score": 0.01,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2026,
         "score": 0.085,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       }
     ],
     "Western": [
       {
         "year": 2022,
         "score": 0.037,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Western North Carolina Fairgrounds": [
       {
         "year": 2025,
         "score": 0.02,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Westover": [
       {
         "year": 2020,
         "score": -0.016,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Westover Park": [
       {
         "year": 2020,
         "score": 0.007,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Weyers Cave": [
       {
         "year": 2020,
         "score": 0.445,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       }
     ],
     "Wildcat": [
       {
         "year": 2024,
         "score": -0.021,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "William H Foege Genome Sciences Building": [
       {
         "year": 2019,
         "score": -0.1,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Williamsburg": [
       {
         "year": 2018,
         "score": -0.022,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Wilmington": [
       {
         "year": 2024,
         "score": 0.188,
-        "count": 5
+        "count": 5,
+        "school": "UNC"
       }
     ],
     "Wilson": [
       {
         "year": 2020,
         "score": 0.914,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Wilson County": [
       {
         "year": 2020,
         "score": -0.052,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2022,
         "score": -0.064,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Wilson Hall": [
       {
         "year": 2023,
         "score": 0.379,
-        "count": 2
+        "count": 2,
+        "school": "JMU"
       }
     ],
     "Wilson Public Library": [
       {
         "year": 2022,
         "score": -0.05,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Wilson River": [
       {
         "year": 2022,
         "score": -0.037,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Wuhan": [
       {
         "year": 2023,
         "score": -0.028,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ],
     "Wyoming": [
       {
         "year": 2022,
         "score": -0.004,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Yerevan Football Academy Stadium": [
       {
         "year": 2020,
         "score": -0.167,
-        "count": 1
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "granville": [
       {
         "year": 2020,
         "score": -0.004,
-        "count": 1
+        "count": 1,
+        "school": "UNC"
       }
     ]
   }

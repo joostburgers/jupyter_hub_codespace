@@ -31,7 +31,7 @@ python -c "from transformers import AutoTokenizer, AutoModelForSequenceClassific
 
 echo ""
 echo "Downloading NLTK data..."
-python -m nltk.downloader -q punkt punkt_tab
+python -m nltk.downloader -q punkt punkt_tab vader_lexicon
 
 echo ""
 echo "Downloading spaCy models..."

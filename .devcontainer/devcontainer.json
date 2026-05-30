@@ -20,7 +20,8 @@
                 "python.defaultInterpreterPath": "/usr/local/bin/python",
                 "jupyter.kernels.filter": [
                     { "path": "/usr/bin/python3", "type": "pythonEnvironment" },
-                    { "path": "/bin/python3", "type": "pythonEnvironment" }
+                    { "path": "/bin/python3", "type": "pythonEnvironment" },
+                    { "path": "/usr/bin/python3.13", "type": "pythonEnvironment" }
                 ],
                 "files.exclude": {
                     "LICENSE": true,

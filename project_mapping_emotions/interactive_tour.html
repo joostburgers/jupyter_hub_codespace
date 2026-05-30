@@ -193,14 +193,17 @@
             padding: 2px 10px;
         }
 
-        /* Pulse animation for highlighted markers in individual mode */
+        /* Pulse animation for highlighted markers */
         @keyframes pulse-ring {
             0%   { transform: scale(1);   opacity: 0.7; }
+            75%  { transform: scale(2.6); opacity: 0;   }
             100% { transform: scale(2.6); opacity: 0;   }
         }
         .pulse-ring-div {
             border-radius: 50%;
-            animation: pulse-ring 1.5s ease-out infinite;
+            transform-origin: center center;
+            animation: pulse-ring 2s linear infinite;
+            will-change: transform, opacity;
             pointer-events: none;
         }
 
@@ -486,6 +489,12 @@
         let currentMarkers = [];
         let highlightLayer;
         let allLocations = [];
+        let _aggregatedLocations = [];     // allLocations deduplicated by name (JMU + non-JMU merged)
+        let _schoolBreakdownByName = {};   // name → [{label, postCount, score}] for tooltip breakdown
+        let _combinedSizeBreaks = null;    // Jenks bins for combined postCounts (all_locations pool)
+        let _jmuSizeBreaks      = null;    // Jenks bins for JMU postCounts (jmu_locations pool)
+        let _nonJmuSizeBreaks   = null;    // Jenks bins for non-JMU postCounts (non_jmu_locations pool)
+        let _partnerSchoolName  = 'Partner school';  // name of the non-JMU school (detected from allLocations)
         let individualHighlightLayer = null;
         let individualBackgroundLayer = null;
         let dimmedLayerGroup          = null;  // shared-layer copy with reduced opacity
@@ -494,6 +503,9 @@
         let currentYearScores = null;  // last year-filtered data, used to reapply when type filter changes
         let _isUpdating = false;       // mutex: prevents concurrent chapter transitions
         let _pendingChapter = null;    // last chapter requested while _isUpdating was true
+        let _lastRenderedShowData = null;  // showData of the last fully rendered chapter
+        let _lastRenderedLocation = null;  // location.name of the last individual render
+        let _lastRenderedPulse    = false; // pulse flag of the last individual render
 
         // Initialize the application
         function initializeApp() {
@@ -582,14 +594,29 @@
             
             legend.onAdd = function(map) {
                 const div = L.DomUtil.create('div', 'legend');
-                div.innerHTML = `
-                    <h4>Sentiment Scale</h4>
-                    <div><span style="background-color: #388e3c"></span>Very Positive (0.6+)</div>
-                    <div><span style="background-color: #9ccc65"></span>Positive (0.3-0.6)</div>
-                    <div><span style="background-color: #ffeb3b"></span>Neutral (-0.3-0.3)</div>
-                    <div><span style="background-color: #ef5350"></span>Negative (-0.6–-0.3)</div>
-                    <div><span style="background-color: #d32f2f"></span>Very Negative (<-0.6)</div>
-                `;
+                let html = '<h4>Sentiment Scale</h4>';
+                if (config.colorBreaks && config.colorPalette && config.colorBreaks.length > 0) {
+                    const breaks  = config.colorBreaks;
+                    const palette = config.colorPalette;
+                    const n = Math.min(breaks.length, palette.length);
+                    html += `<div><span style="background-color:${palette[0]}"></span>≤ ${breaks[0].toFixed(2)}</div>`;
+                    for (let i = 1; i < n - 1; i++) {
+                        html += `<div><span style="background-color:${palette[i]}"></span>${breaks[i-1].toFixed(2)} to ${breaks[i].toFixed(2)}</div>`;
+                    }
+                    if (n > 1) {
+                        html += `<div><span style="background-color:${palette[n-1]}"></span>> ${breaks[n-2].toFixed(2)}</div>`;
+                    }
+                } else {
+                    html += `
+                        <div><span style="background-color: #388e3c"></span>Very Positive (0.6+)</div>
+                        <div><span style="background-color: #9ccc65"></span>Positive (0.3-0.6)</div>
+                        <div><span style="background-color: #ffeb3b"></span>Neutral (-0.3-0.3)</div>
+                        <div><span style="background-color: #ef5350"></span>Negative (-0.6\u2013-0.3)</div>
+                        <div><span style="background-color: #d32f2f"></span>Very Negative (<-0.6)</div>`;
+                }
+                html += '<div id="legend-mode-line" style="margin-top:8px;padding-top:6px;border-top:1px solid #e2e8f0;font-size:11px;color:#666;display:none;"></div>';
+                div.innerHTML = html;
+                div.id = 'tour-legend';
                 return div;
             };
             
@@ -631,6 +658,22 @@
                     }
                 }
 
+        // Updates the legend's mode indicator when the active data pool changes.
+        // Colour breaks remain constant across all modes for direct cross-school comparison.
+        function updateLegendMode(showData) {
+            const modeEl = document.getElementById('legend-mode-line');
+            if (!modeEl) return;
+            const labels = {
+                'all_locations':     'Showing: all schools combined',
+                'jmu_locations':     'Showing: JMU data only',
+                'non_jmu_locations': 'Showing: ' + _partnerSchoolName + ' data only',
+                'none':              '',
+            };
+            const label = labels[showData] || '';
+            modeEl.textContent = label;
+            modeEl.style.display = label ? '' : 'none';
+        }
+
         function loadSentimentData() {
             try {
                 // Use config.allLocations (full dataset) when available; otherwise
@@ -655,68 +698,66 @@
                     return;
                 }
 
-                // Create markers for all locations
-                allLocations.forEach(location => {
-                    // Skip locations with no post count (overview/navigation points only)
-                    if (location.postCount === null || location.postCount === undefined) {
-                        return;
-                    }
-                    
-                    const color = getColorForScore(location.robertaScore, config.colorScale);
-                    const radius = location.postCount ? Math.min(5 + (location.postCount / 20), 15) : 6;
-                    
-                    const marker = L.circleMarker(
-                        [location.latitude, location.longitude],
-                        {
-                            radius: radius,
-                            fillColor: color,
-                            color: '#fff',
-                            weight: 1,
-                            opacity: 0.9,
-                            fillOpacity: 0.7
+                // ── Pre-compute per-school breakdown and aggregate for all_locations ──────
+                // allLocations may have separate JMU and non-JMU entries for the same place
+                // (e.g. DC appears once as isJMU:true and once as isJMU:false). The jmu and
+                // non_jmu pools show per-school stats; all_locations shows the merged total.
+                _aggregatedLocations = [];
+                _schoolBreakdownByName = {};
+                {
+                    const _aggByName = {};
+                    allLocations.forEach(loc => {
+                        if (loc.postCount == null) return;
+                        const label = loc.school || (loc.isJMU ? 'JMU' : 'Other schools');
+                        (_schoolBreakdownByName[loc.name] = _schoolBreakdownByName[loc.name] || [])
+                            .push({ label, postCount: loc.postCount, score: loc.robertaScore });
+                        if (!_aggByName[loc.name]) {
+                            _aggByName[loc.name] = Object.assign({}, loc);
+                        } else {
+                            const agg = _aggByName[loc.name];
+                            const total = agg.postCount + loc.postCount;
+                            agg.robertaScore = parseFloat(
+                                ((agg.robertaScore * agg.postCount + loc.robertaScore * loc.postCount) / total).toFixed(3)
+                            );
+                            agg.postCount = total;
                         }
-                    );
-
-                    // Add tooltip that shows on hover
-                    const tooltipContent = `
-                        <strong>${location.name}</strong><br>
-                        Posts: ${location.postCount || 'N/A'}<br>
-                        Score: ${location.robertaScore !== null ? location.robertaScore.toFixed(2) : 'N/A'}
-                    `;
-                    marker.bindTooltip(tooltipContent, {
-                        permanent: false,
-                        direction: 'top',
-                        offset: [0, -10]
                     });
+                    _aggregatedLocations = Object.values(_aggByName);
+                }
 
-                    // Add popup with more detailed information (on click)
-                    const sentiment = location.robertaScore === null ? 'N/A' :
-                                    location.robertaScore > 0.1 ? 'Positive' :
-                                    location.robertaScore < -0.1 ? 'Negative' : 'Mixed';
-                    
-                    const popupContent = `
-                        <strong>${location.name}</strong><br>
-                        ${location.isJMU ? '🎓 JMU Location' : '🏙️ Community Location'}<br>
-                        Sentiment: ${sentiment}<br>
-                        Score: ${location.robertaScore !== null ? location.robertaScore.toFixed(2) : 'N/A'}<br>
-                        Posts: ${location.postCount || 'N/A'}
-                    `;
-                    marker.bindPopup(popupContent);
-                    
-                    // Store marker with metadata
-                    marker.locationData = location;
-                    
-                    // Add to appropriate layer groups
-                    if (!layerTypes['all_locations']) layerTypes['all_locations'] = L.layerGroup();
-                    layerTypes['all_locations'].addLayer(marker);
-                    
+                // ── Load per-school Jenks size breaks exported by the notebook ─────────────
+                // Color breaks are intentionally shared across all modes so sentiment colours
+                // carry the same meaning regardless of which pool is active.
+                // Size breaks are per-school so each school's marker sizes are relative to its
+                // own data range, not inflated/deflated by the other school's counts.
+                _combinedSizeBreaks = (config.sizeBreaks       && config.sizeBreaks.length       > 0) ? config.sizeBreaks       : null;
+                _jmuSizeBreaks      = (config.jmuSizeBreaks    && config.jmuSizeBreaks.length    > 0) ? config.jmuSizeBreaks    : null;
+                _nonJmuSizeBreaks   = (config.nonJmuSizeBreaks && config.nonJmuSizeBreaks.length > 0) ? config.nonJmuSizeBreaks : null;
+                const _njEntry = allLocations.find(l => !l.isJMU && l.school);
+                if (_njEntry) _partnerSchoolName = _njEntry.school;
+
+                // ── Build jmu_locations and non_jmu_locations from per-school entries ──────
+                if (!layerTypes['jmu_locations'])     layerTypes['jmu_locations']     = L.layerGroup();
+                if (!layerTypes['non_jmu_locations']) layerTypes['non_jmu_locations'] = L.layerGroup();
+                allLocations.forEach(location => {
+                    if (location.postCount == null) return;
+                    const schoolSzBreaks = location.isJMU ? _jmuSizeBreaks : _nonJmuSizeBreaks;
+                    const marker = createMarkerForLocation(location, null, schoolSzBreaks);
                     if (location.isJMU) {
-                        if (!layerTypes['jmu_locations']) layerTypes['jmu_locations'] = L.layerGroup();
                         layerTypes['jmu_locations'].addLayer(marker);
                     } else {
-                        if (!layerTypes['non_jmu_locations']) layerTypes['non_jmu_locations'] = L.layerGroup();
                         layerTypes['non_jmu_locations'].addLayer(marker);
                     }
+                });
+
+                // ── Build all_locations from aggregated (merged) data ─────────────────────
+                // For places that appear in both JMU and non-JMU data, this shows a single
+                // combined marker with summed post count and weighted-average score.
+                if (!layerTypes['all_locations']) layerTypes['all_locations'] = L.layerGroup();
+                _aggregatedLocations.forEach(loc => {
+                    layerTypes['all_locations'].addLayer(
+                        createMarkerForLocation(loc, _schoolBreakdownByName[loc.name], _combinedSizeBreaks)
+                    );
                 });
 
             } catch (error) {
@@ -900,8 +941,8 @@
                 // call updateDataLayers directly in that case.
                 const currentCenter = map.getCenter();
                 const samePosition = (
-                    Math.abs(currentCenter.lat - center[0]) < 1e-10 &&
-                    Math.abs(currentCenter.lng - center[1]) < 1e-10 &&
+                    Math.abs(currentCenter.lat - center[0]) < 0.0001 &&
+                    Math.abs(currentCenter.lng - center[1]) < 0.0001 &&
                     map.getZoom() === chapter.camera.zoom
                 );
 
@@ -961,6 +1002,19 @@
         }
 
         function updateDataLayers(chapter) {
+            const _newShowData = chapter.showData || 'none';
+            const _newLocName  = chapter.location ? chapter.location.name : null;
+            const _newPulse    = chapter.location ? !!chapter.location.pulse : false;
+            // Skip full redraw when the visible output is identical to what is already on the map.
+            // Guard: if a place-type filter is active the pool content may differ even for the
+            // same showData value, so we always redraw in that case.
+            if (_newShowData === _lastRenderedShowData && activeTypeFilter === null) {
+                if (_newLocName === _lastRenderedLocation && _newPulse === _lastRenderedPulse) return;
+            }
+            _lastRenderedShowData = _newShowData;
+            _lastRenderedLocation = _newLocName;
+            _lastRenderedPulse    = _newPulse;
+
             // Hide all layers first (shared pools + any previous individual layers)
             Object.values(layerTypes).forEach(layer => {
                 if (map.hasLayer(layer)) {
@@ -980,132 +1034,96 @@
                 dimmedLayerGroup = null;
             }
 
-            // Show layers based on showData property
-            if (chapter.showData && chapter.showData !== 'none') {
-                if (chapter.showData === 'individual') {
-                    // Build a background group from all_locations, excluding the chapter's own location
-                    // to prevent a duplicate circle from appearing under the highlight marker.
-                    // opacity on the chapter dims the background so the highlight pops;
-                    // background markers get fresh copies at the requested opacity.
-                    const bgOpacity = (chapter.location && chapter.location.opacity !== undefined && chapter.location.opacity !== null)
-                        ? chapter.location.opacity : 1.0;
+            // Show layers based on showData property.
+            // 'individual' was removed as a separate mode — opacity < 1.0, pulse: true,
+            // or label: true on chapter.location now trigger highlight rendering
+            // automatically within whichever pool is active. Any legacy config that still
+            // uses 'individual' is silently redirected to 'all_locations'.
+            const _resolvedShowData = chapter.showData === 'individual' ? 'all_locations' : (chapter.showData || 'none');
+            if (_resolvedShowData !== 'none' && layerTypes[_resolvedShowData]) {
+                const loc       = chapter.location || null;
+                const bgOpacity = loc && loc.opacity !== undefined && loc.opacity !== null ? loc.opacity : 1.0;
+                // Highlight mode: background pool (minus focal location) at bgOpacity,
+                // plus an enlarged focal marker and optional pulse ring.
+                const hasHighlight = loc && (loc.pulse || bgOpacity < 1.0 || loc.label);
+                // Size breaks depend on which pool is active so per-school layers use their
+                // own Jenks scale; all_locations uses the combined scale.
+                const _activeSzBreaks = _resolvedShowData === 'jmu_locations'     ? _jmuSizeBreaks
+                                      : _resolvedShowData === 'non_jmu_locations' ? _nonJmuSizeBreaks
+                                      : _combinedSizeBreaks;
+                if (hasHighlight) {
                     const bgGroup = L.layerGroup();
-                    if (layerTypes['all_locations']) {
-                        layerTypes['all_locations'].eachLayer(function(m) {
-                            if (!chapter.location || !m.locationData ||
-                                    m.locationData.name !== chapter.location.name) {
-                                const bgMarker = bgOpacity < 1.0
-                                    ? createMarkerForLocation(Object.assign({}, m.locationData, { opacity: bgOpacity }))
-                                    : m;
-                                bgGroup.addLayer(bgMarker);
-                            }
-                        });
-                    }
+                    layerTypes[_resolvedShowData].eachLayer(function(m) {
+                        if (loc.name && m.locationData && m.locationData.name === loc.name) return;
+                        const bgMarker = bgOpacity < 1.0
+                            ? createMarkerForLocation(Object.assign({}, m.locationData, { opacity: bgOpacity }), null, _activeSzBreaks)
+                            : m;
+                        bgGroup.addLayer(bgMarker);
+                    });
                     individualBackgroundLayer = bgGroup;
                     map.addLayer(individualBackgroundLayer);
-                    if (chapter.location && chapter.location.name) {
-                        const loc = chapter.location;
-                        if (loc.postCount !== null && loc.postCount !== undefined) {
-                            const color  = getColorForScore(loc.robertaScore, config.colorScale);
-                            // Highlighted marker is slightly larger with a bolder border to stand out.
-                            // It is always full opacity so it pops against the dimmed background.
-                            const radius = Math.min(5 + (loc.postCount / 20), 15) + 3;
-                            const marker = L.circleMarker(
-                                [loc.latitude, loc.longitude],
-                                {
-                                    radius:      radius,
-                                    fillColor:   color,
-                                    color:       '#fff',
-                                    weight:      2.5,
-                                    opacity:     1.0,
-                                    fillOpacity: 0.9
-                                }
+
+                    if (loc.name && loc.postCount !== null && loc.postCount !== undefined) {
+                        const color  = getColorForScore(loc.robertaScore, config.colorScale);
+                        // Highlighted marker is slightly larger with a bolder border to stand out.
+                        // Always rendered at full opacity so it pops against the dimmed background.
+                        const radius = getRadiusForCount(loc.postCount, _activeSzBreaks) + 3;
+                        const marker = L.circleMarker(
+                            [loc.latitude, loc.longitude],
+                            { radius, fillColor: color, color: '#fff', weight: 2.5, opacity: 1.0, fillOpacity: 0.9 }
+                        );
+                        if (loc.label) {
+                            marker.bindTooltip(loc.name, {
+                                permanent: true, direction: 'top',
+                                offset: [0, -(radius + 4)], className: 'location-label'
+                            });
+                        } else {
+                            marker.bindTooltip(
+                                `<strong>${loc.name}</strong><br>Posts: ${loc.postCount}<br>Score: ${loc.robertaScore !== null ? loc.robertaScore.toFixed(2) : 'N/A'}`,
+                                { permanent: false, direction: 'top', offset: [0, -10] }
                             );
-                            if (loc.label) {
-                                marker.bindTooltip(loc.name, {
-                                    permanent:  true,
-                                    direction:  'top',
-                                    offset:     [0, -(radius + 4)],
-                                    className:  'location-label'
-                                });
-                            } else {
-                                marker.bindTooltip(
-                                    `<strong>${loc.name}</strong><br>Posts: ${loc.postCount}<br>Score: ${loc.robertaScore !== null ? loc.robertaScore.toFixed(2) : 'N/A'}`,
-                                    { permanent: false, direction: 'top', offset: [0, -10] }
+                        }
+                        individualHighlightLayer = L.layerGroup([marker]);
+                        map.addLayer(individualHighlightLayer);
+
+                        if (loc.pulse) {
+                            const _pxSize  = (radius + 4) * 2;
+                            const _hlRef   = individualHighlightLayer;
+                            const _marker  = marker;
+                            let   _added   = false;
+                            const _addPulseRing = () => {
+                                if (_added) return;
+                                _added = true;
+                                // Guard: user navigated away or year filter rebuilt the layer — discard silently.
+                                if (!map.hasLayer(_hlRef) || !_hlRef.hasLayer(_marker)) { return; }
+                                const pulseRing = L.marker(
+                                    [loc.latitude, loc.longitude],
+                                    {
+                                        icon: L.divIcon({
+                                            className: '',
+                                            html: `<div class="pulse-ring-div" style="width:${_pxSize}px;height:${_pxSize}px;border:2.5px solid ${color};"></div>`,
+                                            iconSize:   [_pxSize, _pxSize],
+                                            iconAnchor: [_pxSize / 2, _pxSize / 2],
+                                        }),
+                                        interactive: false,
+                                    }
                                 );
-                            }
-                            // Build the highlight layer with just the main marker.
-                            // The pulse ring (if requested) is added after the map settles
-                            // (moveend) to avoid Leaflet's flyTo zoom animation promoting
-                            // the markerPane to a GPU composite layer and hiding the ring
-                            // beneath it ("in DOM but invisible" during flythrough nav).
-                            // Earlier issues fixed: SVG circleMarker → divIcon (shaking);
-                            // zIndexOffset -1000 removed (ring was behind background markers).
-                            individualHighlightLayer = L.layerGroup([marker]);
-                            map.addLayer(individualHighlightLayer);
-
-                            if (loc.pulse) {
-                                const _pxSize  = (radius + 4) * 2;
-                                const _hlRef   = individualHighlightLayer; // capture before async
-                                const _marker  = marker;                   // capture before async
-                                let   _added   = false;
-
-                                const _addPulseRing = () => {
-                                    if (_added) return;
-                                    _added = true;
-                                    // Guard: user navigated away or year filter rebuilt the layer — discard silently.
-                                    if (!map.hasLayer(_hlRef) || !_hlRef.hasLayer(_marker)) { return; }
-                                    const pulseRing = L.marker(
-                                        [loc.latitude, loc.longitude],
-                                        {
-                                            icon: L.divIcon({
-                                                className: '',
-                                                html: `<div class="pulse-ring-div" style="width:${_pxSize}px;height:${_pxSize}px;border:2.5px solid ${color};"></div>`,
-                                                iconSize:   [_pxSize, _pxSize],
-                                                iconAnchor: [_pxSize / 2, _pxSize / 2],
-                                            }),
-                                            interactive: false,
-                                        }
-                                    );
-                                    // Add ring BEHIND the main marker: remove marker, add ring, re-add marker.
-                                    _hlRef.removeLayer(marker);
-                                    _hlRef.addLayer(pulseRing);
-                                    _hlRef.addLayer(marker);
-                                };
-
-                                // updateDataLayers is only ever called after the map is
-                                // fully settled (either from within a moveend handler, or
-                                // synchronously when samePosition=true).  There is no active
-                                // flyTo animation at this point, so calling _addPulseRing()
-                                // directly is safe — no GPU composite-layer conflict.
-                                // Registering map.once('moveend', ...) here was wrong: it
-                                // would fire for the NEXT chapter's flyTo, adding the ring
-                                // just before updateDataLayers(nextChapter) wiped it.
-                                _addPulseRing();
-                            }
+                                _hlRef.removeLayer(marker);
+                                _hlRef.addLayer(pulseRing);
+                                _hlRef.addLayer(marker);
+                            };
+                            // updateDataLayers is only ever called after the map is fully
+                            // settled (moveend handler or synchronous samePosition=true),
+                            // so _addPulseRing() is safe to call directly here.
+                            _addPulseRing();
                         }
                     }
-                } else if (layerTypes[chapter.showData]) {
-                    // Show all_locations, jmu_locations, or non_jmu_locations.
-                    // If opacity < 1.0, build a fresh dimmed copy so the shared layer
-                    // markers are not mutated for subsequent chapters.
-                    const layerOpacity = (chapter.location && chapter.location.opacity !== undefined && chapter.location.opacity !== null)
-                        ? chapter.location.opacity : 1.0;
-                    if (layerOpacity < 1.0) {
-                        dimmedLayerGroup = L.layerGroup();
-                        layerTypes[chapter.showData].eachLayer(function(m) {
-                            if (m.locationData) {
-                                dimmedLayerGroup.addLayer(
-                                    createMarkerForLocation(Object.assign({}, m.locationData, { opacity: layerOpacity }))
-                                );
-                            }
-                        });
-                        map.addLayer(dimmedLayerGroup);
-                    } else {
-                        map.addLayer(layerTypes[chapter.showData]);
-                    }
+                } else {
+                    // Plain pool display: no dimming, focal marker, or pulse needed.
+                    map.addLayer(layerTypes[_resolvedShowData]);
                 }
             }
+            updateLegendMode(_resolvedShowData);
         }
 
         function updateHighlight(chapter) {
@@ -1150,25 +1168,59 @@
             }
         }
 
+        // ── Helper: map postCount to radius using Jenks size-class breaks ────────────
+        // sizeBreaks: array of upper-bound values per Jenks class (from config export).
+        // Falls back to a linear formula when sizeBreaks are absent (e.g. old configs).
+        function getRadiusForCount(count, sizeBreaks) {
+            if (!sizeBreaks || sizeBreaks.length === 0) {
+                return Math.min(5 + (count / 20), 15);
+            }
+            const n    = sizeBreaks.length;
+            const minR = 4, maxR = 15;
+            const step = (maxR - minR) / (n - 1);
+            for (let i = 0; i < n; i++) {
+                if (count <= sizeBreaks[i]) return Math.round(minR + step * i);
+            }
+            return maxR;
+        }
+
         // ── Helper: create a fresh Leaflet circle marker from a location object ──────
-        function createMarkerForLocation(loc) {
+        // sizeBreaks (optional): Jenks bins for the active pool — determines radius.
+        // Pass _jmuSizeBreaks, _nonJmuSizeBreaks, or _combinedSizeBreaks as appropriate.
+        function createMarkerForLocation(loc, breakdown, sizeBreaks) {
             const color  = getColorForScore(loc.robertaScore, config.colorScale);
-            const radius = Math.min(5 + (loc.postCount / 20), 15);
+            const radius = getRadiusForCount(loc.postCount, sizeBreaks);
             const op     = (loc.opacity !== undefined && loc.opacity !== null) ? loc.opacity : 1.0;
             const marker = L.circleMarker(
                 [loc.latitude, loc.longitude],
                 { radius, fillColor: color, color: '#fff', weight: 1, opacity: op, fillOpacity: op * 0.8 }
             );
-            marker.bindTooltip(
-                `<strong>${loc.name}</strong><br>Posts: ${loc.postCount}<br>Score: ${loc.robertaScore !== null ? loc.robertaScore.toFixed(2) : 'N/A'}`,
-                { permanent: false, direction: 'top', offset: [0, -10] }
-            );
+            const scoreStr = loc.robertaScore !== null
+                ? (loc.robertaScore >= 0 ? '+' : '') + loc.robertaScore.toFixed(2)
+                : 'N/A';
+            let tip = `<strong>${loc.name}</strong><br>Total: ${loc.postCount} posts | Avg. sentiment: ${scoreStr}`;
+            if (breakdown && breakdown.length > 1) {
+                breakdown.forEach(b => {
+                    tip += `<br><small>\u2022 ${b.label}: ${b.postCount} posts (${b.score >= 0 ? '+' : ''}${b.score.toFixed(2)})</small>`;
+                });
+            } else {
+                // Single school or no breakdown — include school label so the active mode is apparent
+                const schoolLabel = loc.school || (loc.isJMU !== undefined ? (loc.isJMU ? 'JMU' : null) : null);
+                tip = `<strong>${loc.name}</strong>`;
+                if (schoolLabel) tip += ` <small>(${schoolLabel})</small>`;
+                tip += `<br>Posts: ${loc.postCount} | Sentiment: ${scoreStr}`;
+            }
+            marker.bindTooltip(tip, { permanent: false, direction: 'top', offset: [0, -10] });
             marker.locationData = loc;
             return marker;
         }
 
         // ── Rebuild shared layer groups from a pre-filtered {place: {score, count}} map ──
-        function rebuildSharedLayers(filteredLocations) {
+        // Rebuilds all three pool layers from year-filtered per-school data.
+        // yearScores = { jmu: {place: {score,count}}, nonJmu: {place: {score,count}}, combined: {place: {score,count}} }
+        // Using per-school maps (jmu / nonJmu) means a location that appears in both datasets
+        // gets the correct school-specific count/score in each pool, not the combined total.
+        function rebuildSharedLayers(yearScores) {
             const visibleKeys = ['all_locations', 'jmu_locations', 'non_jmu_locations']
                 .filter(k => layerTypes[k] && map.hasLayer(layerTypes[k]));
 
@@ -1180,14 +1232,17 @@
             allLocations.forEach(baseLoc => {
                 // Apply place-type filter (null activeTypeFilter means show all)
                 if (activeTypeFilter !== null && !activeTypeFilter.has(baseLoc.placeType || 'Other')) return;
-                const data = filteredLocations[baseLoc.name];
+                // Use school-specific filtered data so shared locations show per-school counts,
+                // not the combined total that would appear if we used the flat combined map.
+                const schoolFiltered = baseLoc.isJMU ? yearScores.jmu : yearScores.nonJmu;
+                const data = schoolFiltered ? schoolFiltered[baseLoc.name] : null;
                 if (!data || data.count === 0) return;
                 const loc = Object.assign({}, baseLoc, {
                     postCount:    data.count,
                     robertaScore: parseFloat(data.score.toFixed(3))
                 });
-                const marker = createMarkerForLocation(loc);
-                layerTypes['all_locations'].addLayer(marker);
+                const marker = createMarkerForLocation(loc, null, baseLoc.isJMU ? _jmuSizeBreaks : _nonJmuSizeBreaks);
+                // Per-school pools: each school entry gets its own marker
                 if (baseLoc.isJMU) {
                     layerTypes['jmu_locations'].addLayer(marker);
                 } else {
@@ -1195,22 +1250,58 @@
                 }
             });
 
+            // all_locations uses one merged marker per unique place name.
+            // Uses the combined map so shared places show the total across all schools.
+            const _seenNames = new Set();
+            allLocations.forEach(baseLoc => {
+                if (_seenNames.has(baseLoc.name)) return; // deduplicate
+                if (activeTypeFilter !== null && !activeTypeFilter.has(baseLoc.placeType || 'Other')) return;
+                const data = yearScores.combined ? yearScores.combined[baseLoc.name] : null;
+                if (!data || data.count === 0) return;
+                _seenNames.add(baseLoc.name);
+                const loc = Object.assign({}, baseLoc, {
+                    postCount:    data.count,
+                    robertaScore: parseFloat(data.score.toFixed(3))
+                });
+                layerTypes['all_locations'].addLayer(createMarkerForLocation(loc, _schoolBreakdownByName[loc.name], _combinedSizeBreaks));
+            });
+
             visibleKeys.forEach(k => { if (layerTypes[k]) map.addLayer(layerTypes[k]); });
 
             // If currently in individual mode, rebuild the background layer with the fresh
             // year-filtered data (excluding the highlighted chapter location).
-            if (activeChapterObj && activeChapterObj.showData === 'individual') {
+            // If the active chapter uses highlight mode within a pool, rebuild the
+            // background + highlight layers with the new year-filtered data so the
+            // dimmed/enlarged markers stay in sync with the slider position.
+            const _rebuildLoc     = activeChapterObj && activeChapterObj.location;
+            const _rebuildOpacity = _rebuildLoc && _rebuildLoc.opacity !== undefined && _rebuildLoc.opacity !== null
+                ? _rebuildLoc.opacity : 1.0;
+            const _rebuildHasHighlight = _rebuildLoc &&
+                (_rebuildLoc.pulse || _rebuildOpacity < 1.0 || _rebuildLoc.label);
+            const _rebuildPool = activeChapterObj && (
+                activeChapterObj.showData === 'individual' ? 'all_locations' :
+                ['all_locations', 'jmu_locations', 'non_jmu_locations'].includes(activeChapterObj.showData)
+                    ? activeChapterObj.showData : null
+            );
+            if (_rebuildPool && layerTypes[_rebuildPool] && _rebuildHasHighlight) {
+                const _rebuildSzBreaks = _rebuildPool === 'jmu_locations'     ? _jmuSizeBreaks
+                                       : _rebuildPool === 'non_jmu_locations' ? _nonJmuSizeBreaks
+                                       : _combinedSizeBreaks;
+                // Use the pool-specific filtered map so the highlight marker uses the correct
+                // school-specific count/score, not the combined total.
+                const _rebuildFiltered = _rebuildPool === 'jmu_locations'     ? yearScores.jmu
+                                       : _rebuildPool === 'non_jmu_locations' ? yearScores.nonJmu
+                                       : yearScores.combined;
                 if (individualBackgroundLayer && map.hasLayer(individualBackgroundLayer)) {
                     map.removeLayer(individualBackgroundLayer);
                 }
                 const bgGroup = L.layerGroup();
-                const bgOpacity2 = (activeChapterObj.location && activeChapterObj.location.opacity !== undefined && activeChapterObj.location.opacity !== null)
-                    ? activeChapterObj.location.opacity : 1.0;
-                layerTypes['all_locations'].eachLayer(function(m) {
+                const bgOpacity2 = _rebuildOpacity;
+                layerTypes[_rebuildPool].eachLayer(function(m) {
                     if (!activeChapterObj.location || !m.locationData ||
                             m.locationData.name !== activeChapterObj.location.name) {
                         const bgMarker = bgOpacity2 < 1.0
-                            ? createMarkerForLocation(Object.assign({}, m.locationData, { opacity: bgOpacity2 }))
+                            ? createMarkerForLocation(Object.assign({}, m.locationData, { opacity: bgOpacity2 }), null, _rebuildSzBreaks)
                             : m;
                         bgGroup.addLayer(bgMarker);
                     }
@@ -1225,12 +1316,12 @@
                 }
                 const baseLoc = activeChapterObj.location;
                 if (baseLoc) {
-                    const fd = filteredLocations[baseLoc.name];
+                    const fd = _rebuildFiltered ? _rebuildFiltered[baseLoc.name] : null;
                     if (fd && fd.count > 0) {
                         const score  = parseFloat(fd.score.toFixed(3));
                         const count  = fd.count;
                         const color  = getColorForScore(score, config.colorScale);
-                        const radius = Math.min(5 + (count / 20), 15) + 3;
+                        const radius = getRadiusForCount(count, _rebuildSzBreaks) + 3;
                         // Highlight is always full opacity — opacity dims the background, not this marker.
                         const m = L.circleMarker(
                             [baseLoc.latitude, baseLoc.longitude],
@@ -1251,6 +1342,25 @@
                         }
                         individualHighlightLayer = L.layerGroup([m]);
                         map.addLayer(individualHighlightLayer);
+
+                        if (baseLoc.pulse) {
+                            const _pxSize = (radius + 4) * 2;
+                            const pulseRing = L.marker(
+                                [baseLoc.latitude, baseLoc.longitude],
+                                {
+                                    icon: L.divIcon({
+                                        className: '',
+                                        html: `<div class="pulse-ring-div" style="width:${_pxSize}px;height:${_pxSize}px;border:2.5px solid ${color};"></div>`,
+                                        iconSize:   [_pxSize, _pxSize],
+                                        iconAnchor: [_pxSize / 2, _pxSize / 2],
+                                    }),
+                                    interactive: false,
+                                }
+                            );
+                            individualHighlightLayer.removeLayer(m);
+                            individualHighlightLayer.addLayer(pulseRing);
+                            individualHighlightLayer.addLayer(m);
+                        }
                     }
                 }
             }
@@ -1261,8 +1371,12 @@
         // setActiveChapter updates activeTypeFilter before each updateDataLayers call.
 
         // Rebuilds layer pools from allLocations native scores, respecting activeTypeFilter.
-        // Does not touch map layer visibility — updateDataLayers handles that.
+        // Preserves map visibility: any pool layer that was on the map before the rebuild
+        // is re-added afterwards (mirrors the pattern in rebuildSharedLayers).
         function rebuildBaseSharedLayers() {
+            const visibleKeys = ['all_locations', 'jmu_locations', 'non_jmu_locations']
+                .filter(k => layerTypes[k] && map.hasLayer(layerTypes[k]));
+
             ['all_locations', 'jmu_locations', 'non_jmu_locations'].forEach(k => {
                 if (layerTypes[k] && map.hasLayer(layerTypes[k])) map.removeLayer(layerTypes[k]);
                 layerTypes[k] = L.layerGroup();
@@ -1271,14 +1385,23 @@
             allLocations.forEach(loc => {
                 if (loc.postCount === null || loc.postCount === undefined) return;
                 if (activeTypeFilter !== null && !activeTypeFilter.has(loc.placeType || 'Other')) return;
-                const marker = createMarkerForLocation(loc);
-                layerTypes['all_locations'].addLayer(marker);
+                const marker = createMarkerForLocation(loc, null, loc.isJMU ? _jmuSizeBreaks : _nonJmuSizeBreaks);
                 if (loc.isJMU) {
                     layerTypes['jmu_locations'].addLayer(marker);
                 } else {
                     layerTypes['non_jmu_locations'].addLayer(marker);
                 }
             });
+
+            // all_locations: use _aggregatedLocations so shared places (JMU + other schools)
+            // appear as a single merged marker rather than two overlapping ones.
+            _aggregatedLocations.forEach(loc => {
+                if (loc.postCount == null) return;
+                if (activeTypeFilter !== null && !activeTypeFilter.has(loc.placeType || 'Other')) return;
+                layerTypes['all_locations'].addLayer(createMarkerForLocation(loc, _schoolBreakdownByName[loc.name], _combinedSizeBreaks));
+            });
+
+            visibleKeys.forEach(k => { if (layerTypes[k]) map.addLayer(layerTypes[k]); });
         }
 
         // Routes pool rebuild to the correct function based on whether year filtering is active.
@@ -1347,18 +1470,46 @@
                     updateFill();
 
                     const filtered = {};
+                    // Build per-school filtered maps so per-school pools receive school-specific
+                    // counts/scores. A place that appears in both datasets (e.g. "North Carolina"
+                    // in both JMU and UNC data) will correctly show JMU's count in jmu_locations
+                    // and UNC's count in non_jmu_locations instead of the combined total.
+                    const filteredJmu    = {};
+                    const filteredNonJmu = {};
+                    const _hasSchool = Object.values(config.yearlyData).some(
+                        entries => entries.length > 0 && entries[0].school !== undefined
+                    );
                     Object.entries(config.yearlyData).forEach(([place, entries]) => {
                         const rel = entries.filter(e => e.year >= startYear && e.year <= endYear);
-                        if (rel.length > 0) {
-                            const totalCount = rel.reduce((a, e) => a + e.count, 0);
-                            filtered[place] = {
-                                score: rel.reduce((a, e) => a + e.score * e.count, 0) / totalCount,
-                                count: totalCount
-                            };
+                        if (rel.length === 0) return;
+                        const totalCount = rel.reduce((a, e) => a + e.count, 0);
+                        filtered[place] = {
+                            score: rel.reduce((a, e) => a + e.score * e.count, 0) / totalCount,
+                            count: totalCount
+                        };
+                        if (_hasSchool) {
+                            const jmuRel    = rel.filter(e => e.school === 'JMU');
+                            const nonJmuRel = rel.filter(e => e.school !== 'JMU');
+                            if (jmuRel.length > 0) {
+                                const tc = jmuRel.reduce((a, e) => a + e.count, 0);
+                                filteredJmu[place] = { score: jmuRel.reduce((a, e) => a + e.score * e.count, 0) / tc, count: tc };
+                            }
+                            if (nonJmuRel.length > 0) {
+                                const tc = nonJmuRel.reduce((a, e) => a + e.count, 0);
+                                filteredNonJmu[place] = { score: nonJmuRel.reduce((a, e) => a + e.score * e.count, 0) / tc, count: tc };
+                            }
+                        } else {
+                            // Old config without school field — use combined for all pools
+                            filteredJmu[place]    = filtered[place];
+                            filteredNonJmu[place] = filtered[place];
                         }
                     });
-                    currentYearScores = filtered;
-                    rebuildSharedLayers(filtered);
+                    currentYearScores = { jmu: filteredJmu, nonJmu: filteredNonJmu, combined: filtered };
+                    // Reset skip-redraw state: year filter changes the marker data, so the
+                    // next chapter transition must do a full updateDataLayers (e.g. to
+                    // re-add a pulse ring that rebuildSharedLayers does not restore).
+                    _lastRenderedShowData = null;
+                    rebuildSharedLayers(currentYearScores);
                 }
 
                 let _sliderTimer = null;
