@@ -76,8 +76,8 @@ git update-index --assume-unchanged \
     "lesson_2_very_basic_python/lesson_2_3_packages.ipynb" \
     "lesson_2_very_basic_python/lesson_2_4_reading_code.ipynb" \
     "lesson_3_introduction_pandas/lesson_3_1_loading_and_cleaning.ipynb" \
-    "lesson_3_introduction_pandas/lesson_3_2_plotly_visualization.ipynb" \
-    "lesson_3_introduction_pandas/lesson_3_3_plotly_practice.ipynb" \
+    "lesson_3_introduction_pandas/lesson_3_2_plotly_charts.ipynb" \
+    "lesson_3_introduction_pandas/lesson_3_3_plotly_styling.ipynb" \
     "lesson_4_finding_locations/lesson_4_1_extracting_locations.ipynb" \
     "lesson_4_finding_locations/lesson_4_2_using_ner.ipynb" \
     "lesson_4_finding_locations/lesson_4_3_geoparsing_mapping.ipynb" \
