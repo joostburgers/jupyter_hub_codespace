@@ -26,8 +26,8 @@
                 "files.exclude": {
                     "LICENSE": true,
                     ".devcontainer": true,
-                    ".github": true,
-                    "lesson_5_sentiment_analysis/sentiment_utils.py": true
+                    ".github": true
+                   
                 }
             }
         }

@@ -259,11 +259,12 @@ def load_and_validate_review_sheet(url: str) -> pd.DataFrame | None:
                         + problem['place'].value_counts().head(5).to_string())
 
     # 3. corrected_latlon with no comma
+    correct_mask = df["action"].astype(str).str.strip() == "CORRECT"
     has_value = df['corrected_latlon'].astype(str).str.strip().ne('')
     no_comma = ~df['corrected_latlon'].astype(str).str.contains(',', na=False)
-    bad_fmt = df[has_value & no_comma]
+    bad_fmt = df[correct_mask & has_value & no_comma]
     if not bad_fmt.empty:
-        warnings.append(f"⚠️  {len(bad_fmt)} row(s) have a 'corrected_latlon' value with no comma "
+        warnings.append(f"⚠️  {len(bad_fmt)} row(s) with 'corrected_latlon' value with no comma "
                         "(expected format: '38.433, -78.872'):\n"
                         + bad_fmt['corrected_latlon'].head(5).to_string())
 
@@ -288,7 +289,7 @@ def load_and_validate_review_sheet(url: str) -> pd.DataFrame | None:
             print(w)
         print("Fix these in the sheet, then re-run this cell before exporting.")
     else:
-        print("\n✅ No validation issues found — safe to proceed to Parts D and E.")
+        print("\n✅ No validation issues found.")
 
     return df
 

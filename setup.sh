@@ -81,13 +81,11 @@ git update-index --assume-unchanged \
     "lesson_4_finding_locations/lesson_4_1_extracting_locations.ipynb" \
     "lesson_4_finding_locations/lesson_4_2_using_ner.ipynb" \
     "lesson_4_finding_locations/lesson_4_3_geoparsing_mapping.ipynb" \
-    "lesson_4_finding_locations/lesson_4_4_preparing_review_sheet.ipynb" \
     "lesson_4_finding_locations/lesson_4_5_technical_reference_geoparser.ipynb" \
     "lesson_5_sentiment_analysis/lesson_5_1_sentiment_analysis.ipynb" \
     "lesson_5_sentiment_analysis/lesson_5_2_roberta_sentiment.ipynb" \
     "lesson_6_mapping_fundamentals/lesson_6_mapping_fundamentals.ipynb" \
-    "project_mapping_emotions/project_part_1_data_pipeline.ipynb" \
-    2>/dev/null && echo "          ✓ Done" || echo "          ⚠ Some notebooks not found (may be added later)"
+     2>/dev/null && echo "          ✓ Done" || echo "          ⚠ Some notebooks not found (may be added later)"
 
 echo ""
 echo "=========================================="
