@@ -1,4 +1,4 @@
-type,date,score,sentences,year_month,place,latitude,longitude,feature_type,admin1_name,admin2_name,country_name,school,place_type,action,corrected_name,corrected_place_type,reviewer,place_count,corrected_latlon
+type,date,score,sentences,year_month,place,latitude,longitude,feature_type,admin1_name,admin2_name,country_name,school,place_type,action,corrected_name,corrected_latlon,corrected_place_type,place_count,reviewer
 post,2025-04-07,2339,Dunno why you would take her to TOTS in the first place.,2025-04,Tots Park,38.78956,-76.07355,park,Maryland,Talbot County,United States,VirginiaTech,Neighborhood,,,,,1,
 comment,2025-04-07,9,"Rail and a Rail, best combo in Blacksburg",2025-04,Blacksburg,37.81874,-79.3192,populated place,Virginia,Rockbridge County,United States,VirginiaTech,City,,,,,54,
 comment,2025-04-09,1,Virginia is for mother-fuckers,2025-04,Virginia,37.54812,-77.44675,first-order administrative division,Virginia,,United States,VirginiaTech,State,,,,,102,

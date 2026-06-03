@@ -1,4 +1,4 @@
-type,date,score,sentences,year_month,place,latitude,longitude,feature_type,admin1_name,admin2_name,country_name,school,place_type,action,corrected_name,corrected_place_type,reviewer,place_count,corrected_latlon
+type,date,score,sentences,year_month,place,latitude,longitude,feature_type,admin1_name,admin2_name,country_name,school,place_type,action,corrected_name,corrected_latlon,corrected_place_type,place_count,reviewer
 post,2025-03-05,4182,A legal and acceptable protest on Grounds in Trump’s eyes,2025-03,Capitol Grounds,38.88983,-77.0072,area,District of Columbia,,United States,UVA,Building,,,,,9,
 comment,2025-03-05,77,Never forget these motherfuckers came to Charlottesville and killed Heather Heyer.,2025-03,Charlottesville,38.02931,-78.47668,seat of a second-order administrative division,Virginia,City of Charlottesville,United States,UVA,City,,,,,108,
 comment,2025-03-05,5,or most certainty albemarle county is.,2025-03,Albemarle County,38.02289,-78.55654,second-order administrative division,Virginia,Albemarle County,United States,UVA,State,,,,,10,

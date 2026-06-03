@@ -1,4 +1,4 @@
-type,date,score,sentences,year_month,place,latitude,longitude,feature_type,admin1_name,admin2_name,country_name,school,place_type,action,corrected_name,corrected_place_type,reviewer,place_count,corrected_latlon
+type,date,score,sentences,year_month,place,latitude,longitude,feature_type,admin1_name,admin2_name,country_name,school,place_type,action,corrected_name,corrected_latlon,corrected_place_type,place_count,reviewer
 comment,2025-03-21,36,… next up is Texas lol,2025-03,Texas,31.25044,-99.25061,first-order administrative division,Texas,,United States,WM,State,,,,,1,
 comment,2025-03-21,2,Virginia didn’t make the team so I’m rooting for you this year to go all the way,2025-03,Virginia,37.54812,-77.44675,first-order administrative division,Virginia,,United States,WM,State,,,,,81,
 comment,2025-03-21,10,"In Austin, no less.",2025-03,Austin,30.26715,-97.74306,seat of a first-order administrative division,Texas,Travis County,United States,WM,City,,,,,1,

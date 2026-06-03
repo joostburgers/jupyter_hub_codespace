@@ -1,4 +1,4 @@
-type,date,score,sentences,year_month,place,latitude,longitude,feature_type,admin1_name,admin2_name,country_name,school,place_type,action,corrected_name,corrected_place_type,reviewer,place_count,corrected_latlon
+type,date,score,sentences,year_month,place,latitude,longitude,feature_type,admin1_name,admin2_name,country_name,school,place_type,action,corrected_name,corrected_latlon,corrected_place_type,place_count,reviewer
 comment,2025-12-22,36,I’m in the band and got to go on this trip to Oregon and loved how nice everyone was.,2025-12,Oregon,44.00013,-120.50139,first-order administrative division,Oregon,,United States,JMU,State,,,,,13,
 comment,2025-12-22,13,"I have never, ever, met a nicer community than I did in Eugene Oregon.",2025-12,Eugene,44.05207,-123.08675,seat of a second-order administrative division,Oregon,Lane County,United States,JMU,City,,,,,4,
 comment,2025-12-22,13,"I have never, ever, met a nicer community than I did in Eugene Oregon.",2025-12,Oregon,44.00013,-120.50139,first-order administrative division,Oregon,,United States,JMU,State,,,,,13,
