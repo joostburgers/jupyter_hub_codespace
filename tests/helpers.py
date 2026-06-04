@@ -270,8 +270,8 @@ def load_and_validate_review_sheet(url: str) -> pd.DataFrame | None:
 
     # 4. Non-numeric coordinates after split
     for col, label in [('corrected_lat', 'lat'), ('corrected_lon', 'lon')]:
-        filled = df[df[col].astype(str).str.strip() != '']
-        bad_num = filled[pd.to_numeric(filled[col], errors='coerce').isna()]
+        filled = df[~df[col].astype(str).str.strip().isin(["", "nan","None"])]
+        bad_num = filled[pd.to_numeric(filled[col], errors='coerce').isna()]        
         if not bad_num.empty:
             warnings.append(f"⚠️  {len(bad_num)} row(s) have a non-numeric corrected {label}:\n"
                             + bad_num[col].head(5).to_string())
