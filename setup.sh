@@ -9,7 +9,7 @@ echo "=========================================="
 
 echo ""
 echo "Installing packages..."
-pip install --quiet --no-cache-dir \
+pip install --no-cache-dir \
     pandas \
     plotly \
     nltk \
@@ -35,9 +35,9 @@ python -m nltk.downloader -q punkt punkt_tab vader_lexicon
 
 echo ""
 echo "Downloading spaCy models..."
-python -m spacy download --quiet en_core_web_sm
-python -m spacy download --quiet en_core_web_md
-python -m spacy download --quiet en_core_web_trf
+python -m spacy download en_core_web_sm
+python -m spacy download en_core_web_md
+python -m spacy download en_core_web_trf
 
 echo ""
 echo "Linking system Python to devcontainer Python..."
