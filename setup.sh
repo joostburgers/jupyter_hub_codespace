@@ -59,33 +59,20 @@ git remote remove upstream 2>/dev/null || true
 echo "          ✓ Done (upstream remote removed if it existed)"
 
 echo ""
-echo "Marking lesson notebooks as assume-unchanged..."
+echo "Marking read-only notebooks as assume-unchanged..."
 # Jupyter rewrites notebook metadata (kernel info, execution counts) whenever
-# a notebook is opened, even without running any cells. This causes ALL lesson
-# notebooks to appear as modified in git, polluting students' commit history
-# and creating merge conflicts. --assume-unchanged tells git to stop tracking
-# local changes to these read-only lesson files.
-# NOTE: project_4_template_ignore.ipynb (the whitepaper) is intentionally
-# excluded so students CAN commit their written content there.
-git update-index --assume-unchanged \
-    "lesson_1_the_team/lesson_1_1_git_and_pull_requests.ipynb" \
-    "lesson_1_the_team/lesson_1_2_merge_conflicts.ipynb" \
-    "lesson_1_the_team/lesson_1_3_dynamic_input.ipynb" \
-    "lesson_2_very_basic_python/lesson_2_1_overview_variables.ipynb" \
-    "lesson_2_very_basic_python/lesson_2_2_functions_methods.ipynb" \
-    "lesson_2_very_basic_python/lesson_2_3_packages.ipynb" \
-    "lesson_2_very_basic_python/lesson_2_4_reading_code.ipynb" \
-    "lesson_3_introduction_pandas/lesson_3_1_loading_and_cleaning.ipynb" \
-    "lesson_3_introduction_pandas/lesson_3_2_plotly_charts.ipynb" \
-    "lesson_3_introduction_pandas/lesson_3_3_plotly_styling.ipynb" \
-    "lesson_4_finding_locations/lesson_4_1_extracting_locations.ipynb" \
-    "lesson_4_finding_locations/lesson_4_2_using_ner.ipynb" \
-    "lesson_4_finding_locations/lesson_4_3_geoparsing_mapping.ipynb" \
-    "lesson_4_finding_locations/lesson_4_5_technical_reference_geoparser.ipynb" \
-    "lesson_5_sentiment_analysis/lesson_5_1_sentiment_analysis.ipynb" \
-    "lesson_5_sentiment_analysis/lesson_5_2_roberta_sentiment.ipynb" \
-    "lesson_6_mapping_fundamentals/lesson_6_mapping_fundamentals.ipynb" \
-     2>/dev/null && echo "          ✓ Done" || echo "          ⚠ Some notebooks not found (may be added later)"
+# a notebook is opened, even without running any cells. Marking read-only lesson
+# notebooks as assume-unchanged keeps those harmless edits out of Source Control.
+# Excluded (students commit these): lesson_4_4 and project_mapping_emotions/.
+marked=0
+while IFS= read -r nb; do
+    if git update-index --assume-unchanged "$nb" 2>/dev/null; then
+        marked=$((marked + 1))
+    fi
+done < <(git ls-files '*.ipynb' \
+    | grep -v '^project_mapping_emotions/' \
+    | grep -v 'lesson_4_finding_locations/lesson_4_4')
+echo "          ✓ Done ($marked notebooks)"
 
 echo ""
 echo "=========================================="
