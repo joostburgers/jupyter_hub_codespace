@@ -19,6 +19,7 @@ pip install --no-cache-dir \
     nbformat \
     nbconvert \
     ipykernel \
+    ipywidgets \
     transformers \
     torch \
     scipy
