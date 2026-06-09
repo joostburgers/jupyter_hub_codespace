@@ -38,11 +38,10 @@ _scoring_error_logged = False
 
 def polarity_scores_roberta(text: str) -> Dict[str, float]:
     with torch.inference_mode():
-        encoded_text = tokenizer.encode_plus(
-            text, max_length=512, truncation=True, return_tensors="pt"
-        )
-        output = model(**encoded_text)
-        scores = softmax(output[0][0].detach().numpy())
+        inputs = tokenizer(text, max_length=512, truncation=True, return_tensors="pt")
+        output = model(**inputs)
+        logits = output.logits if hasattr(output, "logits") else output[0]
+        scores = softmax(logits[0].detach().numpy())
     return {
         "roberta_neg": float(scores[0]),
         "roberta_neu": float(scores[1]),
