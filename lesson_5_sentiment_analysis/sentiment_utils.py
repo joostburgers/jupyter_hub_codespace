@@ -36,12 +36,14 @@ model.eval()
 _scoring_error_logged = False
 
 
-def polarity_scores_roberta(text: str) -> Dict[str, float]:
+def polarity_scores_roberta(text: str, output_format: str = "full") -> Dict[str, float]:
     with torch.inference_mode():
         inputs = tokenizer(text, max_length=512, truncation=True, return_tensors="pt")
         output = model(**inputs)
         logits = output.logits if hasattr(output, "logits") else output[0]
         scores = softmax(logits[0].detach().numpy())
+    
+    
     return {
         "roberta_neg": float(scores[0]),
         "roberta_neu": float(scores[1]),
@@ -68,7 +70,10 @@ def _score_text(text) -> Dict[str, Any]:
 
 
 def add_sentiment_to_column(
-    df: pd.DataFrame, column_name: str, num_rows: int = None
+    df: pd.DataFrame,
+    column_name: str,
+    num_rows: int = None,
+    output_format: str = "full",
 ) -> pd.DataFrame:
     df_subset = df.head(num_rows).reset_index(drop=True) if num_rows else df.reset_index(drop=True)
     df_subset = df_subset.drop(columns=[c for c in ROBERTA_COLS if c in df_subset.columns])
@@ -78,5 +83,10 @@ def add_sentiment_to_column(
         for text in tqdm(df_subset[column_name], desc="Processing Sentiment Analysis")
     ]
     scored = pd.json_normalize(results)
+    
+    if output_format == "compact":
+        cols_to_drop = ["roberta_neg", "roberta_neu", "roberta_pos"]
+        scored = scored.drop(
+            columns=[c for c in cols_to_drop if c in scored.columns], errors="ignore")
 
     return pd.concat([df_subset, scored], axis=1)
