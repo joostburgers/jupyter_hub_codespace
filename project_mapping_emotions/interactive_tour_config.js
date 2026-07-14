@@ -11,7 +11,7 @@ var config = {
       "id": "chapter-0",
       "title": "Introduction",
       "description": "Your interactive tour should be a self-contained story about your data. The story is driven by two main components: the scrolling text boxes on the left (chapters) and the map on the right. Both can be customized to fit your particular story and this interactive tour will cycle through some of the options. You should consider how you visualize your story very carefully. You want to provide enough information to your users without overwhelming them.",
-      "image": "./images/quad.jpg",
+      "image": "./images/jmu-quad.jpg",
       "duration": 2000,
       "transition": "normal",
       "camera": {
@@ -21,10 +21,10 @@ var config = {
       },
       "location": {
         "name": "Harrisonburg",
-        "latitude": 38.44957,
-        "longitude": -78.86892,
+        "latitude": 38.44648,
+        "longitude": -78.86714,
         "postCount": 131,
-        "robertaScore": -0.102,
+        "robertaScore": -0.101,
         "isJMU": true,
         "opacity": 1.0,
         "label": false,
@@ -43,22 +43,22 @@ var config = {
       "duration": 2000,
       "transition": "normal",
       "camera": {
-        "latitude": 38.43528,
-        "longitude": -78.87278,
+        "latitude": -42.0,
+        "longitude": 174.0,
         "zoom": 15
       },
       "location": {
-        "name": "Bridgeforth Stadium",
-        "latitude": 38.43528,
-        "longitude": -78.87278,
-        "postCount": 7,
-        "robertaScore": 0.281,
+        "name": "New Zealand",
+        "latitude": -42.0,
+        "longitude": 174.0,
+        "postCount": 5,
+        "robertaScore": -0.031,
         "isJMU": true,
         "opacity": 1.0,
         "label": false,
         "pulse": false,
         "showStats": false,
-        "placeType": "Building",
+        "placeType": "Country",
         "showPlaceType": false
       },
       "showData": "all_locations"
@@ -67,26 +67,26 @@ var config = {
       "id": "chapter-2",
       "title": "Image Setup",
       "description": "Each chapter can display one image, optimized for a 16:9 aspect ratio. Save your image to the <code>images/</code> folder and reference it with the <code>media</code> field. Use the optional <code>caption</code> field to add a credit line below the image:<br><pre><code>\"media\":   \"images/bridgeforth-stadium.jpg\",\n\"caption\": \"Photo: Author Name, CC BY 2.0\"</code></pre>",
-      "image": "./images/bridgeforth-stadium.jpg",
+      "image": "./images/jmu-bridgeforth-stadium.jpg",
       "duration": 2000,
       "transition": "normal",
       "camera": {
-        "latitude": 38.43528,
-        "longitude": -78.87278,
+        "latitude": -42.0,
+        "longitude": 174.0,
         "zoom": 15
       },
       "location": {
-        "name": "Bridgeforth Stadium",
-        "latitude": 38.43528,
-        "longitude": -78.87278,
-        "postCount": 7,
-        "robertaScore": 0.281,
+        "name": "New Zealand",
+        "latitude": -42.0,
+        "longitude": 174.0,
+        "postCount": 5,
+        "robertaScore": -0.031,
         "isJMU": true,
         "opacity": 1.0,
         "label": false,
         "pulse": false,
         "showStats": false,
-        "placeType": "Building",
+        "placeType": "Country",
         "showPlaceType": false
       },
       "showData": "all_locations",
@@ -96,26 +96,26 @@ var config = {
       "id": "chapter-3",
       "title": "Other Chapter Options",
       "description": "Three optional fields add extra context to each chapter card. Use <code>quote</code> to surface a representative sentence from the data as a styled pull quote. Add <code>show_stats</code> to display a post count and sentiment badge, and <code>show_place_type</code> to show a geographic type badge:<br><pre><code>\"quote\":           \"A representative quote from the data.\",\n\"show_stats\":      True,  # post count and sentiment badge\n\"show_place_type\": True   # geographic type badge (Building, City, etc.)</code></pre>",
-      "image": "./images/bridgeforth-stadium.jpg",
+      "image": "./images/jmu-bridgeforth-stadium.jpg",
       "duration": 2000,
       "transition": "normal",
       "camera": {
-        "latitude": 38.43528,
-        "longitude": -78.87278,
+        "latitude": -42.0,
+        "longitude": 174.0,
         "zoom": 15
       },
       "location": {
-        "name": "Bridgeforth Stadium",
-        "latitude": 38.43528,
-        "longitude": -78.87278,
-        "postCount": 7,
-        "robertaScore": 0.281,
+        "name": "New Zealand",
+        "latitude": -42.0,
+        "longitude": 174.0,
+        "postCount": 5,
+        "robertaScore": -0.031,
         "isJMU": true,
         "opacity": 1.0,
         "label": false,
         "pulse": false,
         "showStats": true,
-        "placeType": "Building",
+        "placeType": "Country",
         "showPlaceType": true
       },
       "showData": "all_locations",
@@ -130,22 +130,22 @@ var config = {
       "duration": 2000,
       "transition": "normal",
       "camera": {
-        "latitude": 38.4185,
-        "longitude": -78.84386,
+        "latitude": 35.50069,
+        "longitude": -80.00032,
         "zoom": 15
       },
       "location": {
-        "name": "Chesnut Ridge Apartments",
-        "latitude": 38.4185,
-        "longitude": -78.84386,
-        "postCount": 6,
-        "robertaScore": -0.184,
+        "name": "North Carolina",
+        "latitude": 35.50069,
+        "longitude": -80.00032,
+        "postCount": 5,
+        "robertaScore": -0.174,
         "isJMU": true,
         "opacity": 1.0,
         "label": false,
         "pulse": false,
         "showStats": false,
-        "placeType": "Building",
+        "placeType": "State",
         "showPlaceType": false
       },
       "showData": "all_locations"
@@ -164,10 +164,10 @@ var config = {
       },
       "location": {
         "name": "Harrisonburg",
-        "latitude": 38.44957,
-        "longitude": -78.86892,
+        "latitude": 38.44648,
+        "longitude": -78.86714,
         "postCount": 131,
-        "robertaScore": -0.102,
+        "robertaScore": -0.101,
         "isJMU": true,
         "opacity": 1.0,
         "label": false,
@@ -192,10 +192,10 @@ var config = {
       },
       "location": {
         "name": "Harrisonburg",
-        "latitude": 38.44957,
-        "longitude": -78.86892,
+        "latitude": 38.44648,
+        "longitude": -78.86714,
         "postCount": 131,
-        "robertaScore": -0.102,
+        "robertaScore": -0.101,
         "isJMU": true,
         "opacity": 1.0,
         "label": false,
@@ -220,10 +220,10 @@ var config = {
       },
       "location": {
         "name": "Harrisonburg",
-        "latitude": 38.44957,
-        "longitude": -78.86892,
+        "latitude": 38.44648,
+        "longitude": -78.86714,
         "postCount": 131,
-        "robertaScore": -0.102,
+        "robertaScore": -0.101,
         "isJMU": true,
         "opacity": 1.0,
         "label": false,
@@ -248,10 +248,10 @@ var config = {
       },
       "location": {
         "name": "Harrisonburg",
-        "latitude": 38.44957,
-        "longitude": -78.86892,
+        "latitude": 38.44648,
+        "longitude": -78.86714,
         "postCount": 131,
-        "robertaScore": -0.102,
+        "robertaScore": -0.101,
         "isJMU": true,
         "opacity": 1.0,
         "label": false,
@@ -276,10 +276,10 @@ var config = {
       },
       "location": {
         "name": "Harrisonburg",
-        "latitude": 38.44957,
-        "longitude": -78.86892,
+        "latitude": 38.44648,
+        "longitude": -78.86714,
         "postCount": 131,
-        "robertaScore": -0.102,
+        "robertaScore": -0.101,
         "isJMU": true,
         "opacity": 1.0,
         "label": false,
@@ -299,26 +299,26 @@ var config = {
       "id": "chapter-10",
       "title": "Marker Opacity",
       "description": "<code>opacity</code> dims all background markers so the highlighted location stands out. A value of <code>0.5</code> gives enough surrounding context without competing with the focus location \u2014 use <code>0.0</code> to hide all others entirely:<br><pre><code>\"opacity\":   0.5,\n\"show_data\": \"all_locations\"</code></pre>",
-      "image": "./images/bridgeforth-stadium.jpg",
+      "image": "./images/jmu-bridgeforth-stadium.jpg",
       "duration": 2000,
       "transition": "normal",
       "camera": {
-        "latitude": 38.43528,
-        "longitude": -78.87278,
+        "latitude": -42.0,
+        "longitude": 174.0,
         "zoom": 15
       },
       "location": {
-        "name": "Bridgeforth Stadium",
-        "latitude": 38.43528,
-        "longitude": -78.87278,
-        "postCount": 7,
-        "robertaScore": 0.281,
+        "name": "New Zealand",
+        "latitude": -42.0,
+        "longitude": 174.0,
+        "postCount": 5,
+        "robertaScore": -0.031,
         "isJMU": true,
         "opacity": 0.5,
         "label": false,
         "pulse": false,
         "showStats": false,
-        "placeType": "Building",
+        "placeType": "Country",
         "showPlaceType": false
       },
       "showData": "all_locations"
@@ -327,26 +327,26 @@ var config = {
       "id": "chapter-11",
       "title": "Opacity & Label",
       "description": "<code>label</code> pins the place name directly onto the map. Combine it with <code>opacity</code> so readers can identify the location without needing to hover over the marker:<br><pre><code>\"opacity\": 0.5,\n\"label\":   True</code></pre>",
-      "image": "./images/bridgeforth-stadium.jpg",
+      "image": "./images/jmu-bridgeforth-stadium.jpg",
       "duration": 2000,
       "transition": "normal",
       "camera": {
-        "latitude": 38.43528,
-        "longitude": -78.87278,
+        "latitude": -42.0,
+        "longitude": 174.0,
         "zoom": 15
       },
       "location": {
-        "name": "Bridgeforth Stadium",
-        "latitude": 38.43528,
-        "longitude": -78.87278,
-        "postCount": 7,
-        "robertaScore": 0.281,
+        "name": "New Zealand",
+        "latitude": -42.0,
+        "longitude": 174.0,
+        "postCount": 5,
+        "robertaScore": -0.031,
         "isJMU": true,
         "opacity": 0.5,
         "label": true,
         "pulse": false,
         "showStats": false,
-        "placeType": "Building",
+        "placeType": "Country",
         "showPlaceType": false
       },
       "showData": "all_locations"
@@ -355,26 +355,26 @@ var config = {
       "id": "chapter-12",
       "title": "Opacity, Label & Pulse",
       "description": "<code>pulse</code> adds a radiating ring animation to the highlighted marker, immediately drawing the eye to the location. Use it sparingly for stops where the exact geographic position is the main point of the chapter:<br><pre><code>\"opacity\": 0.5,\n\"label\":   True,\n\"pulse\":   True</code></pre>",
-      "image": "./images/d-hall.jpg",
+      "image": "./images/jmu-d-hall.jpg",
       "duration": 2000,
       "transition": "normal",
       "camera": {
-        "latitude": 38.43528,
-        "longitude": -78.87278,
+        "latitude": -42.0,
+        "longitude": 174.0,
         "zoom": 15
       },
       "location": {
-        "name": "Bridgeforth Stadium",
-        "latitude": 38.43528,
-        "longitude": -78.87278,
-        "postCount": 7,
-        "robertaScore": 0.281,
+        "name": "New Zealand",
+        "latitude": -42.0,
+        "longitude": 174.0,
+        "postCount": 5,
+        "robertaScore": -0.031,
         "isJMU": true,
         "opacity": 0.5,
         "label": true,
         "pulse": true,
         "showStats": false,
-        "placeType": "Building",
+        "placeType": "Country",
         "showPlaceType": false
       },
       "showData": "all_locations"
@@ -387,22 +387,22 @@ var config = {
       "duration": 2000,
       "transition": "normal",
       "camera": {
-        "latitude": 38.41687,
-        "longitude": -78.87159,
+        "latitude": 38.91706,
+        "longitude": -77.00025,
         "zoom": 15
       },
       "location": {
-        "name": "The Hills Southview Apartments",
-        "latitude": 38.41687,
-        "longitude": -78.87159,
-        "postCount": 14,
-        "robertaScore": -0.363,
+        "name": "District of Columbia",
+        "latitude": 38.91706,
+        "longitude": -77.00025,
+        "postCount": 11,
+        "robertaScore": 0.113,
         "isJMU": true,
         "opacity": 1.0,
         "label": false,
         "pulse": false,
         "showStats": true,
-        "placeType": "Building",
+        "placeType": "State",
         "showPlaceType": true
       },
       "showData": "all_locations"
@@ -415,22 +415,22 @@ var config = {
       "duration": 2000,
       "transition": "normal",
       "camera": {
-        "latitude": 38.41687,
-        "longitude": -78.87159,
+        "latitude": 38.91706,
+        "longitude": -77.00025,
         "zoom": 15
       },
       "location": {
-        "name": "The Hills Southview Apartments",
-        "latitude": 38.41687,
-        "longitude": -78.87159,
-        "postCount": 7,
-        "robertaScore": -0.541,
+        "name": "District of Columbia",
+        "latitude": 38.91706,
+        "longitude": -77.00025,
+        "postCount": 5,
+        "robertaScore": 0.065,
         "isJMU": true,
         "opacity": 1.0,
         "label": false,
         "pulse": false,
         "showStats": true,
-        "placeType": "Building",
+        "placeType": "State",
         "showPlaceType": true
       },
       "showData": "all_locations",
@@ -447,22 +447,22 @@ var config = {
       "duration": 2000,
       "transition": "normal",
       "camera": {
-        "latitude": 38.41687,
-        "longitude": -78.87159,
+        "latitude": 38.91706,
+        "longitude": -77.00025,
         "zoom": 15
       },
       "location": {
-        "name": "The Hills Southview Apartments",
-        "latitude": 38.41687,
-        "longitude": -78.87159,
-        "postCount": 6,
-        "robertaScore": -0.169,
+        "name": "District of Columbia",
+        "latitude": 38.91706,
+        "longitude": -77.00025,
+        "postCount": 10,
+        "robertaScore": 0.265,
         "isJMU": true,
         "opacity": 1.0,
         "label": false,
         "pulse": false,
         "showStats": true,
-        "placeType": "Building",
+        "placeType": "State",
         "showPlaceType": true
       },
       "showData": "all_locations",
@@ -479,33 +479,33 @@ var config = {
       "duration": 2000,
       "transition": "normal",
       "camera": {
-        "latitude": 38.41687,
-        "longitude": -78.87159,
+        "latitude": 38.91706,
+        "longitude": -77.00025,
         "zoom": 15
       },
       "location": {
-        "name": "The Hills Southview Apartments",
-        "latitude": 38.41687,
-        "longitude": -78.87159,
-        "postCount": 14,
-        "robertaScore": -0.363,
+        "name": "District of Columbia",
+        "latitude": 38.91706,
+        "longitude": -77.00025,
+        "postCount": 11,
+        "robertaScore": 0.113,
         "isJMU": true,
         "opacity": 1.0,
         "label": false,
         "pulse": false,
         "showStats": false,
-        "placeType": "Building",
+        "placeType": "State",
         "showPlaceType": false
       },
       "showData": "all_locations"
     }
   ],
   "colorBreaks": [
-    -0.3634,
-    -0.1705,
-    -0.0219,
+    -0.3658,
+    -0.1903,
+    -0.0458,
     0.1316,
-    0.3768
+    0.406
   ],
   "colorPalette": [
     "rgb(165, 0, 38)",
@@ -515,14 +515,14 @@ var config = {
     "rgb(0, 104, 55)"
   ],
   "sizeBreaks": [
-    23,
-    52,
+    21,
+    50,
     95,
     134
   ],
   "jmuSizeBreaks": [
-    8,
-    23,
+    20,
+    47,
     77,
     131
   ],
@@ -535,10 +535,10 @@ var config = {
   "allLocations": [
     {
       "name": "Harrisonburg",
-      "latitude": 38.44957,
-      "longitude": -78.86892,
+      "latitude": 38.44648,
+      "longitude": -78.86714,
       "postCount": 131,
-      "robertaScore": -0.102,
+      "robertaScore": -0.101,
       "isJMU": true,
       "school": "JMU",
       "placeType": "City"
@@ -548,7 +548,7 @@ var config = {
       "latitude": 37.54812,
       "longitude": -77.44675,
       "postCount": 77,
-      "robertaScore": -0.069,
+      "robertaScore": -0.066,
       "isJMU": true,
       "school": "JMU",
       "placeType": "State"
@@ -557,98 +557,108 @@ var config = {
       "name": "United States",
       "latitude": 39.76,
       "longitude": -98.5,
-      "postCount": 52,
-      "robertaScore": -0.272,
+      "postCount": 47,
+      "robertaScore": -0.292,
       "isJMU": true,
       "school": "JMU",
       "placeType": "Country"
     },
     {
-      "name": "James Madison University",
-      "latitude": 38.43523,
-      "longitude": -78.86911,
-      "postCount": 23,
-      "robertaScore": -0.129,
+      "name": "Jiamusi",
+      "latitude": 46.79711,
+      "longitude": 130.31118,
+      "postCount": 20,
+      "robertaScore": -0.149,
       "isJMU": true,
       "school": "JMU",
-      "placeType": "University"
+      "placeType": "City"
     },
     {
-      "name": "University of Oregon",
-      "latitude": 44.04496,
-      "longitude": -123.07195,
-      "postCount": 16,
+      "name": "Oregon",
+      "latitude": 44.00013,
+      "longitude": -120.50139,
+      "postCount": 13,
       "robertaScore": 0.275,
       "isJMU": true,
       "school": "JMU",
-      "placeType": "University"
-    },
-    {
-      "name": "The Hills Southview Apartments",
-      "latitude": 38.41687,
-      "longitude": -78.87159,
-      "postCount": 14,
-      "robertaScore": -0.363,
-      "isJMU": true,
-      "school": "JMU",
-      "placeType": "Building"
+      "placeType": "State"
     },
     {
       "name": "District of Columbia",
       "latitude": 38.91706,
       "longitude": -77.00025,
-      "postCount": 12,
-      "robertaScore": 0.126,
+      "postCount": 11,
+      "robertaScore": 0.113,
       "isJMU": true,
       "school": "JMU",
       "placeType": "State"
     },
     {
-      "name": "Hillside Suites",
-      "latitude": 38.47378,
-      "longitude": -78.87933,
+      "name": "Southview",
+      "latitude": 51.03333,
+      "longitude": -113.98333,
+      "postCount": 13,
+      "robertaScore": -0.372,
+      "isJMU": true,
+      "school": "JMU",
+      "placeType": "Neighborhood"
+    },
+    {
+      "name": "D and L Plaza Shopping Center",
+      "latitude": 42.8995,
+      "longitude": -78.68447,
       "postCount": 8,
-      "robertaScore": -0.132,
+      "robertaScore": -0.086,
       "isJMU": true,
       "school": "JMU",
       "placeType": "Building"
+    },
+    {
+      "name": "Hall",
+      "latitude": 40.43368,
+      "longitude": -79.80199,
+      "postCount": 8,
+      "robertaScore": -0.142,
+      "isJMU": true,
+      "school": "JMU",
+      "placeType": null
+    },
+    {
+      "name": "Basalt",
+      "latitude": 39.36887,
+      "longitude": -107.03282,
+      "postCount": 8,
+      "robertaScore": -0.276,
+      "isJMU": true,
+      "school": "JMU",
+      "placeType": "City"
     },
     {
       "name": "New Jersey",
       "latitude": 40.16706,
       "longitude": -74.49987,
-      "postCount": 13,
-      "robertaScore": -0.293,
+      "postCount": 8,
+      "robertaScore": -0.222,
       "isJMU": true,
       "school": "JMU",
       "placeType": "State"
     },
     {
-      "name": "Eagle Hall (JMU)",
-      "latitude": 38.434,
-      "longitude": -78.87297,
-      "postCount": 8,
-      "robertaScore": -0.276,
-      "isJMU": true,
-      "school": "JMU",
-      "placeType": "Building"
-    },
-    {
-      "name": "D-Hall (JMU)",
-      "latitude": 38.43764,
-      "longitude": -78.87196,
-      "postCount": 19,
-      "robertaScore": -0.151,
-      "isJMU": true,
-      "school": "JMU",
-      "placeType": "Building"
-    },
-    {
-      "name": "East Campus (JMU)",
-      "latitude": 38.43193,
-      "longitude": -78.86438,
+      "name": "West Virginia",
+      "latitude": 38.50038,
+      "longitude": -80.50009,
       "postCount": 7,
-      "robertaScore": -0.185,
+      "robertaScore": 0.058,
+      "isJMU": true,
+      "school": "JMU",
+      "placeType": "State"
+    },
+    {
+      "name": "East Campus Quadrangle",
+      "latitude": 38.90611,
+      "longitude": -77.06972,
+      "postCount": 7,
+      "robertaScore": -0.18,
       "isJMU": true,
       "school": "JMU",
       "placeType": "Building"
@@ -664,74 +674,144 @@ var config = {
       "placeType": "City"
     },
     {
-      "name": "Village Dorms (JMU)",
-      "latitude": 38.43607,
-      "longitude": -78.86846,
+      "name": "Village",
+      "latitude": 51.44978,
+      "longitude": -0.08675,
       "postCount": 7,
-      "robertaScore": -0.095,
+      "robertaScore": -0.089,
+      "isJMU": true,
+      "school": "JMU",
+      "placeType": "Neighborhood"
+    },
+    {
+      "name": "University of Oregon Autzen Stadium",
+      "latitude": 44.05827,
+      "longitude": -123.06849,
+      "postCount": 5,
+      "robertaScore": 0.052,
       "isJMU": true,
       "school": "JMU",
       "placeType": "Building"
     },
     {
-      "name": "West Virginia",
-      "latitude": 38.50038,
-      "longitude": -80.50009,
-      "postCount": 7,
-      "robertaScore": 0.058,
+      "name": "Washington",
+      "latitude": 47.50012,
+      "longitude": -120.50147,
+      "postCount": 6,
+      "robertaScore": -0.19,
       "isJMU": true,
       "school": "JMU",
       "placeType": "State"
     },
     {
-      "name": "Washington State University",
-      "latitude": 46.72904,
-      "longitude": -117.14615,
-      "postCount": 4,
-      "robertaScore": -0.272,
-      "isJMU": true,
-      "school": "JMU",
-      "placeType": "University"
-    },
-    {
-      "name": "Chandler Hall",
-      "latitude": 38.43318,
-      "longitude": -78.87362,
-      "postCount": 11,
-      "robertaScore": -0.009,
-      "isJMU": true,
-      "school": "JMU",
-      "placeType": "Building"
-    },
-    {
       "name": "Rockingham County",
-      "latitude": 38.55263,
-      "longitude": -78.96243,
-      "postCount": 8,
-      "robertaScore": -0.092,
+      "latitude": 42.98454,
+      "longitude": -71.08897,
+      "postCount": 6,
+      "robertaScore": -0.119,
+      "isJMU": true,
+      "school": "JMU",
+      "placeType": "State"
+    },
+    {
+      "name": "Bailiwick of Jersey",
+      "latitude": 49.21667,
+      "longitude": -2.11667,
+      "postCount": 5,
+      "robertaScore": -0.372,
+      "isJMU": true,
+      "school": "JMU",
+      "placeType": "Country"
+    },
+    {
+      "name": "Territories of the United States",
+      "latitude": 35.27766,
+      "longitude": -102.35403,
+      "postCount": 5,
+      "robertaScore": -0.032,
       "isJMU": true,
       "school": "JMU",
       "placeType": "Region"
     },
     {
-      "name": "University of Florida",
-      "latitude": 29.64667,
-      "longitude": -82.3529,
+      "name": "Bridgeforth Stadium",
+      "latitude": 38.43528,
+      "longitude": -78.87278,
       "postCount": 5,
-      "robertaScore": -0.111,
+      "robertaScore": 0.406,
       "isJMU": true,
       "school": "JMU",
-      "placeType": "University"
+      "placeType": "Building"
+    },
+    {
+      "name": "North Texas",
+      "latitude": 33.3577,
+      "longitude": -97.34275,
+      "postCount": 5,
+      "robertaScore": -0.163,
+      "isJMU": true,
+      "school": "JMU",
+      "placeType": "Region"
+    },
+    {
+      "name": "Hillside",
+      "latitude": 40.36813,
+      "longitude": -79.26059,
+      "postCount": 8,
+      "robertaScore": -0.132,
+      "isJMU": true,
+      "school": "JMU",
+      "placeType": "City"
+    },
+    {
+      "name": "Charlottesville",
+      "latitude": 38.02931,
+      "longitude": -78.47668,
+      "postCount": 5,
+      "robertaScore": 0.021,
+      "isJMU": true,
+      "school": "JMU",
+      "placeType": "City"
+    },
+    {
+      "name": "Florida",
+      "latitude": 28.75054,
+      "longitude": -82.5001,
+      "postCount": 5,
+      "robertaScore": -0.102,
+      "isJMU": true,
+      "school": "JMU",
+      "placeType": "State"
     },
     {
       "name": "New Zealand",
       "latitude": -42.0,
       "longitude": 174.0,
       "postCount": 5,
-      "robertaScore": -0.044,
+      "robertaScore": -0.031,
       "isJMU": true,
       "school": "JMU",
       "placeType": "Country"
+    },
+    {
+      "name": "Potomac Hall",
+      "latitude": 39.25603,
+      "longitude": -76.70665,
+      "postCount": 5,
+      "robertaScore": 0.375,
+      "isJMU": true,
+      "school": "JMU",
+      "placeType": "Building"
+    },
+    {
+      "name": "Pheasant",
+      "latitude": 28.80165,
+      "longitude": -96.21802,
+      "postCount": 5,
+      "robertaScore": -0.135,
+      "isJMU": true,
+      "school": "JMU",
+      "placeType": "City"
     },
     {
       "name": "North Carolina",
@@ -744,59 +824,39 @@ var config = {
       "placeType": "State"
     },
     {
-      "name": "University of North Texas",
-      "latitude": 33.24179,
-      "longitude": -97.05608,
+      "name": "Chandler",
+      "latitude": -21.68333,
+      "longitude": 16.16667,
       "postCount": 5,
-      "robertaScore": -0.163,
-      "isJMU": true,
-      "school": "JMU",
-      "placeType": "University"
-    },
-    {
-      "name": "Pheasant Run Townhomes",
-      "latitude": 38.42509,
-      "longitude": -78.88512,
-      "postCount": 5,
-      "robertaScore": -0.137,
+      "robertaScore": -0.005,
       "isJMU": true,
       "school": "JMU",
       "placeType": "Building"
     },
     {
-      "name": "Potomac Hall (JMU)",
-      "latitude": 38.4373,
-      "longitude": -78.86595,
-      "postCount": 5,
-      "robertaScore": 0.377,
+      "name": "Eugene",
+      "latitude": 44.05207,
+      "longitude": -123.08675,
+      "postCount": 4,
+      "robertaScore": 0.236,
       "isJMU": true,
       "school": "JMU",
-      "placeType": "Building"
+      "placeType": "City"
     },
     {
-      "name": "University of Oregon Autzen Stadium",
-      "latitude": 44.05827,
-      "longitude": -123.06849,
-      "postCount": 5,
-      "robertaScore": 0.056,
+      "name": "Indiana",
+      "latitude": 40.00032,
+      "longitude": -86.25027,
+      "postCount": 4,
+      "robertaScore": 0.229,
       "isJMU": true,
       "school": "JMU",
-      "placeType": "Building"
-    },
-    {
-      "name": "Bridgeforth Stadium",
-      "latitude": 38.43528,
-      "longitude": -78.87278,
-      "postCount": 7,
-      "robertaScore": 0.281,
-      "isJMU": true,
-      "school": "JMU",
-      "placeType": "Building"
+      "placeType": "State"
     },
     {
       "name": "Bridgewater",
-      "latitude": 38.38203,
-      "longitude": -78.97582,
+      "latitude": 41.53509,
+      "longitude": -73.36623,
       "postCount": 5,
       "robertaScore": -0.097,
       "isJMU": true,
@@ -804,79 +864,9 @@ var config = {
       "placeType": "City"
     },
     {
-      "name": "Charlottesville",
-      "latitude": 38.02931,
-      "longitude": -78.47668,
-      "postCount": 5,
-      "robertaScore": 0.017,
-      "isJMU": true,
-      "school": "JMU",
-      "placeType": "City"
-    },
-    {
-      "name": "Chesnut Ridge Apartments",
-      "latitude": 38.4185,
-      "longitude": -78.84386,
-      "postCount": 6,
-      "robertaScore": -0.184,
-      "isJMU": true,
-      "school": "JMU",
-      "placeType": "Building"
-    },
-    {
-      "name": "Indiana University",
-      "latitude": 39.16842,
-      "longitude": -86.52261,
-      "postCount": 4,
-      "robertaScore": 0.23,
-      "isJMU": true,
-      "school": "JMU",
-      "placeType": "University"
-    },
-    {
-      "name": "Paul Jennings Hall (JMU)",
-      "latitude": 38.43054,
-      "longitude": -78.86537,
-      "postCount": 4,
-      "robertaScore": -0.259,
-      "isJMU": true,
-      "school": "JMU",
-      "placeType": "Building"
-    },
-    {
-      "name": "Madison Union Cemetery",
-      "latitude": 40.25285,
-      "longitude": -79.67976,
-      "postCount": 4,
-      "robertaScore": 0.206,
-      "isJMU": true,
-      "school": "JMU",
-      "placeType": "Building"
-    },
-    {
-      "name": "New York",
-      "latitude": 43.00035,
-      "longitude": -75.4999,
-      "postCount": 4,
-      "robertaScore": -0.21,
-      "isJMU": true,
-      "school": "JMU",
-      "placeType": "State"
-    },
-    {
-      "name": "Newman Lake (JMU)",
-      "latitude": 38.4334,
-      "longitude": -78.87493,
-      "postCount": 4,
-      "robertaScore": 0.006,
-      "isJMU": true,
-      "school": "JMU",
-      "placeType": "Natural Feature"
-    },
-    {
-      "name": "North 38 Apartments",
-      "latitude": 38.45385,
-      "longitude": -78.83831,
+      "name": "North School Number 38 (historical)",
+      "latitude": 39.96305,
+      "longitude": -101.43016,
       "postCount": 4,
       "robertaScore": 0.026,
       "isJMU": true,
@@ -884,61 +874,71 @@ var config = {
       "placeType": "Building"
     },
     {
-      "name": "NoVa (Northern Virginia)",
-      "latitude": 38.97897,
-      "longitude": -77.35229,
+      "name": "Sunbelt Strip",
+      "latitude": 31.11233,
+      "longitude": -83.68656,
       "postCount": 4,
-      "robertaScore": -0.15,
+      "robertaScore": 0.019,
       "isJMU": true,
       "school": "JMU",
-      "placeType": "Region"
+      "placeType": "Building"
     },
     {
-      "name": "Rose Library (JMU)",
-      "latitude": 38.43438,
-      "longitude": -78.85758,
+      "name": "Rose Library",
+      "latitude": 31.63571,
+      "longitude": -86.74331,
       "postCount": 4,
-      "robertaScore": -0.056,
+      "robertaScore": -0.051,
       "isJMU": true,
       "school": "JMU",
       "placeType": "Building"
     },
     {
-      "name": "Arlington",
-      "latitude": 38.88245,
-      "longitude": -77.08136,
-      "postCount": 3,
-      "robertaScore": 0.085,
+      "name": "Jennings County",
+      "latitude": 38.99693,
+      "longitude": -85.62806,
+      "postCount": 4,
+      "robertaScore": -0.25,
       "isJMU": true,
       "school": "JMU",
-      "placeType": "City"
+      "placeType": "State"
     },
     {
-      "name": "Copper Beach Harrisonburg Apartments",
-      "latitude": 38.41578,
-      "longitude": -78.84796,
-      "postCount": 3,
-      "robertaScore": -0.239,
+      "name": "New York",
+      "latitude": 43.00035,
+      "longitude": -75.4999,
+      "postCount": 4,
+      "robertaScore": -0.207,
+      "isJMU": true,
+      "school": "JMU",
+      "placeType": "State"
+    },
+    {
+      "name": "Madison Union Cemetery",
+      "latitude": 40.25285,
+      "longitude": -79.67976,
+      "postCount": 4,
+      "robertaScore": 0.182,
       "isJMU": true,
       "school": "JMU",
       "placeType": "Building"
     },
     {
-      "name": "Godwin Hall (JMU)",
-      "latitude": 38.43552,
-      "longitude": -78.87079,
+      "name": "Hall D",
+      "latitude": 44.9688,
+      "longitude": -93.2741,
       "postCount": 3,
-      "robertaScore": 0.107,
+      "robertaScore": -0.338,
       "isJMU": true,
       "school": "JMU",
       "placeType": "Building"
     },
     {
-      "name": "Keezell Hall (JMU)",
-      "latitude": 38.43875,
-      "longitude": -78.87211,
+      "name": "Kindred Hospital East Houston",
+      "latitude": 29.7744,
+      "longitude": -95.1447,
       "postCount": 3,
-      "robertaScore": 0.014,
+      "robertaScore": 0.225,
       "isJMU": true,
       "school": "JMU",
       "placeType": "Building"
@@ -948,17 +948,27 @@ var config = {
       "latitude": 25.0,
       "longitude": 45.0,
       "postCount": 3,
-      "robertaScore": -0.204,
+      "robertaScore": -0.198,
       "isJMU": true,
       "school": "JMU",
       "placeType": "Country"
     },
     {
-      "name": "New Mexico",
-      "latitude": 34.50034,
-      "longitude": -106.00085,
+      "name": "Alabama",
+      "latitude": 32.75041,
+      "longitude": -86.75026,
       "postCount": 3,
-      "robertaScore": 0.008,
+      "robertaScore": -0.087,
+      "isJMU": true,
+      "school": "JMU",
+      "placeType": "State"
+    },
+    {
+      "name": "Pennsylvania",
+      "latitude": 40.8,
+      "longitude": -77.7,
+      "postCount": 3,
+      "robertaScore": 0.128,
       "isJMU": true,
       "school": "JMU",
       "placeType": "State"
@@ -974,34 +984,44 @@ var config = {
       "placeType": "City"
     },
     {
-      "name": "Pennsylvania",
-      "latitude": 40.8,
-      "longitude": -77.7,
+      "name": "Vermont",
+      "latitude": 44.00034,
+      "longitude": -72.74983,
       "postCount": 3,
-      "robertaScore": 0.128,
+      "robertaScore": -0.437,
       "isJMU": true,
       "school": "JMU",
       "placeType": "State"
     },
     {
-      "name": "Potomac",
-      "latitude": 40.15285,
-      "longitude": -80.52924,
+      "name": "Texas",
+      "latitude": 31.25044,
+      "longitude": -99.25061,
       "postCount": 3,
-      "robertaScore": 0.207,
+      "robertaScore": -0.226,
+      "isJMU": true,
+      "school": "JMU",
+      "placeType": "State"
+    },
+    {
+      "name": "Copper Basin",
+      "latitude": 40.60297,
+      "longitude": -117.04649,
+      "postCount": 3,
+      "robertaScore": -0.22,
       "isJMU": true,
       "school": "JMU",
       "placeType": "City"
     },
     {
-      "name": "Purcell Park",
-      "latitude": 38.42762,
-      "longitude": -78.88225,
-      "postCount": 3,
-      "robertaScore": 0.06,
+      "name": "Newman Lake",
+      "latitude": 51.26581,
+      "longitude": -98.48763,
+      "postCount": 4,
+      "robertaScore": 0.006,
       "isJMU": true,
       "school": "JMU",
-      "placeType": "Neighborhood"
+      "placeType": "Natural Feature"
     },
     {
       "name": "Showker Hall",
@@ -1014,14 +1034,44 @@ var config = {
       "placeType": "Building"
     },
     {
-      "name": "Skyline",
-      "latitude": 51.1851,
-      "longitude": -0.163,
+      "name": "Potomac",
+      "latitude": 40.15285,
+      "longitude": -80.52924,
       "postCount": 3,
-      "robertaScore": 0.269,
+      "robertaScore": 0.204,
+      "isJMU": true,
+      "school": "JMU",
+      "placeType": "City"
+    },
+    {
+      "name": "Jiamusi Airport",
+      "latitude": 46.8434,
+      "longitude": 130.465,
+      "postCount": 3,
+      "robertaScore": 0.037,
       "isJMU": true,
       "school": "JMU",
       "placeType": "Building"
+    },
+    {
+      "name": "Keezell Hall",
+      "latitude": 38.43861,
+      "longitude": -78.87278,
+      "postCount": 3,
+      "robertaScore": 0.015,
+      "isJMU": true,
+      "school": "JMU",
+      "placeType": "Building"
+    },
+    {
+      "name": "Godwin",
+      "latitude": 42.51269,
+      "longitude": -114.57476,
+      "postCount": 3,
+      "robertaScore": 0.106,
+      "isJMU": true,
+      "school": "JMU",
+      "placeType": "City"
     },
     {
       "name": "State of Israel",
@@ -1034,54 +1084,84 @@ var config = {
       "placeType": "Country"
     },
     {
-      "name": "Texas",
-      "latitude": 31.25044,
-      "longitude": -99.25061,
+      "name": "New Mexico",
+      "latitude": 34.50034,
+      "longitude": -106.00085,
       "postCount": 3,
-      "robertaScore": -0.24,
+      "robertaScore": 0.004,
       "isJMU": true,
       "school": "JMU",
       "placeType": "State"
     },
     {
-      "name": "Vermont",
-      "latitude": 44.00034,
-      "longitude": -72.74983,
+      "name": "Arlington",
+      "latitude": 32.73569,
+      "longitude": -97.10807,
       "postCount": 3,
-      "robertaScore": -0.437,
+      "robertaScore": 0.079,
       "isJMU": true,
       "school": "JMU",
-      "placeType": "State"
+      "placeType": "City"
     },
     {
-      "name": "Alabama",
-      "latitude": 32.75041,
-      "longitude": -86.75026,
+      "name": "Wayland",
+      "latitude": 48.01682,
+      "longitude": -83.81652,
       "postCount": 3,
-      "robertaScore": -0.088,
+      "robertaScore": -0.016,
       "isJMU": true,
       "school": "JMU",
-      "placeType": "State"
+      "placeType": "Building"
     },
     {
-      "name": "Wayland Hall (JMU)",
-      "latitude": 38.43741,
-      "longitude": -78.8757,
+      "name": "Chestnut Ridge",
+      "latitude": 36.24564,
+      "longitude": -83.90214,
+      "postCount": 5,
+      "robertaScore": -0.162,
+      "isJMU": true,
+      "school": "JMU",
+      "placeType": null
+    },
+    {
+      "name": "Chandler Hall",
+      "latitude": 40.80944,
+      "longitude": -73.96278,
+      "postCount": 6,
+      "robertaScore": -0.013,
+      "isJMU": true,
+      "school": "JMU",
+      "placeType": "Building"
+    },
+    {
+      "name": "Purcell Park",
+      "latitude": 38.42762,
+      "longitude": -78.88225,
+      "postCount": 3,
+      "robertaScore": 0.061,
+      "isJMU": true,
+      "school": "JMU",
+      "placeType": "Neighborhood"
+    },
+    {
+      "name": "Skyline",
+      "latitude": 45.36327,
+      "longitude": -75.72732,
+      "postCount": 3,
+      "robertaScore": 0.269,
+      "isJMU": true,
+      "school": "JMU",
+      "placeType": "City"
+    },
+    {
+      "name": "Nova",
+      "latitude": 39.73176,
+      "longitude": -77.81944,
       "postCount": 4,
-      "robertaScore": 0.231,
+      "robertaScore": -0.145,
       "isJMU": true,
       "school": "JMU",
-      "placeType": "Building"
-    },
-    {
-      "name": "Ashby Hall (JMU)",
-      "latitude": 38.43888,
-      "longitude": -78.87508,
-      "postCount": 3,
-      "robertaScore": 0.257,
-      "isJMU": true,
-      "school": "JMU",
-      "placeType": "Building"
+      "placeType": "City"
     },
     {
       "name": "North Carolina",
@@ -1880,7 +1960,7 @@ var config = {
       },
       {
         "year": 2025,
-        "score": -0.088,
+        "score": -0.087,
         "count": 3,
         "school": "JMU"
       },
@@ -1903,6 +1983,14 @@ var config = {
       {
         "year": 2022,
         "score": 0.018,
+        "count": 1,
+        "school": "JMU"
+      }
+    ],
+    "Algiers": [
+      {
+        "year": 2020,
+        "score": -0.036,
         "count": 1,
         "school": "JMU"
       }
@@ -1958,7 +2046,7 @@ var config = {
     "Arizona": [
       {
         "year": 2020,
-        "score": -0.741,
+        "score": -0.699,
         "count": 1,
         "school": "JMU"
       },
@@ -1998,18 +2086,20 @@ var config = {
     "Arlington": [
       {
         "year": 2020,
-        "score": 0.085,
+        "score": 0.079,
         "count": 3,
         "school": "JMU"
       }
     ],
-    "Ashby Hall (JMU)": [
+    "Ashby": [
       {
         "year": 2020,
-        "score": 0.386,
+        "score": 0.38,
         "count": 2,
         "school": "JMU"
-      },
+      }
+    ],
+    "Ashby Cemetery": [
       {
         "year": 2026,
         "score": -0.0,
@@ -2034,7 +2124,7 @@ var config = {
     "Asia": [
       {
         "year": 2021,
-        "score": -0.496,
+        "score": -0.463,
         "count": 1,
         "school": "JMU"
       }
@@ -2113,10 +2203,22 @@ var config = {
     ],
     "Bailiwick of Jersey": [
       {
+        "year": 2020,
+        "score": -0.002,
+        "count": 3,
+        "school": "JMU"
+      },
+      {
         "year": 2021,
         "score": 0.019,
         "count": 1,
         "school": "UNC"
+      },
+      {
+        "year": 2025,
+        "score": -0.927,
+        "count": 2,
+        "school": "JMU"
       }
     ],
     "Baltimore": [
@@ -2124,6 +2226,32 @@ var config = {
         "year": 2022,
         "score": -0.275,
         "count": 2,
+        "school": "JMU"
+      }
+    ],
+    "Basalt": [
+      {
+        "year": 2020,
+        "score": -0.925,
+        "count": 1,
+        "school": "JMU"
+      },
+      {
+        "year": 2021,
+        "score": -0.761,
+        "count": 1,
+        "school": "JMU"
+      },
+      {
+        "year": 2022,
+        "score": 0.013,
+        "count": 2,
+        "school": "JMU"
+      },
+      {
+        "year": 2024,
+        "score": -0.137,
+        "count": 4,
         "school": "JMU"
       }
     ],
@@ -2343,6 +2471,20 @@ var config = {
         "school": "JMU"
       }
     ],
+    "Bridgeforth Branch": [
+      {
+        "year": 2021,
+        "score": -0.038,
+        "count": 1,
+        "school": "JMU"
+      },
+      {
+        "year": 2026,
+        "score": -0.019,
+        "count": 1,
+        "school": "JMU"
+      }
+    ],
     "Bridgeforth Stadium": [
       {
         "year": 2020,
@@ -2352,20 +2494,14 @@ var config = {
       },
       {
         "year": 2021,
-        "score": 0.419,
-        "count": 2,
+        "score": 0.875,
+        "count": 1,
         "school": "JMU"
       },
       {
         "year": 2025,
-        "score": 0.611,
+        "score": 0.613,
         "count": 3,
-        "school": "JMU"
-      },
-      {
-        "year": 2026,
-        "score": -0.019,
-        "count": 1,
         "school": "JMU"
       }
     ],
@@ -2384,7 +2520,7 @@ var config = {
       },
       {
         "year": 2024,
-        "score": -0.362,
+        "score": -0.36,
         "count": 2,
         "school": "JMU"
       }
@@ -2424,7 +2560,7 @@ var config = {
     "Burruss Hall": [
       {
         "year": 2021,
-        "score": -0.079,
+        "score": -0.078,
         "count": 1,
         "school": "JMU"
       },
@@ -2464,7 +2600,7 @@ var config = {
       },
       {
         "year": 2025,
-        "score": 0.206,
+        "score": 0.213,
         "count": 1,
         "school": "JMU"
       },
@@ -2492,7 +2628,7 @@ var config = {
     "Campus": [
       {
         "year": 2020,
-        "score": 0.602,
+        "score": 0.647,
         "count": 1,
         "school": "JMU"
       },
@@ -2732,16 +2868,16 @@ var config = {
     "Champions Church": [
       {
         "year": 2026,
-        "score": 0.039,
+        "score": 0.05,
         "count": 1,
         "school": "JMU"
       }
     ],
-    "Chandler Hall": [
+    "Chandler": [
       {
         "year": 2020,
-        "score": -0.009,
-        "count": 4,
+        "score": -0.023,
+        "count": 2,
         "school": "JMU"
       },
       {
@@ -2752,8 +2888,22 @@ var config = {
       },
       {
         "year": 2022,
-        "score": -0.01,
-        "count": 6,
+        "score": 0.013,
+        "count": 2,
+        "school": "JMU"
+      }
+    ],
+    "Chandler Hall": [
+      {
+        "year": 2020,
+        "score": 0.003,
+        "count": 2,
+        "school": "JMU"
+      },
+      {
+        "year": 2022,
+        "score": -0.022,
+        "count": 4,
         "school": "JMU"
       }
     ],
@@ -2882,7 +3032,7 @@ var config = {
     "Charlottesville": [
       {
         "year": 2020,
-        "score": 0.057,
+        "score": 0.062,
         "count": 4,
         "school": "JMU"
       },
@@ -2918,7 +3068,7 @@ var config = {
     "Chesapeake": [
       {
         "year": 2020,
-        "score": -0.017,
+        "score": -0.02,
         "count": 1,
         "school": "JMU"
       },
@@ -2937,7 +3087,15 @@ var config = {
         "school": "JMU"
       }
     ],
-    "Chesnut Ridge Apartments": [
+    "Chesnut Ridge": [
+      {
+        "year": 2020,
+        "score": -0.29,
+        "count": 1,
+        "school": "JMU"
+      }
+    ],
+    "Chestnut Ridge": [
       {
         "year": 2015,
         "score": -0.402,
@@ -2945,14 +3103,8 @@ var config = {
         "school": "JMU"
       },
       {
-        "year": 2020,
-        "score": -0.29,
-        "count": 1,
-        "school": "JMU"
-      },
-      {
         "year": 2021,
-        "score": -0.003,
+        "score": -0.002,
         "count": 3,
         "school": "JMU"
       }
@@ -2988,7 +3140,7 @@ var config = {
     "City of Covington": [
       {
         "year": 2026,
-        "score": -0.487,
+        "score": -0.477,
         "count": 1,
         "school": "JMU"
       }
@@ -2996,7 +3148,7 @@ var config = {
     "Cleveland Hall": [
       {
         "year": 2023,
-        "score": 0.258,
+        "score": 0.165,
         "count": 1,
         "school": "JMU"
       }
@@ -3104,7 +3256,7 @@ var config = {
     "Concord": [
       {
         "year": 2025,
-        "score": 0.206,
+        "score": 0.213,
         "count": 1,
         "school": "JMU"
       }
@@ -3158,15 +3310,15 @@ var config = {
     "Copper": [
       {
         "year": 2021,
-        "score": -0.307,
+        "score": -0.281,
         "count": 2,
         "school": "JMU"
       }
     ],
-    "Copper Beach Harrisonburg Apartments": [
+    "Copper Basin": [
       {
         "year": 2021,
-        "score": -0.239,
+        "score": -0.22,
         "count": 3,
         "school": "JMU"
       }
@@ -3174,7 +3326,7 @@ var config = {
     "Copper Beech Elementary School": [
       {
         "year": 2021,
-        "score": -0.187,
+        "score": -0.134,
         "count": 1,
         "school": "JMU"
       }
@@ -3182,7 +3334,7 @@ var config = {
     "Corona": [
       {
         "year": 2020,
-        "score": -0.792,
+        "score": -0.747,
         "count": 1,
         "school": "JMU"
       }
@@ -3231,41 +3383,29 @@ var config = {
         "school": "UNC"
       }
     ],
-    "D-Hall (JMU)": [
+    "D and L Plaza Shopping Center": [
       {
         "year": 2016,
         "score": -0.239,
-        "count": 4,
-        "school": "JMU"
-      },
-      {
-        "year": 2018,
-        "score": -0.306,
-        "count": 1,
+        "count": 2,
         "school": "JMU"
       },
       {
         "year": 2020,
-        "score": -0.127,
-        "count": 6,
+        "score": -0.053,
+        "count": 3,
         "school": "JMU"
       },
       {
         "year": 2021,
         "score": -0.001,
-        "count": 2,
+        "count": 1,
         "school": "JMU"
       },
       {
         "year": 2023,
-        "score": -0.093,
-        "count": 5,
-        "school": "JMU"
-      },
-      {
-        "year": 2025,
-        "score": -0.384,
-        "count": 1,
+        "score": -0.026,
+        "count": 2,
         "school": "JMU"
       }
     ],
@@ -3320,7 +3460,7 @@ var config = {
     "Dayton": [
       {
         "year": 2021,
-        "score": 0.087,
+        "score": 0.079,
         "count": 1,
         "school": "JMU"
       }
@@ -3344,7 +3484,7 @@ var config = {
     "Decimomannu": [
       {
         "year": 2025,
-        "score": 0.547,
+        "score": 0.618,
         "count": 1,
         "school": "JMU"
       }
@@ -3396,7 +3536,7 @@ var config = {
     "Devon": [
       {
         "year": 2024,
-        "score": -0.022,
+        "score": -0.011,
         "count": 1,
         "school": "JMU"
       }
@@ -3448,7 +3588,7 @@ var config = {
       },
       {
         "year": 2020,
-        "score": 0.081,
+        "score": 0.077,
         "count": 4,
         "school": "JMU"
       },
@@ -3472,13 +3612,13 @@ var config = {
       },
       {
         "year": 2024,
-        "score": 0.146,
-        "count": 2,
+        "score": -0.026,
+        "count": 1,
         "school": "JMU"
       },
       {
         "year": 2025,
-        "score": 0.195,
+        "score": 0.213,
         "count": 4,
         "school": "JMU"
       },
@@ -3573,32 +3713,6 @@ var config = {
         "school": "JMU"
       }
     ],
-    "Eagle Hall (JMU)": [
-      {
-        "year": 2020,
-        "score": -0.925,
-        "count": 1,
-        "school": "JMU"
-      },
-      {
-        "year": 2021,
-        "score": -0.761,
-        "count": 1,
-        "school": "JMU"
-      },
-      {
-        "year": 2022,
-        "score": 0.013,
-        "count": 2,
-        "school": "JMU"
-      },
-      {
-        "year": 2024,
-        "score": -0.137,
-        "count": 4,
-        "school": "JMU"
-      }
-    ],
     "Earth": [
       {
         "year": 2021,
@@ -3608,7 +3722,7 @@ var config = {
       },
       {
         "year": 2024,
-        "score": 0.513,
+        "score": 0.561,
         "count": 1,
         "school": "JMU"
       },
@@ -3625,7 +3739,15 @@ var config = {
         "school": "UNC"
       }
     ],
-    "East Campus (JMU)": [
+    "East Campus Power Plant": [
+      {
+        "year": 2021,
+        "score": -0.026,
+        "count": 1,
+        "school": "JMU"
+      }
+    ],
+    "East Campus Quadrangle": [
       {
         "year": 2020,
         "score": -0.033,
@@ -3634,16 +3756,8 @@ var config = {
       },
       {
         "year": 2021,
-        "score": -0.21,
+        "score": -0.205,
         "count": 6,
-        "school": "JMU"
-      }
-    ],
-    "East Campus Power Plant": [
-      {
-        "year": 2021,
-        "score": -0.026,
-        "count": 1,
         "school": "JMU"
       }
     ],
@@ -3782,7 +3896,7 @@ var config = {
     "Engeo": [
       {
         "year": 2023,
-        "score": 0.837,
+        "score": 0.843,
         "count": 1,
         "school": "JMU"
       }
@@ -3798,7 +3912,7 @@ var config = {
     "Erickson": [
       {
         "year": 2019,
-        "score": -0.005,
+        "score": -0.004,
         "count": 1,
         "school": "JMU"
       }
@@ -3830,6 +3944,14 @@ var config = {
         "year": 2020,
         "score": 0.054,
         "count": 1,
+        "school": "JMU"
+      }
+    ],
+    "Eugene": [
+      {
+        "year": 2025,
+        "score": 0.236,
+        "count": 4,
         "school": "JMU"
       }
     ],
@@ -3866,7 +3988,7 @@ var config = {
     "Fairfax": [
       {
         "year": 2020,
-        "score": -0.036,
+        "score": -0.038,
         "count": 1,
         "school": "JMU"
       }
@@ -3874,7 +3996,7 @@ var config = {
     "Farafangana": [
       {
         "year": 2025,
-        "score": 0.653,
+        "score": 0.655,
         "count": 1,
         "school": "JMU"
       }
@@ -3936,6 +4058,12 @@ var config = {
     "Florida": [
       {
         "year": 2020,
+        "score": -0.509,
+        "count": 2,
+        "school": "JMU"
+      },
+      {
+        "year": 2020,
         "score": -0.43,
         "count": 2,
         "school": "UNC"
@@ -3947,10 +4075,22 @@ var config = {
         "school": "UNC"
       },
       {
+        "year": 2023,
+        "score": 0.279,
+        "count": 2,
+        "school": "JMU"
+      },
+      {
         "year": 2025,
         "score": -0.004,
         "count": 1,
         "school": "UNC"
+      },
+      {
+        "year": 2026,
+        "score": -0.052,
+        "count": 1,
+        "school": "JMU"
       },
       {
         "year": 2026,
@@ -4134,7 +4274,7 @@ var config = {
     "Gifford": [
       {
         "year": 2020,
-        "score": -0.017,
+        "score": -0.02,
         "count": 1,
         "school": "JMU"
       },
@@ -4159,10 +4299,10 @@ var config = {
         "school": "UNC"
       }
     ],
-    "Godwin Hall (JMU)": [
+    "Godwin": [
       {
         "year": 2020,
-        "score": -0.105,
+        "score": -0.107,
         "count": 1,
         "school": "JMU"
       },
@@ -4184,7 +4324,7 @@ var config = {
     "Grace Street House": [
       {
         "year": 2020,
-        "score": -0.047,
+        "score": -0.059,
         "count": 1,
         "school": "JMU"
       }
@@ -4275,10 +4415,56 @@ var config = {
         "school": "UNC"
       }
     ],
+    "Hall": [
+      {
+        "year": 2016,
+        "score": -0.239,
+        "count": 2,
+        "school": "JMU"
+      },
+      {
+        "year": 2020,
+        "score": -0.202,
+        "count": 3,
+        "school": "JMU"
+      },
+      {
+        "year": 2021,
+        "score": -0.001,
+        "count": 1,
+        "school": "JMU"
+      },
+      {
+        "year": 2023,
+        "score": -0.026,
+        "count": 2,
+        "school": "JMU"
+      }
+    ],
+    "Hall D": [
+      {
+        "year": 2018,
+        "score": -0.306,
+        "count": 1,
+        "school": "JMU"
+      },
+      {
+        "year": 2023,
+        "score": -0.325,
+        "count": 1,
+        "school": "JMU"
+      },
+      {
+        "year": 2025,
+        "score": -0.384,
+        "count": 1,
+        "school": "JMU"
+      }
+    ],
     "Hall E": [
       {
         "year": 2021,
-        "score": -0.78,
+        "score": -0.723,
         "count": 1,
         "school": "JMU"
       }
@@ -4388,7 +4574,7 @@ var config = {
     "Harrison County": [
       {
         "year": 2020,
-        "score": 0.005,
+        "score": 0.007,
         "count": 1,
         "school": "JMU"
       },
@@ -4454,19 +4640,19 @@ var config = {
       },
       {
         "year": 2020,
-        "score": -0.173,
+        "score": -0.17,
         "count": 75,
         "school": "JMU"
       },
       {
         "year": 2021,
-        "score": -0.096,
+        "score": -0.097,
         "count": 14,
         "school": "JMU"
       },
       {
         "year": 2022,
-        "score": -0.177,
+        "score": -0.171,
         "count": 7,
         "school": "JMU"
       },
@@ -4484,7 +4670,7 @@ var config = {
       },
       {
         "year": 2025,
-        "score": 0.157,
+        "score": 0.158,
         "count": 8,
         "school": "JMU"
       },
@@ -4543,7 +4729,7 @@ var config = {
         "school": "UNC"
       }
     ],
-    "Hillside Suites": [
+    "Hillside": [
       {
         "year": 2012,
         "score": -0.001,
@@ -4564,7 +4750,7 @@ var config = {
       },
       {
         "year": 2026,
-        "score": -0.032,
+        "score": -0.03,
         "count": 1,
         "school": "JMU"
       }
@@ -4654,13 +4840,13 @@ var config = {
     "Houston": [
       {
         "year": 2020,
-        "score": -0.078,
+        "score": -0.075,
         "count": 1,
         "school": "JMU"
       },
       {
         "year": 2025,
-        "score": 0.469,
+        "score": 0.494,
         "count": 1,
         "school": "JMU"
       }
@@ -4692,7 +4878,7 @@ var config = {
     "Hunters Ridge": [
       {
         "year": 2021,
-        "score": -0.915,
+        "score": -0.867,
         "count": 1,
         "school": "JMU"
       }
@@ -4722,7 +4908,7 @@ var config = {
       },
       {
         "year": 2025,
-        "score": -0.507,
+        "score": -0.472,
         "count": 1,
         "school": "JMU"
       }
@@ -4741,10 +4927,10 @@ var config = {
         "school": "UNC"
       }
     ],
-    "Indiana University": [
+    "Indiana": [
       {
         "year": 2025,
-        "score": -0.014,
+        "score": -0.015,
         "count": 3,
         "school": "JMU"
       },
@@ -4856,7 +5042,7 @@ var config = {
     "Jackson": [
       {
         "year": 2020,
-        "score": 0.386,
+        "score": 0.38,
         "count": 2,
         "school": "JMU"
       }
@@ -4864,7 +5050,7 @@ var config = {
     "Jackson Hall": [
       {
         "year": 2020,
-        "score": -0.03,
+        "score": -0.031,
         "count": 1,
         "school": "JMU"
       }
@@ -4874,50 +5060,6 @@ var config = {
         "year": 2020,
         "score": -0.219,
         "count": 1,
-        "school": "JMU"
-      }
-    ],
-    "James Madison University": [
-      {
-        "year": 2014,
-        "score": -0.008,
-        "count": 1,
-        "school": "JMU"
-      },
-      {
-        "year": 2019,
-        "score": -0.235,
-        "count": 1,
-        "school": "JMU"
-      },
-      {
-        "year": 2020,
-        "score": -0.104,
-        "count": 10,
-        "school": "JMU"
-      },
-      {
-        "year": 2021,
-        "score": -0.186,
-        "count": 5,
-        "school": "JMU"
-      },
-      {
-        "year": 2022,
-        "score": -0.273,
-        "count": 2,
-        "school": "JMU"
-      },
-      {
-        "year": 2023,
-        "score": 0.001,
-        "count": 1,
-        "school": "JMU"
-      },
-      {
-        "year": 2025,
-        "score": -0.072,
-        "count": 3,
         "school": "JMU"
       }
     ],
@@ -4937,6 +5079,20 @@ var config = {
         "school": "JMU"
       }
     ],
+    "Jennings County": [
+      {
+        "year": 2021,
+        "score": -0.912,
+        "count": 1,
+        "school": "JMU"
+      },
+      {
+        "year": 2023,
+        "score": -0.03,
+        "count": 3,
+        "school": "JMU"
+      }
+    ],
     "Jennings Hall": [
       {
         "year": 2026,
@@ -4951,6 +5107,58 @@ var config = {
         "score": -0.497,
         "count": 1,
         "school": "UNC"
+      }
+    ],
+    "Jiamusi": [
+      {
+        "year": 2014,
+        "score": -0.008,
+        "count": 1,
+        "school": "JMU"
+      },
+      {
+        "year": 2019,
+        "score": -0.235,
+        "count": 1,
+        "school": "JMU"
+      },
+      {
+        "year": 2020,
+        "score": -0.103,
+        "count": 10,
+        "school": "JMU"
+      },
+      {
+        "year": 2021,
+        "score": -0.332,
+        "count": 3,
+        "school": "JMU"
+      },
+      {
+        "year": 2022,
+        "score": -0.271,
+        "count": 2,
+        "school": "JMU"
+      },
+      {
+        "year": 2025,
+        "score": -0.056,
+        "count": 3,
+        "school": "JMU"
+      }
+    ],
+    "Jiamusi Airport": [
+      {
+        "year": 2021,
+        "score": 0.055,
+        "count": 2,
+        "school": "JMU"
+      },
+      {
+        "year": 2023,
+        "score": 0.001,
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Jincheng": [
@@ -4972,7 +5180,7 @@ var config = {
     "Johnston Hall": [
       {
         "year": 2021,
-        "score": -0.614,
+        "score": -0.624,
         "count": 1,
         "school": "JMU"
       }
@@ -5015,7 +5223,7 @@ var config = {
         "school": "UNC"
       }
     ],
-    "Keezell Hall (JMU)": [
+    "Keezell Hall": [
       {
         "year": 2020,
         "score": 0.032,
@@ -5024,7 +5232,7 @@ var config = {
       },
       {
         "year": 2022,
-        "score": -0.021,
+        "score": -0.017,
         "count": 1,
         "school": "JMU"
       },
@@ -5097,16 +5305,30 @@ var config = {
         "school": "UNC"
       }
     ],
+    "Kindred Hospital East Houston": [
+      {
+        "year": 2024,
+        "score": 0.793,
+        "count": 1,
+        "school": "JMU"
+      },
+      {
+        "year": 2025,
+        "score": -0.059,
+        "count": 2,
+        "school": "JMU"
+      }
+    ],
     "King Hall": [
       {
         "year": 2023,
-        "score": 0.837,
+        "score": 0.843,
         "count": 1,
         "school": "JMU"
       },
       {
         "year": 2026,
-        "score": 0.004,
+        "score": 0.005,
         "count": 1,
         "school": "JMU"
       }
@@ -5144,13 +5366,13 @@ var config = {
     "Kingdom of Saudi Arabia": [
       {
         "year": 2025,
-        "score": -0.266,
+        "score": -0.25,
         "count": 1,
         "school": "JMU"
       },
       {
         "year": 2026,
-        "score": -0.172,
+        "score": -0.173,
         "count": 2,
         "school": "JMU"
       }
@@ -5292,7 +5514,7 @@ var config = {
     "Liberty Street": [
       {
         "year": 2020,
-        "score": -0.019,
+        "score": -0.008,
         "count": 1,
         "school": "JMU"
       }
@@ -5316,7 +5538,7 @@ var config = {
     "Logan International Airport": [
       {
         "year": 2020,
-        "score": -0.017,
+        "score": -0.02,
         "count": 1,
         "school": "JMU"
       }
@@ -5432,7 +5654,7 @@ var config = {
     "Madison": [
       {
         "year": 2020,
-        "score": -0.326,
+        "score": -0.306,
         "count": 2,
         "school": "JMU"
       }
@@ -5440,7 +5662,7 @@ var config = {
     "Madison Union Cemetery": [
       {
         "year": 2023,
-        "score": 0.206,
+        "score": 0.182,
         "count": 4,
         "school": "JMU"
       }
@@ -5536,7 +5758,7 @@ var config = {
     "Mason": [
       {
         "year": 2020,
-        "score": -0.036,
+        "score": -0.045,
         "count": 2,
         "school": "JMU"
       }
@@ -5588,7 +5810,7 @@ var config = {
     "Maury County": [
       {
         "year": 2020,
-        "score": 0.77,
+        "score": 0.758,
         "count": 1,
         "school": "JMU"
       }
@@ -5632,7 +5854,7 @@ var config = {
       },
       {
         "year": 2026,
-        "score": -0.032,
+        "score": -0.03,
         "count": 1,
         "school": "JMU"
       },
@@ -5646,7 +5868,7 @@ var config = {
     "Memorial": [
       {
         "year": 2020,
-        "score": -0.248,
+        "score": -0.219,
         "count": 2,
         "school": "JMU"
       }
@@ -5662,7 +5884,7 @@ var config = {
     "Memphis": [
       {
         "year": 2023,
-        "score": 0.0,
+        "score": 0.001,
         "count": 1,
         "school": "JMU"
       }
@@ -5734,7 +5956,7 @@ var config = {
     "Mid East Hospital Karachi": [
       {
         "year": 2026,
-        "score": -0.629,
+        "score": -0.594,
         "count": 1,
         "school": "JMU"
       }
@@ -5764,13 +5986,13 @@ var config = {
     "Mill": [
       {
         "year": 2019,
-        "score": -0.09,
+        "score": -0.082,
         "count": 1,
         "school": "JMU"
       },
       {
         "year": 2021,
-        "score": 0.487,
+        "score": 0.543,
         "count": 1,
         "school": "JMU"
       }
@@ -5888,7 +6110,7 @@ var config = {
     "Myrtle": [
       {
         "year": 2023,
-        "score": 0.627,
+        "score": 0.575,
         "count": 1,
         "school": "JMU"
       }
@@ -5942,21 +6164,15 @@ var config = {
       },
       {
         "year": 2020,
-        "score": -0.187,
-        "count": 10,
-        "school": "JMU"
-      },
-      {
-        "year": 2025,
-        "score": -0.943,
-        "count": 2,
+        "score": -0.244,
+        "count": 7,
         "school": "JMU"
       }
     ],
     "New Mexico": [
       {
         "year": 2022,
-        "score": 0.008,
+        "score": 0.004,
         "count": 3,
         "school": "JMU"
       },
@@ -5970,7 +6186,7 @@ var config = {
     "New Mexico State Capitol": [
       {
         "year": 2022,
-        "score": 0.002,
+        "score": 0.003,
         "count": 1,
         "school": "JMU"
       }
@@ -5998,7 +6214,7 @@ var config = {
       },
       {
         "year": 2020,
-        "score": -0.285,
+        "score": -0.282,
         "count": 3,
         "school": "JMU"
       },
@@ -6044,12 +6260,12 @@ var config = {
     "New Zealand": [
       {
         "year": 2020,
-        "score": -0.044,
+        "score": -0.031,
         "count": 5,
         "school": "JMU"
       }
     ],
-    "Newman Lake (JMU)": [
+    "Newman Lake": [
       {
         "year": 2013,
         "score": -0.067,
@@ -6075,20 +6291,6 @@ var config = {
         "school": "JMU"
       }
     ],
-    "NoVa (Northern Virginia)": [
-      {
-        "year": 2020,
-        "score": -0.019,
-        "count": 3,
-        "school": "JMU"
-      },
-      {
-        "year": 2022,
-        "score": -0.543,
-        "count": 1,
-        "school": "JMU"
-      }
-    ],
     "Nords Ranch": [
       {
         "year": 2020,
@@ -6102,14 +6304,6 @@ var config = {
         "year": 2025,
         "score": 0.006,
         "count": 1,
-        "school": "JMU"
-      }
-    ],
-    "North 38 Apartments": [
-      {
-        "year": 2020,
-        "score": 0.026,
-        "count": 4,
         "school": "JMU"
       }
     ],
@@ -6185,6 +6379,22 @@ var config = {
         "school": "UNC"
       }
     ],
+    "North School Number 38 (historical)": [
+      {
+        "year": 2020,
+        "score": 0.026,
+        "count": 4,
+        "school": "JMU"
+      }
+    ],
+    "North Texas": [
+      {
+        "year": 2025,
+        "score": -0.163,
+        "count": 5,
+        "school": "JMU"
+      }
+    ],
     "Northern Colorado Rehabilitation Hospital": [
       {
         "year": 2023,
@@ -6207,6 +6417,20 @@ var config = {
         "score": -0.026,
         "count": 1,
         "school": "UNC"
+      }
+    ],
+    "Nova": [
+      {
+        "year": 2020,
+        "score": -0.012,
+        "count": 3,
+        "school": "JMU"
+      },
+      {
+        "year": 2022,
+        "score": -0.543,
+        "count": 1,
+        "school": "JMU"
       }
     ],
     "Oakland": [
@@ -6236,7 +6460,7 @@ var config = {
     "Oceania": [
       {
         "year": 2021,
-        "score": -0.496,
+        "score": -0.463,
         "count": 1,
         "school": "JMU"
       }
@@ -6337,6 +6561,12 @@ var config = {
         "score": 0.012,
         "count": 1,
         "school": "JMU"
+      },
+      {
+        "year": 2025,
+        "score": 0.297,
+        "count": 12,
+        "school": "JMU"
       }
     ],
     "Outer Banks": [
@@ -6396,20 +6626,6 @@ var config = {
         "year": 2014,
         "score": 0.014,
         "count": 1,
-        "school": "JMU"
-      }
-    ],
-    "Paul Jennings Hall (JMU)": [
-      {
-        "year": 2021,
-        "score": -0.946,
-        "count": 1,
-        "school": "JMU"
-      },
-      {
-        "year": 2023,
-        "score": -0.03,
-        "count": 3,
         "school": "JMU"
       }
     ],
@@ -6473,18 +6689,10 @@ var config = {
         "school": "UNC"
       }
     ],
-    "Pheasant Run": [
-      {
-        "year": 2021,
-        "score": 0.002,
-        "count": 2,
-        "school": "JMU"
-      }
-    ],
-    "Pheasant Run Townhomes": [
+    "Pheasant": [
       {
         "year": 2019,
-        "score": -0.09,
+        "score": -0.082,
         "count": 1,
         "school": "JMU"
       },
@@ -6497,6 +6705,14 @@ var config = {
       {
         "year": 2021,
         "score": -0.186,
+        "count": 2,
+        "school": "JMU"
+      }
+    ],
+    "Pheasant Run": [
+      {
+        "year": 2021,
+        "score": 0.002,
         "count": 2,
         "school": "JMU"
       }
@@ -6678,12 +6894,12 @@ var config = {
       },
       {
         "year": 2025,
-        "score": 0.642,
+        "score": 0.632,
         "count": 1,
         "school": "JMU"
       }
     ],
-    "Potomac Hall (JMU)": [
+    "Potomac Hall": [
       {
         "year": 2021,
         "score": 0.414,
@@ -6698,7 +6914,7 @@ var config = {
       },
       {
         "year": 2025,
-        "score": 0.642,
+        "score": 0.632,
         "count": 1,
         "school": "JMU"
       }
@@ -6754,7 +6970,7 @@ var config = {
     "Purcell Park": [
       {
         "year": 2022,
-        "score": 0.006,
+        "score": 0.009,
         "count": 1,
         "school": "JMU"
       },
@@ -6768,7 +6984,7 @@ var config = {
     "Purgitsville": [
       {
         "year": 2022,
-        "score": -0.062,
+        "score": -0.094,
         "count": 2,
         "school": "JMU"
       }
@@ -6784,7 +7000,7 @@ var config = {
     "Quad": [
       {
         "year": 2017,
-        "score": -0.102,
+        "score": -0.096,
         "count": 1,
         "school": "JMU"
       },
@@ -6796,7 +7012,7 @@ var config = {
       },
       {
         "year": 2021,
-        "score": -0.079,
+        "score": -0.078,
         "count": 1,
         "school": "JMU"
       }
@@ -6952,7 +7168,7 @@ var config = {
     "Republic of Haiti": [
       {
         "year": 2025,
-        "score": -0.123,
+        "score": -0.144,
         "count": 1,
         "school": "JMU"
       }
@@ -6960,7 +7176,7 @@ var config = {
     "Republic of India": [
       {
         "year": 2025,
-        "score": -0.043,
+        "score": -0.044,
         "count": 1,
         "school": "JMU"
       },
@@ -7088,7 +7304,7 @@ var config = {
       },
       {
         "year": 2025,
-        "score": 0.653,
+        "score": 0.655,
         "count": 1,
         "school": "JMU"
       }
@@ -7120,7 +7336,7 @@ var config = {
     "Riyadh": [
       {
         "year": 2026,
-        "score": -0.629,
+        "score": -0.594,
         "count": 1,
         "school": "JMU"
       }
@@ -7133,10 +7349,18 @@ var config = {
         "school": "UNC"
       }
     ],
+    "Rockingham": [
+      {
+        "year": 2025,
+        "score": -0.01,
+        "count": 2,
+        "school": "JMU"
+      }
+    ],
     "Rockingham County": [
       {
         "year": 2020,
-        "score": 0.196,
+        "score": 0.195,
         "count": 3,
         "school": "JMU"
       },
@@ -7148,8 +7372,8 @@ var config = {
       },
       {
         "year": 2025,
-        "score": -0.171,
-        "count": 4,
+        "score": -0.328,
+        "count": 2,
         "school": "JMU"
       }
     ],
@@ -7169,7 +7393,7 @@ var config = {
         "school": "JMU"
       }
     ],
-    "Rose Library (JMU)": [
+    "Rose Library": [
       {
         "year": 2021,
         "score": 0.034,
@@ -7178,7 +7402,7 @@ var config = {
       },
       {
         "year": 2023,
-        "score": 0.042,
+        "score": 0.052,
         "count": 2,
         "school": "JMU"
       },
@@ -7248,7 +7472,7 @@ var config = {
     "Ru\u0161e": [
       {
         "year": 2026,
-        "score": 0.036,
+        "score": 0.039,
         "count": 1,
         "school": "JMU"
       }
@@ -7294,7 +7518,7 @@ var config = {
     "Sampson Hall": [
       {
         "year": 2020,
-        "score": -0.327,
+        "score": -0.297,
         "count": 2,
         "school": "JMU"
       }
@@ -7426,7 +7650,7 @@ var config = {
     "Sheldon Hall": [
       {
         "year": 2023,
-        "score": 0.258,
+        "score": 0.165,
         "count": 1,
         "school": "JMU"
       }
@@ -7584,7 +7808,7 @@ var config = {
     "South Main Street Park": [
       {
         "year": 2020,
-        "score": 0.028,
+        "score": 0.029,
         "count": 1,
         "school": "JMU"
       }
@@ -7637,6 +7861,46 @@ var config = {
         "school": "UNC"
       }
     ],
+    "Southview": [
+      {
+        "year": 2019,
+        "score": -0.603,
+        "count": 6,
+        "school": "JMU"
+      },
+      {
+        "year": 2021,
+        "score": -0.31,
+        "count": 1,
+        "school": "JMU"
+      },
+      {
+        "year": 2022,
+        "score": -0.03,
+        "count": 3,
+        "school": "JMU"
+      },
+      {
+        "year": 2024,
+        "score": -0.098,
+        "count": 2,
+        "school": "JMU"
+      },
+      {
+        "year": 2025,
+        "score": -0.622,
+        "count": 1,
+        "school": "JMU"
+      }
+    ],
+    "Southview Apartments": [
+      {
+        "year": 2019,
+        "score": -0.069,
+        "count": 1,
+        "school": "JMU"
+      }
+    ],
     "Southwest": [
       {
         "year": 2020,
@@ -7670,7 +7934,7 @@ var config = {
     "Spotswood": [
       {
         "year": 2020,
-        "score": -0.017,
+        "score": -0.02,
         "count": 1,
         "school": "JMU"
       },
@@ -7742,7 +8006,7 @@ var config = {
     "Straupe": [
       {
         "year": 2023,
-        "score": 0.095,
+        "score": 0.111,
         "count": 2,
         "school": "JMU"
       }
@@ -7769,6 +8033,20 @@ var config = {
         "score": -0.737,
         "count": 1,
         "school": "UNC"
+      }
+    ],
+    "Sunbelt Strip": [
+      {
+        "year": 2024,
+        "score": 0.754,
+        "count": 1,
+        "school": "JMU"
+      },
+      {
+        "year": 2025,
+        "score": -0.226,
+        "count": 3,
+        "school": "JMU"
       }
     ],
     "Sunchase Iv Resort": [
@@ -7898,6 +8176,12 @@ var config = {
     "Territories of the United States": [
       {
         "year": 2020,
+        "score": -0.148,
+        "count": 1,
+        "school": "JMU"
+      },
+      {
+        "year": 2020,
         "score": -0.453,
         "count": 2,
         "school": "UNC"
@@ -7913,6 +8197,12 @@ var config = {
         "score": -0.826,
         "count": 1,
         "school": "UNC"
+      },
+      {
+        "year": 2025,
+        "score": -0.003,
+        "count": 4,
+        "school": "JMU"
       },
       {
         "year": 2025,
@@ -7932,7 +8222,7 @@ var config = {
     "Texas": [
       {
         "year": 2020,
-        "score": -0.741,
+        "score": -0.699,
         "count": 1,
         "school": "JMU"
       },
@@ -8001,38 +8291,6 @@ var config = {
         "school": "UNC"
       }
     ],
-    "The Hills Southview Apartments": [
-      {
-        "year": 2019,
-        "score": -0.541,
-        "count": 7,
-        "school": "JMU"
-      },
-      {
-        "year": 2021,
-        "score": -0.287,
-        "count": 1,
-        "school": "JMU"
-      },
-      {
-        "year": 2022,
-        "score": -0.033,
-        "count": 3,
-        "school": "JMU"
-      },
-      {
-        "year": 2024,
-        "score": -0.1,
-        "count": 2,
-        "school": "JMU"
-      },
-      {
-        "year": 2025,
-        "score": -0.714,
-        "count": 1,
-        "school": "JMU"
-      }
-    ],
     "The Morgan High School": [
       {
         "year": 2020,
@@ -8044,7 +8302,7 @@ var config = {
     "The New School of Northern Virginia": [
       {
         "year": 2020,
-        "score": -0.067,
+        "score": -0.084,
         "count": 1,
         "school": "JMU"
       }
@@ -8263,7 +8521,7 @@ var config = {
       {
         "year": 2020,
         "score": -0.295,
-        "count": 25,
+        "count": 24,
         "school": "JMU"
       },
       {
@@ -8274,7 +8532,7 @@ var config = {
       },
       {
         "year": 2021,
-        "score": -0.29,
+        "score": -0.287,
         "count": 8,
         "school": "JMU"
       },
@@ -8310,8 +8568,8 @@ var config = {
       },
       {
         "year": 2025,
-        "score": -0.154,
-        "count": 15,
+        "score": -0.202,
+        "count": 11,
         "school": "JMU"
       },
       {
@@ -8322,7 +8580,7 @@ var config = {
       },
       {
         "year": 2026,
-        "score": -0.756,
+        "score": -0.726,
         "count": 1,
         "school": "JMU"
       }
@@ -8363,26 +8621,6 @@ var config = {
         "score": 0.002,
         "count": 1,
         "school": "UNC"
-      }
-    ],
-    "University of Florida": [
-      {
-        "year": 2020,
-        "score": -0.53,
-        "count": 2,
-        "school": "JMU"
-      },
-      {
-        "year": 2023,
-        "score": 0.279,
-        "count": 2,
-        "school": "JMU"
-      },
-      {
-        "year": 2026,
-        "score": -0.052,
-        "count": 1,
-        "school": "JMU"
       }
     ],
     "University of Mississippi": [
@@ -8439,26 +8677,10 @@ var config = {
         "school": "UNC"
       }
     ],
-    "University of North Texas": [
-      {
-        "year": 2025,
-        "score": -0.163,
-        "count": 5,
-        "school": "JMU"
-      }
-    ],
-    "University of Oregon": [
-      {
-        "year": 2025,
-        "score": 0.275,
-        "count": 16,
-        "school": "JMU"
-      }
-    ],
     "University of Oregon Autzen Stadium": [
       {
         "year": 2025,
-        "score": 0.056,
+        "score": 0.052,
         "count": 5,
         "school": "JMU"
       }
@@ -8506,7 +8728,7 @@ var config = {
     "Valley": [
       {
         "year": 2020,
-        "score": -0.017,
+        "score": -0.02,
         "count": 1,
         "school": "JMU"
       }
@@ -8563,7 +8785,7 @@ var config = {
         "school": "JMU"
       }
     ],
-    "Village Dorms (JMU)": [
+    "Village": [
       {
         "year": 2016,
         "score": 0.007,
@@ -8590,7 +8812,7 @@ var config = {
       },
       {
         "year": 2024,
-        "score": -0.277,
+        "score": -0.237,
         "count": 1,
         "school": "JMU"
       }
@@ -8616,13 +8838,13 @@ var config = {
       },
       {
         "year": 2020,
-        "score": -0.061,
+        "score": -0.058,
         "count": 37,
         "school": "JMU"
       },
       {
         "year": 2021,
-        "score": -0.337,
+        "score": -0.325,
         "count": 7,
         "school": "JMU"
       },
@@ -8640,13 +8862,13 @@ var config = {
       },
       {
         "year": 2025,
-        "score": -0.064,
+        "score": -0.06,
         "count": 15,
         "school": "JMU"
       },
       {
         "year": 2026,
-        "score": 0.378,
+        "score": 0.376,
         "count": 3,
         "school": "JMU"
       },
@@ -8728,7 +8950,7 @@ var config = {
     "Wampler": [
       {
         "year": 2020,
-        "score": -0.017,
+        "score": -0.02,
         "count": 1,
         "school": "JMU"
       }
@@ -8757,9 +8979,15 @@ var config = {
         "school": "UNC"
       },
       {
-        "year": 2025,
-        "score": -0.376,
+        "year": 2024,
+        "score": 0.318,
         "count": 1,
+        "school": "JMU"
+      },
+      {
+        "year": 2025,
+        "score": -0.292,
+        "count": 5,
         "school": "JMU"
       },
       {
@@ -8767,14 +8995,6 @@ var config = {
         "score": -0.0,
         "count": 1,
         "school": "UNC"
-      }
-    ],
-    "Washington State University": [
-      {
-        "year": 2025,
-        "score": -0.272,
-        "count": 4,
-        "school": "JMU"
       }
     ],
     "Washington-Arlington-Alexandria, DC-VA-MD-WV Metro Area": [
@@ -8793,7 +9013,7 @@ var config = {
         "school": "UNC"
       }
     ],
-    "Wayland Hall (JMU)": [
+    "Wayland": [
       {
         "year": 2019,
         "score": -0.039,
@@ -8802,8 +9022,16 @@ var config = {
       },
       {
         "year": 2024,
-        "score": 0.321,
-        "count": 3,
+        "score": -0.005,
+        "count": 2,
+        "school": "JMU"
+      }
+    ],
+    "Waylands": [
+      {
+        "year": 2024,
+        "score": 0.947,
+        "count": 1,
         "school": "JMU"
       }
     ],
@@ -8954,7 +9182,7 @@ var config = {
     "Wilson Hall": [
       {
         "year": 2023,
-        "score": 0.379,
+        "score": 0.333,
         "count": 2,
         "school": "JMU"
       }
