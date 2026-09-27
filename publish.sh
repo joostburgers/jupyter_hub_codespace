@@ -13,11 +13,18 @@
 
 set -e  # Exit immediately on any error
 
-# Resolve paths
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# Resolve paths — work from script's directory first
+cd "$(dirname "${BASH_SOURCE[0]}")"
+SCRIPT_DIR="$(pwd)"
+
 # Prefer the actual git toplevel when available; fall back to script directory.
-REPO_ROOT="$(git -C "$SCRIPT_DIR" rev-parse --show-toplevel 2>/dev/null || echo "$SCRIPT_DIR")"
-PROJECT_DIR="$SCRIPT_DIR/project_mapping_emotions"
+if command -v git &> /dev/null; then
+    REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || echo "$SCRIPT_DIR")"
+else
+    REPO_ROOT="$SCRIPT_DIR"
+fi
+
+PROJECT_DIR="$REPO_ROOT/project_mapping_emotions"
 DOCS="$REPO_ROOT/docs"
 
 echo ""
