@@ -12,6 +12,8 @@ echo "=========================================="
 
 echo ""
 echo "Installing packages..."
+# CPU-only torch: Codespaces have no GPU, and the default wheel adds ~3.5 GB of CUDA libraries.
+pip install --quiet --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu
 pip install --quiet --no-cache-dir \
     pandas \
     plotly \
@@ -24,7 +26,6 @@ pip install --quiet --no-cache-dir \
     ipykernel \
     ipywidgets \
     transformers \
-    torch \
     scipy
 
 echo ""

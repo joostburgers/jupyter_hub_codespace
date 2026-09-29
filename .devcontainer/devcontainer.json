@@ -1,6 +1,11 @@
 {
     "name": "DS 101: Introduction to Data Science",
     "image": "mcr.microsoft.com/devcontainers/python:3.11",
+    "hostRequirements": {
+        "cpus": 2,
+        "memory": "8gb",
+        "storage": "32gb"
+    },
     "features": {
         "ghcr.io/devcontainers/features/git:1": {}
     },

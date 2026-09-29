@@ -7,8 +7,16 @@ echo "=========================================="
 echo "Setting up DS 101"
 echo "=========================================="
 
+# Skip installs when the prebuild (.devcontainer/post-create.sh) already provided them.
+if python -c "import torch, spacy, transformers, nltk, en_core_web_sm, en_core_web_md, en_core_web_trf" 2>/dev/null; then
+    echo ""
+    echo "Packages and models already installed — skipping downloads."
+else
+
 echo ""
 echo "Installing packages..."
+# CPU-only torch: Codespaces have no GPU, and the default wheel adds ~3.5 GB of CUDA libraries.
+pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu
 pip install --no-cache-dir \
     pandas \
     plotly \
@@ -21,7 +29,6 @@ pip install --no-cache-dir \
     ipykernel \
     ipywidgets \
     transformers \
-    torch \
     scipy
 
 echo ""
@@ -39,6 +46,8 @@ echo "Downloading spaCy models..."
 python -m spacy download en_core_web_sm
 python -m spacy download en_core_web_md
 python -m spacy download en_core_web_trf
+
+fi
 
 echo ""
 echo "Linking system Python to devcontainer Python..."
